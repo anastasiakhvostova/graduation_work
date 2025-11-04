@@ -44,10 +44,10 @@ const QuestsPage = async () => {
                     width={90}
                     height={90}/>
                     <h1 className="text-center font-bold text-neutral-800 text-2xl my-6">
-                        Квест
+                        Челенджі
                     </h1>
                     <p className="text-muted-foreground text-center text-lg mb-6">
-                        Виконуйте квести, заробляючи бали
+                        Виконуйте челенджі, заробляючи бали
                     </p>
                     <ul className="w-full">
                         {quests.map((quest) => {

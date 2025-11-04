@@ -22,19 +22,19 @@ async function main() {
 
     // === КРАЇНИ ===
     await db.insert(schema.countries).values([
-      { id: 1, title: "Ukrainian", imageSrc: "/ukraine.png" },
-      { id: 2, title: "German", imageSrc: "/germany.png" },
-      { id: 3, title: "English", imageSrc: "/britain.webp" },
+      { id: 1, title: "Україна", imageSrc: "/ukraine.png" },
+      { id: 2, title: "Німеччина", imageSrc: "/germany.png" },
+      { id: 3, title: "Велика Британія", imageSrc: "/britain.webp" },
     ]);
 
     // === РЕГІОНИ ===
     await db.insert(schema.regions).values([
       { id: 7, title: "Північне наріччя", countryId: 1, imageSrc: "/ukraine.png" },
       { id: 8, title: "Південно-західне наріччя", countryId: 1, imageSrc: "/ukraine.png" },
-      // { id: 9, title: "Південно-східне наріччя", countryId: 1, imageSrc: "/ukraine.png" },
+      { id: 9, title: "Південно-східне наріччя", countryId: 1, imageSrc: "/ukraine.png" },
       { id: 10, title: "Нижньонімецькі діалекти", countryId: 2, imageSrc: "/germany.png" },
       { id: 11, title: "Середньонімецькі діалекти", countryId: 2, imageSrc: "/germany.png" },
-      // { id: 12, title: "Верхньонімецькі діалекти", countryId: 2, imageSrc: "/germany.png" },
+      { id: 12, title: "Верхньонімецькі діалекти", countryId: 2, imageSrc: "/germany.png" },
       { id: 13, title: "-", countryId: 3, imageSrc: "/britain.webp" },
       { id: 14, title: "-", countryId: 3, imageSrc: "/britain.webp" },
     ]);

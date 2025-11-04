@@ -1,12 +1,27 @@
 import type { Metadata } from "next";
 import { Pangolin } from "next/font/google";
+import { Nunito } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from '@clerk/nextjs';
 import { Toaster } from "sonner";
 import { PracticeModal } from "@/components/modals/practice-modal";
 import { HeartsModal } from "@/components/modals/hearts-modal";
 import { ExitModal } from "@/components/modals/exit-modal"
-const font = Pangolin({ subsets: ["latin"], weight: "400" });
+import { ukUA } from "@clerk/localizations";
+
+
+// const font = Pangolin({ subsets: ["latin"], weight: "400" });
+// const font = Nunito({
+//   subsets: ["latin"],
+//   weight: ["400", "600", "700"],
+// });
+// import { Poppins } from "next/font/google";
+// const font = Poppins({ subsets: ["latin"], weight: ["400", "600", "700"] });
+import { Baloo_2 } from "next/font/google";
+const font = Baloo_2({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,8 +34,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en">
+    <ClerkProvider localization={ukUA}>
+      <html lang="ua">
         <body className={font.className}>
           <Toaster />
            <ExitModal />

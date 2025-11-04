@@ -59,7 +59,7 @@ export const Items = ({
                     onClick={onRefillHearts}
                     disabled={pending || hearts === 5 || points < POINTS_TO_REFILL}
                 >
-                    {hearts === 5 ? "full" : (
+                    {hearts === 5 ? "Повні серця" : (
                         <div className="flex items-center">
                             <Image 
                                 src="/points.png"
