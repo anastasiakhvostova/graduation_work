@@ -8,9 +8,8 @@ const db = drizzle(sql, { schema });
 
 async function main() {
   try {
-    console.log("🌾 Seeding database...");
+    console.log("Seeding database...");
 
-    // Очистка таблиць
     await db.delete(schema.challengesProgress);
     await db.delete(schema.challengesOptions);
     await db.delete(schema.challenges);
@@ -20,14 +19,12 @@ async function main() {
     await db.delete(schema.userProgress);
     await db.delete(schema.countries);
 
-    // === КРАЇНИ ===
     await db.insert(schema.countries).values([
       { id: 1, title: "Україна", imageSrc: "/ukraine.png" },
       { id: 2, title: "Німеччина", imageSrc: "/germany.png" },
       { id: 3, title: "Велика Британія", imageSrc: "/britain.webp" },
     ]);
 
-    // === РЕГІОНИ ===
     await db.insert(schema.regions).values([
       { id: 7, title: "Північне наріччя", countryId: 1, imageSrc: "/ukraine.png" },
       { id: 8, title: "Південно-західне наріччя", countryId: 1, imageSrc: "/ukraine.png" },
@@ -35,11 +32,12 @@ async function main() {
       { id: 10, title: "Нижньонімецькі діалекти", countryId: 2, imageSrc: "/germany.png" },
       { id: 11, title: "Середньонімецькі діалекти", countryId: 2, imageSrc: "/germany.png" },
       { id: 12, title: "Верхньонімецькі діалекти", countryId: 2, imageSrc: "/germany.png" },
-      { id: 13, title: "-", countryId: 3, imageSrc: "/britain.webp" },
-      { id: 14, title: "-", countryId: 3, imageSrc: "/britain.webp" },
+      { id: 13, title: "Кокні", countryId: 3, imageSrc: "/britain.webp" },
+      { id: 14, title: "Скауз", countryId: 3, imageSrc: "/britain.webp" },
+      { id: 15, title: "Джорди", countryId: 3, imageSrc: "/britain.webp" },
+      { id: 16, title: "Йоркшир", countryId: 3, imageSrc: "/britain.webp" },
     ]);
 
-    // === ЮНІТ ДЛЯ ПІВНІЧНОГО НАРІЧЧЯ ===
     await db.insert(schema.units).values([
       {
         id: 2,
@@ -58,12 +56,10 @@ async function main() {
       { id: 10, unitId: 2, order: 5, title: "Дієслова та дії" },
     ]);
 
-    // 🟩 Масиви для завдань
     const northChallenges: typeof schema.challenges.$inferInsert[] = [];
     const northOptions: typeof schema.challengesOptions.$inferInsert[] = [];
     let idCounter = 100;
 
-    // 🧩 Функція для створення завдань
     const addChallenge = (
       lessonId: number,
       type: "SELECT" | "ASSIST" | "LISTEN" | "WRITE",
@@ -85,7 +81,6 @@ async function main() {
       });
     };
 
-    // === Урок 1: Слова про людей ===
     addChallenge(6, "SELECT", "Що означає слово «гуторити»?", [
       { text: "розмовляти", correct: true, audioSrc: "/audio/rozmovlyaty.mp3", imageSrc: "/images/rozmovlyaty.png" },
       { text: "співати", correct: false, audioSrc: "/audio/spivaty.mp3", imageSrc: "/images/spivaty.png" },
@@ -114,7 +109,6 @@ async function main() {
       { text: "гуторити", correct: true },
     ]);
 
-    // === Урок 2: Природа і село ===
     addChallenge(7, "SELECT", "Що означає «ставок»?", [
       { text: "невелике озеро", correct: true, audioSrc: "/audio/stavok.mp3", imageSrc: "/images/stavok.png" },
       { text: "парк", correct: false, audioSrc: "/audio/park.mp3", imageSrc: "/images/park.png" },
@@ -143,7 +137,6 @@ async function main() {
       { text: "пагорб", correct: true },
     ]);
 
-    // === Урок 3: Хата і побут ===
     addChallenge(8, "SELECT", "Що означає слово «піч»?", [
       { text: "камін", correct: false, audioSrc: "/audio/kamin.mp3", imageSrc: "/images/kamin.png" },
       { text: "кухня", correct: false, audioSrc: "/audio/kuhnya.mp3", imageSrc: "/images/kuhnya.png" },
@@ -172,7 +165,6 @@ async function main() {
       { text: "кут хати", correct: true },
     ]);
 
-    // === Урок 4: Їжа ===
     addChallenge(9, "SELECT", "Що означає «бурак»?", [
       { text: "буряк", correct: true, audioSrc: "/audio/buryak.mp3", imageSrc: "/images/buryak.png" },
       { text: "морква", correct: false, audioSrc: "/audio/morkva.mp3", imageSrc: "/images/morkva.png" },
@@ -200,8 +192,6 @@ async function main() {
     addChallenge(9, "WRITE", "Напиши переклад слова «кулеша»", [
       { text: "каша з кукурудзи", correct: true },
     ]);
-
-    // === Урок 5: Дії ===
     addChallenge(10, "SELECT", "Що означає «співати» на півночі?", [
       { text: "гуторити", correct: false, audioSrc: "/audio/gutority.mp3", imageSrc: "/images/gutority.png" },
       { text: "співати", correct: true, audioSrc: "/audio/spivaty.mp3", imageSrc: "/images/spivaty.png" },
@@ -246,7 +236,6 @@ await db.insert(schema.lessons).values([
   { id: 14, unitId: 3, order: 4, title: "Їжа і напої" },
   { id: 15, unitId: 3, order: 5, title: "Дії" },
 ]);
-    // === ПІВДЕННО-ЗАХІДНЕ НАРІЧЧЯ ===
     const swChallenges: typeof schema.challenges.$inferInsert[] = [];
     const swOptions: typeof schema.challengesOptions.$inferInsert[] = [];
     let swIdCounter = 200;
@@ -271,7 +260,6 @@ await db.insert(schema.lessons).values([
         });
       });
     };
-    // === Урок 1: Слова про людей ===
     addSWChallenge(11, "SELECT", "Що означає слово «файний»?", [
       { text: "гарний", correct: true, audioSrc: "/audio/faynyy.mp3" },
       { text: "злий", correct: false, audioSrc: "/audio/zlyy.mp3" },
@@ -299,7 +287,6 @@ await db.insert(schema.lessons).values([
   ]);
   addSWChallenge(11, "WRITE", "Мій тато — добрий ______.", [{ text: "ґазда", correct: true }]);
 
-// Урок 2: Природа і село
 addSWChallenge(12, "SELECT", "Що означає «грунь»?", [
   { text: "пагорб", correct: true, audioSrc: "/audio/pagorb.mp3", imageSrc: "/images/pagorb.png" },
   { text: "болото", correct: false, audioSrc: "/audio/boloto.mp3", imageSrc: "/images/boloto.png" },
@@ -319,7 +306,6 @@ addSWChallenge(12, "LISTEN", "Прослухай слово «муркотіти
 
 addSWChallenge(12, "WRITE", "Напиши переклад слова «грунь»", [{ text: "пагорб", correct: true }]);
 
-// Урок 3: Хата і побут
 addSWChallenge(13, "SELECT", "Що означає слово «мисник»?", [
   { text: "шафа для посуду", correct: true, audioSrc: "/audio/shafa_posud.mp3", imageSrc: "/images/shafa_posud.png" },
   { text: "стіл", correct: false, audioSrc: "/audio/stil.mp3", imageSrc: "/images/stil.png" },
@@ -337,7 +323,6 @@ addSWChallenge(13, "LISTEN", "Прослухай слово «припічок»
 
 addSWChallenge(13, "WRITE", "У мене стоїть глечик на ______.", [{ text: "миснику", correct: true }]);
 
-// Урок 4: Їжа і напої
 addSWChallenge(14, "SELECT", "Що означає «кулеша»?", [
   { text: "каша з кукурудзяного борошна", correct: true, audioSrc: "/audio/kulesha.mp3", imageSrc: "/images/kulesha.png" },
   { text: "борщ", correct: false, audioSrc: "/audio/borshch.mp3", imageSrc: "/images/borshch.png" },
@@ -356,7 +341,6 @@ addSWChallenge(14, "LISTEN", "Прослухай і вибери слово «в
 
 addSWChallenge(14, "WRITE", "Мама приготувала смачну ______.", [{ text: "кулешу", correct: true }]);
 
-// Урок 5: Дії
 addSWChallenge(15, "SELECT", "Що означає «гуторити»?", [
   { text: "розмовляти", correct: true, audioSrc: "/audio/gutoryty.mp3", imageSrc: "/images/rozmova.png" },
   { text: "співати", correct: false, audioSrc: "/audio/spivaty.mp3", imageSrc: "/images/spivaty.png" },
@@ -374,14 +358,13 @@ addSWChallenge(15, "LISTEN", "Прослухай і вибери слово «і
 ]);
 
 addSWChallenge(15, "WRITE", "Напиши переклад слова «гуторити»", [{ text: "розмовляти", correct: true }]);
-  
-// === UNIT для Нижньонімецьких діалектів (Plattdeutsch) ===
+
 await db.insert(schema.units).values([
   {
     id: 4,
     regionId: 10,
-    title: "Основи Plattdeutsch",
-    description: "Перші речення, слова та вимова в Нижньонімецьких діалектах.",
+    title: "Додаток",
+    description: "Перед тим як практикуватись радимо, прочитати навчальні матеріали.",
     order: 1,
   },
 ]);
@@ -394,7 +377,6 @@ await db.insert(schema.lessons).values([
   { id: 20, unitId: 4, order: 5, title: "Дії та рух" },
 ]);
 
-// === МОДУЛЬ 2: Нижньонімецькі діалекти (Plattdeutsch)
 const plattChallenges: typeof schema.challenges.$inferInsert[] = [];
 const plattOptions: typeof schema.challengesOptions.$inferInsert[] = [];
 let plattId = 300;
@@ -419,143 +401,88 @@ const addPlatt = (
     });
   });
 };
-
-// === LESSON 1 ===
-addPlatt(16, "SELECT", "Вибери правильне речення", [
-  { text: "He dat nich verstahn.", correct: false },
-  { text: "Ik heww dat nich verstahn.", correct: true, audioSrc: "/audio/ik_heww_dat_nich_verstahn.mp3" },
-  { text: "Ik heb dat nicht verstanden.", correct: false },
-  { text: "Dat nich heww verstahn.", correct: false },
+addPlatt(16, "SELECT", "Що означає слово 'ik'?", [
+  { text: "ти", correct: false },
+  { text: "я", correct: true, audioSrc: "/audio/ik_heww_dat_nich_verstahn.mp3" },
+  { text: "він", correct: false },
 ]);
 
-addPlatt(16, "ASSIST", "Постав слова у правильному порядку: mien / Huus / is / dat", [
-  { text: "Dat is mien Huus.", correct: true },
-  { text: "is dat mien Huus.", correct: false, audioSrc: "/audio/dat_is_mien_huus.mp3" },
-   { text: "Huus is dat mien.", correct: false, audioSrc: "/audio/dat_is_mien_huus.mp3" },
+addPlatt(16, "ASSIST", "Як перекладається 'maken' стандартною німецькою?", [
+  { text: "singen", correct: false },
+  { text: "tun", correct: false, audioSrc: "/audio/dat_is_mien_huus.mp3" },
+   { text: "machen", correct: true, audioSrc: "/audio/dat_is_mien_huus.mp3" },
 ]);
 
-addPlatt(16, "WRITE", "Напиши речення зі словами: ik / heww / keen / Tied", [
-  { text: "Ik heww keen Tied.", correct: true },
+addPlatt(16, "WRITE", "Ik heww dat nich …", [
+  { text: "verstahn", correct: true },
 ]);
 
-addPlatt(16, "LISTEN", "he_kummt_later переклда речення:", [
-  { text: "Він прийде пізніше", correct: true},
-  { text: "Він уже тут", correct: false },
-  { text: "Я пішов додому", correct: false },
-  { text: "Він не чув", correct: false },
+addPlatt(17, "SELECT", "Що означає слово 'Bröödt'?", [
+  { text: "хліб", correct: true },
+  { text: "вода", correct: false, audioSrc: "/audio/dat_is_een_broodt.mp3" },
+  { text: "дім", correct: false },
+]);
+addPlatt(17, "SELECT", "Що означає привітання 'Moin!'?", [
+  { text: "Прощавай", correct: false },
+  { text: "Доброго ранку", correct: true, audioSrc: "/audio/dat_is_een_broodt.mp3" },
+  { text: "Як справи", correct: false },
 ]);
 
-addPlatt(16, "ASSIST", "Збери речення: Wi / gaht / to / de / Markt", [
-  { text: "Wi gaht to de Markt.", correct: true},
-  { text: "Markt Wi gaht to de.", correct: false},
-  { text: "Markt Wi to de gaht.", correct: false},
+
+
+addPlatt(17, "WRITE", "Dat is een … ", [
+  { text: "bröödt", correct: true },
+
+]);
+addPlatt(18, "SELECT", "Що означає 'Vadder' у Plattdeutsch?", [
+  { text: "Дідусь", correct: false},
+  { text: "Батько", correct: true },
+  { text: "Друг", correct: false },
 ]);
 
-// === LESSON 2 ===
-addPlatt(17, "SELECT", "Вибери правильне речення", [
-  { text: "Een Bröödt is dat.", correct: false },
-  { text: "Dat is een Bröödt.", correct: true, audioSrc: "/audio/dat_is_een_broodt.mp3" },
-  { text: "Ik heww Bröödt.", correct: false },
-  { text: "Bröödt een dat.", correct: false },
+addPlatt(18, "SELECT", "У якому варіанті слово відповідає стандартному 'Kind'?", [
+  { text: "Keind", correct: false},
+  { text: "Kinner", correct: true},
+  { text: "Ken", correct: false},
 ]);
 
-addPlatt(17, "LISTEN", "wo_is_dien_vadder переклад:", [
-  { text: "Де твій батько?", correct: true},
-  { text: "Це мій дім.", correct: false },
-  { text: "Твій тато спить.", correct: false },
-  { text: "Я йду додому.", correct: false },
-]);
 
-addPlatt(17, "WRITE", "Напиши речення зі словами: ik / mutt / na / Huus", [
-  { text: "Ik mutt na Huus.", correct: true },
-  // { text: "mutt Ik na Huus.", correct: false },
-  // { text: "Huus mutt Ik na.", correct: false },
-]);
 
-addPlatt(17, "ASSIST", "Збери речення: se / sünd / to / de / Schoul", [
-  { text: "Se sünd to de Schoul.", correct: true},
-  { text: "Schoul Se sünd to de Schoul.", correct: false},
-  { text: "Schoul Se sünd de to Schoul.", correct: false},
+addPlatt(18, "WRITE", "Wo is dien …?", [
+  { text: "vadder", correct: true },
 ]);
-// === LESSON 3: Сімʼя та дім ===
-addPlatt(18, "SELECT", "Що означає 'Dat is mien Huus'?", [
-  { text: "Це мій дім", correct: true},
-  { text: "Твій дім тут", correct: false },
-  { text: "Де мій дім?", correct: false },
-  { text: "Мій тато вдома", correct: false },
-]);
+addPlatt(19, "SELECT", "Що означає фраза 'Dat is mien Huus'?", [
+      { text: "Це мій дім", correct: true, audioSrc: "/audio/faynyy.mp3" },
+      { text: "Там моя школа", correct: false, audioSrc: "/audio/zlyy.mp3" },
+      { text: "Де твій дім?", correct: false, audioSrc: "/audio/malenkyy.mp3" },
+    ]);
+addPlatt(19, "SELECT", "Що означає фраза 'Ik heww keen Tied'?", [
+      { text: "У мене є час", correct: false, audioSrc: "/audio/hozhar.mp3" },
+      { text: "У мене немає часу", correct: true, audioSrc: "/audio/selyanyn.mp3" },
+      { text: "Ти маєш час", correct: false, audioSrc: "/audio/drug.mp3" },
+    ]);
+addPlatt(19, "WRITE", " Ik heww keen …", [{ text: "tied", correct: true }]);
 
-addPlatt(18, "ASSIST", "Збери речення: Wo / is / dien / Vadder?", [
-  { text: "Wo is dien Vadder?", correct: true},
-  { text: "Vadder? Wo is dien Vadder?", correct: false},
-  { text: "dien Wo is dien Vadder?", correct: false},
-]);
 
-addPlatt(18, "LISTEN", "dat_is_dien_vadder вибери правильний переклад", [
-  { text: "Мій батько вдома", correct: true},
-  { text: "Дім старий", correct: false },
-  { text: "Тато пішов на роботу", correct: false },
-]);
+addPlatt(20, "SELECT", "Що означає речення 'Ik heww dat nich verstahn'?", [
+      { text: "Я не зрозумів це", correct: true, audioSrc: "/audio/faynyy.mp3" },
+      { text: "Я маю час", correct: false, audioSrc: "/audio/zlyy.mp3" },
+      { text: "Це мій дім", correct: false, audioSrc: "/audio/malenkyy.mp3" },
+    ]);
+addPlatt(20, "SELECT", "Як Plattdeutsch вплинув на стандартну німецьку мову?", [
+      { text: "Він є її основою", correct: false, audioSrc: "/audio/hozhar.mp3" },
+      { text: "Його фонетика збереглася у північних регіонах", correct: true, audioSrc: "/audio/selyanyn.mp3" },
+      { text: "Він виник у Швейцарії", correct: false, audioSrc: "/audio/drug.mp3" },
+    ]);
+addPlatt(20, "WRITE", "Se sünd to de … ", [{ text: "schoul", correct: true }]);
 
-addPlatt(18, "WRITE", "Напиши речення: Dat is mien Huus", [
-  { text: "Dat is mien Huus.", correct: true },
-]);
 
-// === LESSON 4: Їжа та речі ===
-addPlatt(19, "SELECT", "Що означає 'Dat is een Bröödt'?", [
-  { text: "Це хліб", correct: true},
-  { text: "Це сир", correct: false },
-  { text: "Це м’ясо", correct: false },
-  { text: "Це суп", correct: false },
-]);
-
-addPlatt(19, "ASSIST", "Постав слова у правильному порядку: Dat / is / een / Bröödt", [
-  { text: "Dat is een Bröödt.", correct: true},
-  { text: "Bröödt Dat is een.", correct: false},
-  { text: "is Bröödt Dat is een.", correct: false},
-]);
-
-addPlatt(19, "LISTEN", "вибери переклад слова 'eten'", [
-  { text: "їсти", correct: true},
-  { text: "пити", correct: false },
-  { text: "спати", correct: false },
-]);
-
-addPlatt(19, "WRITE", "Напиши речення: Ik heww dat nich verstahn", [
-  { text: "Ik heww dat nich verstahn.", correct: true },
-]);
-
-// === LESSON 5: Дії та рух ===
-addPlatt(20, "SELECT", "Що означає 'He kümmt later'?", [
-  { text: "Він прийде пізніше", correct: true},
-  { text: "Він уже тут", correct: false },
-  { text: "Він спить", correct: false },
-  { text: "Я йду додому", correct: false },
-]);
-
-addPlatt(20, "ASSIST", "Склади речення: Ik / mutt / na / Huus", [
-  { text: "Ik mutt na Huus.", correct: true},
-  { text: "Huus Ik mutt na.", correct: false},
-  { text: "Huus Ik na mutt.", correct: false},
-]);
-
-addPlatt(20, "LISTEN", "ik_mutt_na_huus вибери речення з тим самим змістом", [
-  { text: "Я йду додому", correct: true},
-  { text: "Він іде додому", correct: false },
-  { text: "Ми в школі", correct: false },
-]);
-
-addPlatt(20, "WRITE", "Напиши речення: Se sünd to de Schoul", [
-  { text: "Se sünd to de Schoul.", correct: true },
-]);
-
-// === UNIT для Нижньонімецьких діалектів (Plattdeutsch) ===
 await db.insert(schema.units).values([
   {
     id: 5,
     regionId: 11,
-    title: "Основи Plattdeutsch",
-    description: "Перші речення, слова та вимова в Середньонімечьких діалектах.",
+    title: "Додаток",
+    description: "Перед тим як практикуватись радимо, прочитати навчальні матеріали.",
     order: 1,
   },
 ]);
@@ -583,7 +510,7 @@ const addMiddlet = (
 
   answers.forEach((a) => {
     middleOptions.push({
-      id: plattId++,
+      id: middleId++,
       challengeId: chId,
       text: a.text,
       correct: a.correct,
@@ -594,165 +521,673 @@ const addMiddlet = (
 };
 addMiddlet(21, "SELECT", "Який з наведених діалектів належить до Mitteldeutsch?", [
   { text: "Швабський", correct: false },
-  { text: "Баварський", correct: true },
-  { text: "Гессенський", correct: false },
-  { text: "Швейцарський", correct: false },
+  { text: "Баварський", correct: false },
+  { text: "Гессенський", correct: true },
 ]);
 
 addMiddlet(21, "SELECT", "Що типово для Mitteldeutsch на фонетичному рівні?", [
-  { text: "Вимова з “pf”", correct: true },
-  { text: "Збалансована, проміжна фонетика", correct: false },
+  { text: "Вимова з “pf”", correct: false },
+  { text: "Збалансована, проміжна фонетика", correct: true },
   { text: "Чергування t → z", correct: false },
-  { text: "Вокалізація 'r'", correct: false },
-]);
-addMiddlet(21, "ASSIST", "Isch / hab / ken / Zeit", [
-  { text: "Isch hab ken Zeit.", correct: true },
-  { text: "Zeit Isch hab ken.", correct: false },
-  { text: "Isch ken hab Zeit.", correct: false },
-]);
-
-addMiddlet(21, "ASSIST", "Der / Mann / wo / beim / Daimler / schaffe", [
-  { text: "Der Mann wo beim Daimler schaffe.", correct: true },
-   { text: "Daimler Der Mann wo beim Daimler schaffe.", correct: false },
-    { text: "Der Mann wo beim Daimler wo schaffe.", correct: false },
 ]);
 
 
-addMiddlet(21, "SELECT", "Що означає 'Mädsche' у гессенському варіанті?", [
+addMiddlet(21, "WRITE", "Isch hab ken … ", [
+  { text: "zeit", correct: true },
+]);
+
+addMiddlet(22, "SELECT", "Що означає 'Mädsche' у гессенському варіанті?", [
   { text: "Хлопець", correct: false },
   { text: "Дівчина", correct: true },
   { text: "Мама", correct: false },
-  { text: "Бабуся", correct: false },
-]);
-addMiddlet(21, "WRITE", "Переклади: 'я не маю часу'", [
-  { text: "Isch hab ken Zeit", correct: true },
 ]);
 
 addMiddlet(22, "SELECT", "Який з цих діалектів може вживати 'wie' замість 'als'?", [
   { text: "Гессенський", correct: true },
   { text: "Швабський", correct: false },
   { text: "Баварський", correct: false },
-  { text: "Plattdeutsch", correct: false },
 ]);
 
-addMiddlet(22, "SELECT", "Що означає речення 'Isch hab ken Zeit'?", [
+addMiddlet(22, "WRITE", "Des is mei …", [
+  { text: "mädsche", correct: true },
+]);
+
+addMiddlet(23, "SELECT", "Що означає фраза 'Isch hab ken Zeit'?", [
   { text: "У мене є час", correct: false },
   { text: "У мене немає часу", correct: true },
   { text: "У тебе є час", correct: false },
-  { text: "Ти маєш час", correct: false },
-]);
-addMiddlet(22, "ASSIST", "Isch / geh / heem / jetz", [
-  { text: "Isch geh jetz heem.", correct: true },
-  { text: "Isch jetz geh heem.", correct: false },
-  { text: "Isch jetz heem.", correct: false },
-]);
-
-addMiddlet(22, "ASSIST", "Gude / wie / geht’s / dir?", [
-  { text: "Gude, wie geht’s dir?", correct: true },
-  { text: "wie geht’s dir?", correct: false },
-  { text: "Gude, dir wie geht’s?", correct: false },
-]);
-addMiddlet(22, "WRITE", "Переклади: 'привіт'", [
-  { text: "Gude", correct: true },
-]);
-addMiddlet(23, "SELECT", "Що означає речення 'Isch hab ken Zeit'?", [
-  { text: "У мене є час", correct: false },
-  { text: "У мене немає часу", correct: true },
-  { text: "У тебе є час", correct: false },
-  { text: "Ти маєш час", correct: false },
 ]);
 
 addMiddlet(23, "SELECT", "Яка особливість у слові 'isch' (замість ich)?", [
-  { text: "Південний варіант", correct: true },
-  { text: "Типова заміна 'ch' на 'sch'", correct: false },
-  { text: "Гортанне r", correct: false },
+  { text: "Південний варіант", correct: false },
+  { text: "Типова заміна 'ch' на 'sch'", correct: true },
   { text: "Архаїзм", correct: false },
 ]);
-addMiddlet(23, "ASSIST", "Es / is / net / schlimm", [
-  { text: "Es schlimm is net schlimm.", correct: false },
-  { text: "Es is net schlimm.", correct: true },
-  { text: "Es net is schlimm.", correct: false },
+
+addMiddlet(23, "WRITE", "Isch hab ken … ", [
+  { text: "zeit", correct: true },
 ]);
 
-addMiddlet(23, "ASSIST", "Du / bisch / mein / Fründ", [
-  { text: "Fründ Du bisch mein.", correct: false },
-  { text: "Du mein bisch Fründ.", correct: false },
-  { text: "Du bisch mein Fründ.", correct: true },
-]);
-addMiddlet(23, "WRITE", "Напиши фразу: 'він дома'", [
-  { text: "He is doheem", correct: true },
-]);
-
-addMiddlet(24, "SELECT", "Що означає 'Schaffe' у контексті «beim Daimler schaffe»?", [
+addMiddlet(24, "SELECT", "Що означає “Schaffe” у контексті «beim Daimler schaffe»?", [
   { text: "Їсти", correct: false },
   { text: "Працювати", correct: true },
   { text: "Ламати", correct: false },
-  { text: "Дивитись", correct: false },
 ]);
 
 addMiddlet(24, "SELECT", "Яке слово у Mitteldeutsch є заміною до 'ein bisschen'?", [
   { text: "a bissle", correct: false },
-  { text: "a weng", correct: true },
-  { text: "e wänschje", correct: false },
-  { text: "ganz", correct: false },
+  { text: "a weng", correct: false },
+  { text: "e wänschje", correct: true },
 ]);
-addMiddlet(24, "ASSIST", "Was / machst / du / heit?", [
-  { text: "Was machst du heit?", correct: true },
-  { text: "Was heit machst?", correct: false },
-   { text: "Was heit machst du?", correct: false },
+addMiddlet(24, "WRITE", "Ich muss viel …", [
+  { text: "schaffe", correct: true },
 ]);
 
-addMiddlet(24, "ASSIST", "Mer / ginn / in / die / Stadt", [
-  { text: "Mer ginn in die Stadt.", correct: true },
-  { text: "Mer die ginn in Stadt.", correct: false },
-  { text: "Mer in die ginn in Stadt.", correct: false },
-]);
-addMiddlet(24, "WRITE", "Переклади: 'що ти робиш?'", [
-  { text: "Was machst du?", correct: true },
-]);
-addMiddlet(25, "SELECT", "'Gude!' — це:", [
+
+addMiddlet(25, "SELECT", "Що означає “Gude!”?", [
   { text: "Прощання", correct: false },
-  { text: "Дякую", correct: true },
-  { text: "Привітання", correct: false },
+  { text: "Дякую", correct: false },
+  { text: "Привітання", correct: true },
   { text: "Погодження", correct: false },
 ]);
 
 addMiddlet(25, "SELECT", "Яке з цих тверджень вірне щодо Mitteldeutsch?", [
-  { text: "Має найменше діалектів", correct: true },
-  { text: "Лежить між північчю і півднем", correct: false },
-  { text: "Всі діалекти стандартизовані", correct: false },
+  { text: "Має найменше діалектів", correct: false },
+  { text: "Лежить між північчю і півднем", correct: true },
   { text: "Використовується лише в Австрії", correct: false },
 ]);
-addMiddlet(25, "ASSIST", "He / is / doheem", [
-  { text: "He is doheem.", correct: true },
-  { text: "is He doheem.", correct: false },
-  { text: "He doheem. is", correct: false },
+addMiddlet(25, "WRITE", "…! Wie geht’s?", [
+  { text: "Gude", correct: true },
 ]);
 
-addMiddlet(25, "ASSIST", "Des / is / mei / Auto", [
-  { text: "Des is mei Auto.", correct: true },
-  { text: "Des mei is Auto.", correct: false},
-  { text: "is Des mei Auto.", correct: false},
+await db.insert(schema.units).values([
+  {
+    id: 6,
+    regionId: 12,
+    title: "Додаток",
+    description: "Перед тим як практикуватись радимо, прочитати навчальні матеріали.",
+    order: 1,
+  },
 ]);
-addMiddlet(25, "WRITE", "Переклади: 'я йду додому'", [
-  { text: "Isch geh heem", correct: true },
+
+await db.insert(schema.lessons).values([
+  { id: 26, unitId: 6, order: 1, title: "Основні речення (частина 1)" },
+  { id: 27, unitId: 6, order: 2, title: "Основні речення (частина 2)" },
+   { id: 28, unitId: 6, order: 3, title: "Сімʼя та дім" },
+  { id: 29, unitId: 6, order: 4, title: "Їжа та речі" },
+  { id: 30, unitId: 6, order: 5, title: "Дії та рух" }
+]);
+
+const oberChallenges: typeof schema.challenges.$inferInsert[] = [];
+const oberOptions: typeof schema.challengesOptions.$inferInsert[] = [];
+let oberId = 500;
+
+const addOber = (
+  lessonId: number,
+  type: "SELECT" | "ASSIST" | "LISTEN" | "WRITE",
+  question: string,
+  answers: { text: string; correct: boolean; audioSrc?: string; imageSrc?: string }[]
+) => {
+  const chId = oberId++;
+  oberChallenges.push({ id: chId, lessonId, type, order: chId, question });
+
+  answers.forEach((a) => {
+    oberOptions.push({
+      id: oberId++,
+      challengeId: chId,
+      text: a.text,
+      correct: a.correct,
+      audioSrc: a.audioSrc || null,
+      imageSrc: a.imageSrc || null,
+    });
+  });
+};
+addOber(26, "SELECT", "Що означає “Griaß di!” у баварському діалекті?", [
+  { text: "Дякую", correct: false },
+  { text: "Побачимось", correct: false },
+  { text: "привіт", correct: true },
+]);
+addOber(26, "SELECT", "Як буде 'картопля' у баварському варіанті?", [
+  { text: "Kartoffel", correct: false },
+  { text: "Erdbirn", correct: false },
+  { text: "Erdäpfel", correct: true },
+]);
+addMiddlet(26, "WRITE", "… di! Wie geht’s?", [
+  { text: "Griaß", correct: true },
+]);
+
+addOber(27, "SELECT", "Що означає 'Gwand' у баварському діалекті?", [
+  { text: "Їжа", correct: false },
+  { text: "Одяг", correct: true },
+  { text: "Гроші", correct: false },
+]);
+addOber(27, "SELECT", "Яке з цих дієслів частіше вживається в Perfekt, а не в Präteritum у південних діалектах?", [
+  { text: "haben", correct: false },
+  { text: "sagen", correct: true },
+  { text: "sein", correct: false },
+]);
+addMiddlet(27, "WRITE", "Des is mei …", [
+  { text: "Gwand", correct: true },
+]);
+
+addOber(28, "SELECT", "Фраза “i hob koa Zeit” перекладається як", [
+  { text: "У тебе є час", correct: false },
+  { text: "Я не маю часу", correct: true },
+  { text: "Я хочу час", correct: false },
+]);
+addOber(28, "SELECT", "Яке з цих слів є швабським варіантом “дівчина”?", [
+  { text: "Mädel", correct: false },
+  { text: "Mädele", correct: true },
+  { text: "Möd", correct: false },
+]);
+addMiddlet(28, "WRITE", "I hob koa …", [
+  { text: "zeit", correct: true },
+]);
+
+addOber(29, "SELECT", "Що означає “Bua” в баварському діалекті?", [
+  { text: "Пес", correct: false },
+  { text: "Хлопець", correct: true },
+  { text: "Вино", correct: false },
+]);
+addOber(29, "SELECT", "Яка фонетична зміна притаманна Oberdeutsch?", [
+  { text: "t → z", correct: true },
+  { text: "ch → k", correct: false },
+  { text: "r → ø", correct: false },
+]);
+addMiddlet(29, "WRITE", "Da … spielt draußen", [
+  { text: "bua", correct: true },
+]);
+
+addOber(30, "SELECT", "'Da Voda is im Haus' — переклади", [
+  { text: "Батько пішов", correct: false },
+  { text: "Батько в домі", correct: true },
+  { text: "Дім новий", correct: false },
+]);
+addOber(30, "SELECT", "Який з варіантів є прикладом вокалізації r у баварській мові?", [
+  { text: "Vater → Vatter", correct: false },
+  { text: "Vater → Foda", correct: true },
+  { text: "Vater → Vadder", correct: false },
+]);
+addMiddlet(30, "WRITE", "Da … is im Haus", [
+  { text: "voda", correct: true },
+]);
+
+
+await db.insert(schema.units).values([
+  {
+    id: 7,
+    regionId: 13,
+    title: "Додаток",
+    description: "Перед тим як практикуватись радимо, прочитати навчальні матеріали.",
+    order: 1,
+  },
+]);
+
+await db.insert(schema.lessons).values([
+  { id: 31, unitId: 7, order: 1, title: "Основні речення (частина 1)" },
+  { id: 32, unitId: 7, order: 2, title: "Основні речення (частина 2)" },
+   { id: 33, unitId: 7, order: 3, title: "Сімʼя та дім" },
+  { id: 34, unitId: 7, order: 4, title: "Їжа та речі" },
+  { id: 35, unitId: 7, order: 5, title: "Дії та рух" }
+]);
+
+const cockneyChallenges: typeof schema.challenges.$inferInsert[] = [];
+const cockneyOptions: typeof schema.challengesOptions.$inferInsert[] = [];
+let cockneyId = 600;
+
+const addCockney = (
+  lessonId: number,
+  type: "SELECT" | "ASSIST" | "LISTEN" | "WRITE",
+  question: string,
+  answers: { text: string; correct: boolean; audioSrc?: string; imageSrc?: string }[]
+) => {
+  const chId = cockneyId++;
+  cockneyChallenges.push({ id: chId, lessonId, type, order: chId, question });
+
+  answers.forEach((a) => {
+    cockneyOptions.push({
+      id: cockneyId++,
+      challengeId: chId,
+      text: a.text,
+      correct: a.correct,
+      audioSrc: a.audioSrc || null,
+      imageSrc: a.imageSrc || null,
+    });
+  });
+};
+addCockney(31, "SELECT", "Що з цього означає «гроші»?", [
+  { text: "china plate", correct: false },
+  { text: "bees and honey", correct: true },
+  { text: "apples and pears", correct: false },
+]);
+addCockney(31, "SELECT", "Що з цього означає «голова»?", [
+  { text: "loaf of bread", correct: true },
+  { text: "dog and bone", correct: false },
+  { text: "bottle and stopper", correct: false },
+]);
+addCockney(31, "WRITE", "I don’t have any … to buy you this", [
+  { text: "bees and honey", correct: true },
+]);
+
+addCockney(32, "SELECT", "Що означає 'Gwand' у баварському діалекті?", [
+  { text: "Їжа", correct: false },
+  { text: "Одяг", correct: true },
+  { text: "Гроші", correct: false },
+]);
+addCockney(32, "SELECT", "Що з цього означає «друг»?", [
+  { text: "loaf of bread", correct: false },
+  { text: "bees and honey", correct: false },
+  { text: "china plate", correct: true },
+]);
+addCockney(32, "WRITE", "Go up the … and you’ll see the bathroom", [
+  { text: "apples and pears", correct: true },
+]);
+
+addCockney(33, "SELECT", "Що з цього означає «волосся»?", [
+  { text: "barnet (fair)", correct: true },
+  { text: "trouble and strife", correct: false },
+  { text: "china plate", correct: false },
+]);
+addCockney(33, "SELECT", "Що з цього означає «поліцейський»?", [
+  { text: "rosie lee", correct: false },
+  { text: "butcher’s hook", correct: false },
+  { text: "bottle and stopper", correct: true },
+]);
+addCockney(33, "WRITE", "Watch out, the … is about! ", [
+  { text: "bottle and stopper", correct: true },
+]);
+
+addCockney(34, "SELECT", "Що з цього означає «украсти»?", [
+  { text: "loaf of bread", correct: false },
+  { text: "half-inch", correct: true },
+  { text: "bees and honey", correct: false },
+]);
+addCockney(34, "SELECT", "Що з цього означає «дружина»?", [
+  { text: "rosie lee", correct: false },
+  { text: "china plate", correct: false },
+  { text: "trouble and strife", correct: true },
+]);
+addCockney(34, "WRITE", "My … is waiting for me at home", [
+  { text: "trouble and strife", correct: true },
+]);
+
+addCockney(35, "SELECT", "Що з цього означає «подив/погляд»?", [
+  { text: "butcher’s hook", correct: true },
+  { text: "china plate", correct: false },
+  { text: "apples and pears", correct: false },
+]);
+addCockney(35, "SELECT", "2)	Що з цього означає «чай»?", [
+  { text: "bees and honey", correct: false },
+  { text: "rosie lee", correct: true },
+  { text: "half-inch", correct: false },
+]);
+addCockney(35, "WRITE", "Fancy a cup of …? ", [
+  { text: "rosie lee", correct: true },
 ]);
 
 
 
+await db.insert(schema.units).values([
+  {
+    id: 8,
+    regionId: 14,
+    title: "Додаток",
+    description: "Перед тим як практикуватись радимо, прочитати навчальні матеріали.",
+    order: 1,
+  },
+]);
 
+await db.insert(schema.lessons).values([
+  { id: 36, unitId: 8, order: 1, title: "Основні речення (частина 1)" },
+  { id: 37, unitId: 8, order: 2, title: "Основні речення (частина 2)" },
+   { id: 38, unitId: 8, order: 3, title: "Сімʼя та дім" },
+  { id: 39, unitId: 8, order: 4, title: "Їжа та речі" },
+  { id: 40, unitId: 8, order: 5, title: "Дії та рух" }
+]);
+
+const scouseChallenges: typeof schema.challenges.$inferInsert[] = [];
+const scouseOptions: typeof schema.challengesOptions.$inferInsert[] = [];
+let scouseId = 700;
+
+const addScouse = (
+  lessonId: number,
+  type: "SELECT" | "ASSIST" | "LISTEN" | "WRITE",
+  question: string,
+  answers: { text: string; correct: boolean; audioSrc?: string; imageSrc?: string }[]
+) => {
+  const chId = scouseId++;
+  scouseChallenges.push({ id: chId, lessonId, type, order: chId, question });
+
+  answers.forEach((a) => {
+    scouseOptions.push({
+      id: scouseId++,
+      challengeId: chId,
+      text: a.text,
+      correct: a.correct,
+      audioSrc: a.audioSrc || null,
+      imageSrc: a.imageSrc || null,
+    });
+  });
+};
+addScouse(36, "SELECT", "Що з цього означає «їжа»?", [
+  { text: "scran", correct: true },
+  { text: "kecks", correct: false },
+  { text: "boss", correct: false },
+]);
+addScouse(36, "SELECT", "Що з цього означає «штани»?", [
+  { text: "scran", correct: false },
+  { text: "kecks", correct: true },
+  { text: "jarg", correct: false },
+]);
+addScouse(36, "WRITE", "I’m starving, let’s grab some … before we go out", [
+  { text: "scran", correct: true },
+]);
+
+addScouse(37, "SELECT", "Що з цього означає «не місцевий/чужак»?", [
+  { text: "wool", correct: true },
+  { text: "jarg", correct: false },
+  { text: "la/lad", correct: false },
+]);
+addScouse(37, "SELECT", "Що з цього означає «фальшивий/підробка»?", [
+  { text: "boss", correct: false },
+  { text: "jarg", correct: true },
+  { text: "div", correct: false },
+]);
+addScouse(37, "WRITE", "That … just moved here last week, he doesn’t know the city.", [
+  { text: "wool", correct: true },
+]);
+
+addScouse(38, "SELECT", "Що з цього означає «голова»?", [
+  { text: "lid", correct: true },
+  { text: "bevvy", correct: false },
+  { text: "div", correct: false },
+]);
+addScouse(38, "SELECT", "Що з цього означає «друг/товариш»?", [
+  { text: "la/lad", correct: true },
+  { text: "liddo/little one", correct: false },
+  { text: "boss", correct: false },
+]);
+addScouse(38, "WRITE", "Me and my … are going to watch the football", [
+  { text: "la/lad", correct: true },
+  { text: "lad", correct: true },
+  { text: "la", correct: true },
+]);
+
+addScouse(39, "SELECT", "Що з цього означає «дурень»?", [
+  { text: "kecks", correct: false },
+  { text: "div", correct: true },
+  { text: "boss", correct: false },
+]);
+addScouse(39, "SELECT", "Що з цього означає «дитина»?", [
+  { text: "liddo/little one", correct: true },
+  { text: "la/lad", correct: false },
+  { text: "scran", correct: false },
+]);
+addScouse(39, "WRITE", "Come on, …, time for bed", [
+  { text: "liddo/little one", correct: true },
+  { text: "liddo", correct: true },
+  { text: "little one", correct: true },
+]);
+
+addScouse(40, "SELECT", "Що з цього означає «алкогольний напій»?", [
+  { text: "scran", correct: false },
+  { text: "bevvy", correct: true },
+  { text: "wool", correct: false },
+]);
+addScouse(40, "SELECT", "Що з цього означає «гарний/чудовий»?", [
+  { text: "div", correct: false },
+  { text: "boss", correct: true },
+  { text: "jarg", correct: false },
+]);
+addScouse(40, "WRITE", "That match was …, la! ", [
+  { text: "boss", correct: true },
+]);
+
+
+await db.insert(schema.units).values([
+  {
+    id: 9,
+    regionId: 15,
+    title: "Додаток",
+    description: "Перед тим як практикуватись радимо, прочитати навчальні матеріали.",
+    order: 1,
+  },
+]);
+
+await db.insert(schema.lessons).values([
+  { id: 41, unitId: 9, order: 1, title: "Основні речення (частина 1)" },
+  { id: 42, unitId: 9, order: 2, title: "Основні речення (частина 2)" },
+   { id: 43, unitId: 9, order: 3, title: "Сімʼя та дім" },
+  { id: 44, unitId: 9, order: 4, title: "Їжа та речі" },
+  { id: 45, unitId: 9, order: 5, title: "Дії та рух" }
+]);
+
+const geordieChallenges: typeof schema.challenges.$inferInsert[] = [];
+const geordieOptions: typeof schema.challengesOptions.$inferInsert[] = [];
+let geordieId = 800;
+
+const addGeordie = (
+  lessonId: number,
+  type: "SELECT" | "ASSIST" | "LISTEN" | "WRITE",
+  question: string,
+  answers: { text: string; correct: boolean; audioSrc?: string; imageSrc?: string }[]
+) => {
+  const chId = geordieId++;
+  geordieChallenges.push({ id: chId, lessonId, type, order: chId, question });
+
+  answers.forEach((a) => {
+    geordieOptions.push({
+      id: geordieId++,
+      challengeId: chId,
+      text: a.text,
+      correct: a.correct,
+      audioSrc: a.audioSrc || null,
+      imageSrc: a.imageSrc || null,
+    });
+  });
+};
+addGeordie(41, "SELECT", "Що з цього означає «хліб»?", [
+  { text: "toon", correct: false },
+  { text: "breed", correct: true },
+  { text: "spuggy", correct: false },
+]);
+addGeordie(41, "SELECT", "Що з цього означає «друг»?", [
+  { text: "marra", correct: true },
+  { text: "gadgie", correct: false },
+  { text: "nappa", correct: false },
+]);
+addGeordie(41, "WRITE", "He’s my … from school", [
+  { text: "marra", correct: true },
+]);
+
+addGeordie(42, "SELECT", "Що з цього означає «голова»?", [
+  { text: "nappa", correct: true },
+  { text: "toon", correct: false },
+  { text: "clart", correct: false },
+]);
+addGeordie(42, "SELECT", "Що з цього означає «дитина»?", [
+  { text: "gadgie", correct: false },
+  { text: "bairn", correct: true },
+  { text: "radgie", correct: false },
+]);
+addGeordie(42, "WRITE", "Use your … and think before you speak! ", [
+  { text: "nappa", correct: true },
+]);
+
+addGeordie(43, "SELECT", "Що з цього означає «бруд»?", [
+  { text: "gadgie", correct: false },
+  { text: "clart", correct: true },
+  { text: "radgie", correct: false },
+]);
+addGeordie(43, "SELECT", "Що з цього означає «місто (особливо Ньюкасл)»?", [
+  { text: "toon", correct: true },
+  { text: "clart", correct: false },
+  { text: "gansey", correct: false },
+]);
+addGeordie(43, "WRITE", "You’ve got … all over your boots", [
+  { text: "clart", correct: true },
+]);
+
+addGeordie(44, "SELECT", "Що з цього означає «чоловік»?", [
+  { text: "gadgie", correct: true },
+  { text: "nappa", correct: false },
+  { text: "spuggy", correct: false },
+]);
+addGeordie(44, "SELECT", "Що з цього означає «светр»?", [
+  { text: "toon", correct: false },
+  { text: "gansey", correct: true },
+  { text: "bairn", correct: false },
+]);
+addGeordie(44, "WRITE", "He’s wearing his new … today", [
+  { text: "gansey", correct: true },
+]);
+
+addGeordie(45, "SELECT", "Що з цього означає «сердитий»?", [
+  { text: "radgie", correct: true },
+  { text: "spuggy", correct: false },
+  { text: "toon", correct: false },
+]);
+addGeordie(45, "SELECT", "Що з цього означає «горобець»?", [
+  { text: "spuggy", correct: true },
+  { text: "bairn", correct: false },
+  { text: "gadgie", correct: false },
+]);
+addGeordie(45, "WRITE", "He gets a bit … when his team loses ", [
+  { text: "radgie", correct: true },
+]);
+
+
+await db.insert(schema.units).values([
+  {
+    id: 10,
+    regionId: 16,
+    title: "Додаток",
+    description: "Перед тим як практикуватись радимо, прочитати навчальні матеріали.",
+    order: 1,
+  },
+]);
+
+await db.insert(schema.lessons).values([
+  { id: 46, unitId: 10, order: 1, title: "Основні речення (частина 1)" },
+  { id: 47, unitId: 10, order: 2, title: "Основні речення (частина 2)" },
+   { id: 48, unitId: 10, order: 3, title: "Сімʼя та дім" },
+  { id: 49, unitId: 10, order: 4, title: "Їжа та речі" },
+  { id: 50, unitId: 10, order: 5, title: "Дії та рух" }
+]);
+
+const yorkChallenges: typeof schema.challenges.$inferInsert[] = [];
+const yorkOptions: typeof schema.challengesOptions.$inferInsert[] = [];
+let yorkId = 900;
+
+const addYork = (
+  lessonId: number,
+  type: "SELECT" | "ASSIST" | "LISTEN" | "WRITE",
+  question: string,
+  answers: { text: string; correct: boolean; audioSrc?: string; imageSrc?: string }[]
+) => {
+  const chId = yorkId++;
+  yorkChallenges.push({ id: chId, lessonId, type, order: chId, question });
+
+  answers.forEach((a) => {
+    yorkOptions.push({
+      id: geordieId++,
+      challengeId: chId,
+      text: a.text,
+      correct: a.correct,
+      audioSrc: a.audioSrc || null,
+      imageSrc: a.imageSrc || null,
+    });
+  });
+};
+addYork(46, "SELECT", "Що з цього означає «кінь»?", [
+  { text: "cuddy", correct: true },
+  { text: "croft", correct: false },
+  { text: "pannier", correct: false },
+]);
+addYork(46, "SELECT", "Що з цього означає «кошик»?", [
+  { text: "pannier", correct: true },
+  { text: "garth", correct: false },
+  { text: "kist", correct: false },
+]);
+addYork(46, "WRITE", "ut the apples in the … before you carry them.", [
+  { text: "pannier", correct: true },
+]);
+
+addYork(47, "SELECT", "Що з цього означає «сад/двір»?", [
+  { text: "garth", correct: true },
+  { text: "ginnel", correct: false },
+  { text: "beck", correct: false },
+]);
+addYork(47, "SELECT", "Що з цього означає «коробка/скриня»?", [
+  { text: "kist", correct: true },
+  { text: "croft", correct: false },
+  { text: "staithe", correct: false },
+]);
+addYork(47, "WRITE", "Fetch that … from the loft", [
+  { text: "kist", correct: true },
+]);
+
+addYork(48, "SELECT", "Що з цього означає «невеликий потік/струмок»?", [
+  { text: "staithe", correct: false },
+  { text: "neddy", correct: false },
+  { text: "beck", correct: true },
+]);
+addYork(48, "SELECT", "Що з цього означає «невелика ферма/земельна ділянка»?", [
+  { text: "croft", correct: true },
+  { text: "cuddy", correct: false },
+  { text: "garth", correct: false },
+]);
+addYork(48, "WRITE", "The … runs behind the cottages", [
+  { text: "beck", correct: true },
+]);
+
+addYork(49, "SELECT", "Що з цього означає «гавань/причал»?", [
+  { text: "staithe", correct: true },
+  { text: "ginnel", correct: false },
+  { text: "cuddy", correct: false },
+]);
+addYork(49, "SELECT", "Що з цього означає «вузький прохід/провулок»?", [
+  { text: "pannier", correct: false },
+  { text: "croft", correct: false },
+  { text: "ginnel", correct: true },
+]);
+addYork(49, "WRITE", "She went down the … behind the shop", [
+  { text: "ginnel", correct: true },
+]);
+
+addYork(50, "SELECT", "Що з цього означає «вівця»?", [
+  { text: "yow", correct: true },
+  { text: "cuddy", correct: false },
+  { text: "beck", correct: false },
+]);
+addYork(50, "SELECT", "Що з цього означає «кінь»?", [
+  { text: "croft", correct: false },
+  { text: "pannier", correct: false },
+  { text: "neddy", correct: true },
+]);
+addYork(50, "WRITE", "The … were grazing peacefully in the field", [
+  { text: "yow", correct: true },
+]);
+  
 // ✅ Вставка в базу
+   await db.insert(schema.challenges).values(yorkChallenges);
+    await db.insert(schema.challengesOptions).values(yorkOptions);
+   await db.insert(schema.challenges).values(geordieChallenges);
+    await db.insert(schema.challengesOptions).values(geordieOptions);
+    await db.insert(schema.challenges).values(scouseChallenges);
+    await db.insert(schema.challengesOptions).values(scouseOptions);
+    await db.insert(schema.challenges).values(cockneyChallenges);
+    await db.insert(schema.challengesOptions).values(cockneyOptions);
+     await db.insert(schema.challenges).values(oberChallenges);
+    await db.insert(schema.challengesOptions).values(oberOptions);
+
     await db.insert(schema.challenges).values(plattChallenges);
     await db.insert(schema.challengesOptions).values(plattOptions);
     await db.insert(schema.challenges).values(middleChallenges);
     await db.insert(schema.challengesOptions).values(middleOptions);
 
-    // ✅ Вставка в БД
     await db.insert(schema.challenges).values(northChallenges);
     await db.insert(schema.challengesOptions).values(northOptions);
-    // ✅ Вставка Південно-західного наріччя
-    // await db.insert(schema.challenges).values(northChallenges);
-    // await db.insert(schema.challengesOptions).values(northOptions);
     await db.insert(schema.challenges).values(swChallenges);
     await db.insert(schema.challengesOptions).values(swOptions);
 
