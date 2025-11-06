@@ -4,17 +4,15 @@ import { Quiz } from "../quiz"
 
 type Props = {
     params: {
-        lesssonId: number
+        lessonId: number
     }
 }
+
 const LessonIdPage = async ({params}: Props) => {
-    const lessonData = getLesson(params.lesssonId)
+    const lessonData = getLesson(params.lessonId)
     const userProgressData = getUserProgress()
 
-    const [
-        lesson,
-        userProgress,
-    ] = await Promise.all([
+    const [lesson, userProgress] = await Promise.all([
         lessonData,
         userProgressData,
     ])
@@ -23,9 +21,9 @@ const LessonIdPage = async ({params}: Props) => {
         redirect("/learn")
     }
 
-    const initialPercentage = lesson.challenges 
-     .filter((challenge) => challenge.completed)
-     .length / lesson.challenges.length * 100
+    const initialPercentage =
+        lesson.challenges.filter(c => c.completed).length /
+        lesson.challenges.length * 100
 
     return (
         <Quiz 
@@ -33,8 +31,7 @@ const LessonIdPage = async ({params}: Props) => {
             initialLessonChallenges={lesson.challenges}
             initialHearts={userProgress.hearts}
             initialPercentage={initialPercentage}
-           
-         />
+        />
     )
 }
 
