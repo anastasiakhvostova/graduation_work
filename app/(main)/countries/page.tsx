@@ -15,20 +15,17 @@ const CountriesPage = async () => {
 
   return (
     <div className="h-full max-w-[912px] px-3 mx-auto">
-      {/* Кнопка повернення на головну */}
-      <div className="mt-4 mb-6">
+      <div className="mt-4 mb-6 flex items-center gap-3">
         <Link href="/">
-          <Button variant="ghost" className="flex items-center gap-2 text-black">
-            <ArrowLeft className="h-5 w-5" />
-            Повернутись до входу
+          <Button variant="ghost" className="flex items-center gap-2 text-black p-0 h-auto">
+            <ArrowLeft className="h-5 w-5 stroke-2 text-neutral-400" />
           </Button>
         </Link>
-      </div>
 
-      <h1 className="text-2xl font-bold text-neutral-700">
-        Обери країну, діалекти якої хочеш вивчати
-      </h1>
-
+        <h1 className="text-2xl font-bold text-neutral-700">
+          Обери країну, діалекти якої хочеш вивчати
+        </h1>
+    </div>
       <List
         countries={countries}
         activeCountryId={userProgress?.activeCountryId ?? null}

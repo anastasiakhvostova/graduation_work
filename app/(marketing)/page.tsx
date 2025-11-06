@@ -22,8 +22,7 @@ export default function Home() {
       {/* Права частина — текст, кнопки і підпис */}
       <div className="flex flex-col items-center gap-y-6">
         <h1 className="text-xl lg:text-3xl font-bold text-neutral-600 max-w-[480px] text-center">
-          Вивчай, практикуйся та покращуй знання у діалектах німецької,
-          української та англійської мов!
+          Веб-застосунок для вивчення українських, англійських та німецьких діалектів
         </h1>
 
         <div className="flex flex-col items-center gap-y-3 max-w-[330px] w-full">

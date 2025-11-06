@@ -40,7 +40,7 @@ async function main() {
 
     await db.insert(schema.units).values([
       {
-        id: 2,
+        id: 1,
         regionId: 7,
         title: "Додаток",
         description: "Перед тим як практикуватись радимо, прочитати навчальні матеріали.",
@@ -49,11 +49,11 @@ async function main() {
     ]);
 
     await db.insert(schema.lessons).values([
-      { id: 6, unitId: 2, order: 1, title: "Слова про людей" },
-      { id: 7, unitId: 2, order: 2, title: "Природа і село" },
-      { id: 8, unitId: 2, order: 3, title: "Хата і побут" },
-      { id: 9, unitId: 2, order: 4, title: "Їжа і напої" },
-      { id: 10, unitId: 2, order: 5, title: "Дієслова та дії" },
+      { id: 1, unitId: 1, order: 1, title: "Слова про людей" },
+      { id: 2, unitId: 1, order: 2, title: "Природа і село" },
+      { id: 3, unitId: 1, order: 3, title: "Хата і побут" },
+      { id: 4, unitId: 1, order: 4, title: "Їжа і напої" },
+      { id: 5, unitId: 1, order: 5, title: "Дієслова та дії" },
     ]);
 
     const northChallenges: typeof schema.challenges.$inferInsert[] = [];
@@ -81,160 +81,162 @@ async function main() {
       });
     };
 
-    addChallenge(6, "SELECT", "Що означає слово «гуторити»?", [
-      { text: "розмовляти", correct: true, audioSrc: "/audio/rozmovlyaty.mp3", imageSrc: "/images/rozmovlyaty.png" },
-      { text: "співати", correct: false, audioSrc: "/audio/spivaty.mp3", imageSrc: "/images/spivaty.png" },
-      { text: "плакати", correct: false, audioSrc: "/audio/plakaty.mp3", imageSrc: "/images/plakaty.png" },
+    addChallenge(1, "SELECT", "Що з цього означає «картопля»?", [
+      { text: "лєс", correct: false, audioSrc: "/audio/rozmovlyaty.mp3", imageSrc: "/les.png" },
+      { text: "бульба", correct: true, audioSrc: "/audio/spivaty.mp3", imageSrc: "/bulba.png" },
+      { text: "калач", correct: false, audioSrc: "/audio/plakaty.mp3", imageSrc: "/kalach.png" },
     ]);
 
-    addChallenge(6, "ASSIST", "Переклади: дєдьо", [
-      { text: "дідусь", correct: true, audioSrc: "/audio/didus.mp3" },
-      { text: "хлопець", correct: false, audioSrc: "/audio/hlopets.mp3" },
-      { text: "онук", correct: false, audioSrc: "/audio/onuk.mp3" },
+    addChallenge(1, "ASSIST", "Що з цього означає «розмовляти»?", [
+      { text: "гуторити", correct: true, audioSrc: "/audio/didus.mp3" },
+      { text: "клюмба", correct: false, audioSrc: "/audio/hlopets.mp3" },
+      { text: "дєдьо", correct: false, audioSrc: "/audio/onuk.mp3" },
     ]);
 
-    addChallenge(6, "SELECT", "Що означає «дєдьо гуторить»?", [
-      { text: "Дід розмовляє", correct: true, audioSrc: "/audio/did_rozmovlyaye.mp3", imageSrc: "/images/did_rozmovlyaye.png" },
-      { text: "Дід співає", correct: false, audioSrc: "/audio/did_spivaye.mp3", imageSrc: "/images/did_spivaye.png" },
-      { text: "Дід працює", correct: false, audioSrc: "/audio/did_pratsyuye.mp3", imageSrc: "/images/did_pratsyuye.png" },
+    // addChallenge(6, "SELECT", "Що означає «дєдьо гуторить»?", [
+    //   { text: "Дід розмовляє", correct: true, audioSrc: "/audio/did_rozmovlyaye.mp3", imageSrc: "/images/did_rozmovlyaye.png" },
+    //   { text: "Дід співає", correct: false, audioSrc: "/audio/did_spivaye.mp3", imageSrc: "/images/did_spivaye.png" },
+    //   { text: "Дід працює", correct: false, audioSrc: "/audio/did_pratsyuye.mp3", imageSrc: "/images/did_pratsyuye.png" },
+    // ]);
+
+    // addChallenge(6, "LISTEN", "Прослухай і вибери значення слова «ліс»", [
+    //   { text: "лєс", correct: true, audioSrc: "/audio/les.mp3" },
+    //   { text: "луг", correct: false, audioSrc: "/audio/lug.mp3" },
+    //   { text: "лось", correct: false, audioSrc: "/audio/los.mp3" },
+    // ]);
+
+    addChallenge(1, "WRITE", "Ми з дєдом довго … біля печі", [
+      { text: "гуторили", correct: true },
     ]);
 
-    addChallenge(6, "LISTEN", "Прослухай і вибери значення слова «ліс»", [
-      { text: "лєс", correct: true, audioSrc: "/audio/les.mp3" },
-      { text: "луг", correct: false, audioSrc: "/audio/lug.mp3" },
-      { text: "лось", correct: false, audioSrc: "/audio/los.mp3" },
+    addChallenge(2, "SELECT", "Що з цього означає «чемодан»?", [
+      { text: "кулачі", correct: false, audioSrc: "/audio/stavok.mp3", imageSrc: "/kalachi.png" },
+      { text: "клюмба", correct: false, audioSrc: "/audio/park.mp3", imageSrc: "/klumba.png" },
+      { text: "куфер", correct: true, audioSrc: "/audio/gora.mp3", imageSrc: "/kufer.png" },
     ]);
 
-    addChallenge(6, "WRITE", "Напиши слово, що означає «говорити»", [
-      { text: "гуторити", correct: true },
+    addChallenge(2, "ASSIST", "Що з цього означає «квітник»?", [
+      { text: "порєдок", correct: false, audioSrc: "/audio/rozmova.mp3" },
+      { text: "клюмба", correct: true, audioSrc: "/audio/pisnya.mp3" },
+      { text: "погрєб", correct: false, audioSrc: "/audio/progulyanka.mp3" },
     ]);
 
-    addChallenge(7, "SELECT", "Що означає «ставок»?", [
-      { text: "невелике озеро", correct: true, audioSrc: "/audio/stavok.mp3", imageSrc: "/images/stavok.png" },
-      { text: "парк", correct: false, audioSrc: "/audio/park.mp3", imageSrc: "/images/park.png" },
-      { text: "гора", correct: false, audioSrc: "/audio/gora.mp3", imageSrc: "/images/gora.png" },
+    // addChallenge(7, "SELECT", "Що означає слово «грунь»?", [
+    //   { text: "пагорб", correct: true, audioSrc: "/audio/pagorb.mp3", imageSrc: "/images/pagorb.png" },
+    //   { text: "болото", correct: false, audioSrc: "/audio/boloto.mp3", imageSrc: "/images/boloto.png" },
+    //   { text: "рівнина", correct: false, audioSrc: "/audio/rivnina.mp3", imageSrc: "/images/rivnina.png" },
+    // ]);
+
+    // addChallenge(7, "LISTEN", "Прослухай слово «муркотіти»", [
+    //   { text: "вуркотати", correct: true, audioSrc: "/audio/vurkotaty.mp3" },
+    //   { text: "вуркочати", correct: false, audioSrc: "/audio/vurkohaty.mp3" },
+    //   { text: "варкачати", correct: false, audioSrc: "/audio/varkachaty.mp3" },
+    // ]);
+
+    addChallenge(2, "WRITE", "Він поклав речі в ….", [
+      { text: "куфер", correct: true },
     ]);
 
-    addChallenge(7, "ASSIST", "Переклади: гутірка", [
-      { text: "розмова", correct: true, audioSrc: "/audio/rozmova.mp3" },
-      { text: "пісня", correct: false, audioSrc: "/audio/pisnya.mp3" },
-      { text: "прогулянка", correct: false, audioSrc: "/audio/progulyanka.mp3" },
+    addChallenge(3, "SELECT", "Що з цього означає «льох»?", [
+      { text: "шопка", correct: false, audioSrc: "/audio/kamin.mp3", imageSrc: "/shopka.png" },
+      { text: "погрєб", correct: true, audioSrc: "/audio/kuhnya.mp3", imageSrc: "/погрєб.png" },
+      { text: "хвіртка", correct: false, audioSrc: "/audio/pich.mp3", imageSrc: "/hvirtka.png" },
     ]);
 
-    addChallenge(7, "SELECT", "Що означає слово «грунь»?", [
-      { text: "пагорб", correct: true, audioSrc: "/audio/pagorb.mp3", imageSrc: "/images/pagorb.png" },
-      { text: "болото", correct: false, audioSrc: "/audio/boloto.mp3", imageSrc: "/images/boloto.png" },
-      { text: "рівнина", correct: false, audioSrc: "/audio/rivnina.mp3", imageSrc: "/images/rivnina.png" },
+    // addChallenge(8, "ASSIST", "Переклади: покуть", [
+    //   { text: "кут хати", correct: true, audioSrc: "/audio/kut_haty.mp3" },
+    //   { text: "двері", correct: false, audioSrc: "/audio/dveri.mp3" },
+    //   { text: "вікно", correct: false, audioSrc: "/audio/vikno.mp3" },
+    // ]);
+
+    addChallenge(3, "SELECT", "Що з цього означає «дверна ручка»?", [
+      { text: "клямка", correct: true, audioSrc: "/audio/shafa.mp3", imageSrc: "/images/shafa.png" },
+      { text: "порєдок", correct: false, audioSrc: "/audio/stil.mp3", imageSrc: "/images/stil.png" },
+      { text: "калачі", correct: false, audioSrc: "/audio/stilets.mp3", imageSrc: "/images/stilets.png" },
     ]);
 
-    addChallenge(7, "LISTEN", "Прослухай слово «муркотіти»", [
-      { text: "вуркотати", correct: true, audioSrc: "/audio/vurkotaty.mp3" },
-      { text: "вуркочати", correct: false, audioSrc: "/audio/vurkohaty.mp3" },
-      { text: "варкачати", correct: false, audioSrc: "/audio/varkachaty.mp3" },
+    // addChallenge(8, "LISTEN", "Прослухай слово «місце біля печі»", [
+    //   { text: "припічок", correct: true, audioSrc: "/audio/pripichok.mp3" },
+    //   { text: "підлога", correct: false, audioSrc: "/audio/pidloga.mp3" },
+    //   { text: "стіна", correct: false, audioSrc: "/audio/stina.mp3" },
+    // ]);
+
+    addChallenge(3, "WRITE", "Мама поставила банки в ….", [
+      { text: "погрєб", correct: true },
     ]);
 
-    addChallenge(7, "WRITE", "Напиши переклад слова «грунь»", [
-      { text: "пагорб", correct: true },
+    addChallenge(4, "SELECT", "Що з цього означає «ворота»?", [
+      { text: "хвіртка", correct: true, audioSrc: "/audio/buryak.mp3", imageSrc: "/hvirtka.png" },
+      { text: "хата", correct: false, audioSrc: "/audio/morkva.mp3", imageSrc: "/hata.png" },
+      { text: "погрєб", correct: false, audioSrc: "/audio/kapusta.mp3", imageSrc: "/погрєб.png" },
     ]);
 
-    addChallenge(8, "SELECT", "Що означає слово «піч»?", [
-      { text: "камін", correct: false, audioSrc: "/audio/kamin.mp3", imageSrc: "/images/kamin.png" },
-      { text: "кухня", correct: false, audioSrc: "/audio/kuhnya.mp3", imageSrc: "/images/kuhnya.png" },
-      { text: "піч", correct: true, audioSrc: "/audio/pich.mp3", imageSrc: "/images/pich.png" },
+    // addChallenge(9, "ASSIST", "Переклади: кулеша", [
+    //   { text: "каша з кукурудзяного борошна", correct: true, audioSrc: "/audio/kulesha.mp3" },
+    //   { text: "борщ", correct: false, audioSrc: "/audio/borsh.mp3" },
+    //   { text: "сир", correct: false, audioSrc: "/audio/syr.mp3" },
+    // ]);
+
+    addChallenge(4, "SELECT", "Що з цього означає «селище»?", [
+      { text: "поляна", correct: false, audioSrc: "/audio/varenyky.mp3", imageSrc: "/images/varenyky.png" },
+      { text: "посьолок", correct: true, audioSrc: "/audio/syrnyky.mp3", imageSrc: "/images/syrnyky.png" },
+      { text: "двір", correct: false, audioSrc: "/audio/galushky.mp3", imageSrc: "/images/galushky.png" },
     ]);
 
-    addChallenge(8, "ASSIST", "Переклади: покуть", [
-      { text: "кут хати", correct: true, audioSrc: "/audio/kut_haty.mp3" },
-      { text: "двері", correct: false, audioSrc: "/audio/dveri.mp3" },
-      { text: "вікно", correct: false, audioSrc: "/audio/vikno.mp3" },
+    // addChallenge(9, "LISTEN", "Обери слово хліб", [
+    //   { text: "хліб", correct: true, audioSrc: "/audio/hlib.mp3" },
+    //   { text: "булочка", correct: false, audioSrc: "/audio/bulochka.mp3" },
+    //   { text: "паляниця", correct: false, audioSrc: "/audio/palyanytsya.mp3" },
+    // ]);
+
+    addChallenge(4, "WRITE", "Зайди через ….", [
+      { text: "хвіртку", correct: true },
     ]);
 
-    addChallenge(8, "SELECT", "Що означає «мисник»?", [
-      { text: "шафа для посуду", correct: true, audioSrc: "/audio/shafa.mp3", imageSrc: "/images/shafa.png" },
-      { text: "стіл", correct: false, audioSrc: "/audio/stil.mp3", imageSrc: "/images/stil.png" },
-      { text: "стілець", correct: false, audioSrc: "/audio/stilets.mp3", imageSrc: "/images/stilets.png" },
+
+    addChallenge(5, "SELECT", "Що з цього означає «місце біля печі»?", [
+      { text: "припічок", correct: false, audioSrc: "/audio/hovoryty.mp3", imageSrc: "/kamin.png" },
+      { text: "куфер", correct: true, audioSrc: "/audio/tovkty.mp3", imageSrc: "/kufer.png" },
+      { text: "хата", correct: false, audioSrc: "/audio/zhartuvaty.mp3", imageSrc: "/hata.png" },
     ]);
 
-    addChallenge(8, "LISTEN", "Прослухай слово «місце біля печі»", [
-      { text: "припічок", correct: true, audioSrc: "/audio/pripichok.mp3" },
-      { text: "підлога", correct: false, audioSrc: "/audio/pidloga.mp3" },
-      { text: "стіна", correct: false, audioSrc: "/audio/stina.mp3" },
+    addChallenge(5, "SELECT", "Що з цього означає «пам’ятник»?", [
+      { text: "припічок", correct: false, audioSrc: "/audio/gutority.mp3", imageSrc: "/gutority.png" },
+      { text: "порєдок", correct: false, audioSrc: "/audio/spivaty.mp3", imageSrc: "/images/spivaty.png" },
+      { text: "прип’ятник", correct: true, audioSrc: "/audio/hovoryty.mp3", imageSrc: "/images/hovoryty.png" },
     ]);
 
-    addChallenge(8, "WRITE", "Напиши переклад слова «покуть»", [
-      { text: "кут хати", correct: true },
-    ]);
+    // addChallenge(10, "ASSIST", "Переклади: гуторка", [
+    //   { text: "розмова", correct: true, audioSrc: "/audio/rozmova.mp3" },
+    //   { text: "спів", correct: false, audioSrc: "/audio/spiv.mp3" },
+    //   { text: "сварка", correct: false, audioSrc: "/audio/svarka.mp3" },
+    // ]);
 
-    addChallenge(9, "SELECT", "Що означає «бурак»?", [
-      { text: "буряк", correct: true, audioSrc: "/audio/buryak.mp3", imageSrc: "/images/buryak.png" },
-      { text: "морква", correct: false, audioSrc: "/audio/morkva.mp3", imageSrc: "/images/morkva.png" },
-      { text: "капуста", correct: false, audioSrc: "/audio/kapusta.mp3", imageSrc: "/images/kapusta.png" },
-    ]);
+    // addChallenge(10, "LISTEN", "Прослухай і вибери слово «ходити»", [
+    //   { text: "іти", correct: true, audioSrc: "/audio/ity.mp3" },
+    //   { text: "йти", correct: false, audioSrc: "/audio/yty.mp3" },
+    //   { text: "ходь", correct: false, audioSrc: "/audio/khod.mp3" },
+    // ]);
 
-    addChallenge(9, "ASSIST", "Переклади: кулеша", [
-      { text: "каша з кукурудзяного борошна", correct: true, audioSrc: "/audio/kulesha.mp3" },
-      { text: "борщ", correct: false, audioSrc: "/audio/borsh.mp3" },
-      { text: "сир", correct: false, audioSrc: "/audio/syr.mp3" },
-    ]);
-
-    addChallenge(9, "SELECT", "Що означає «лєпка»?", [
-      { text: "вареники", correct: true, audioSrc: "/audio/varenyky.mp3", imageSrc: "/images/varenyky.png" },
-      { text: "сирники", correct: false, audioSrc: "/audio/syrnyky.mp3", imageSrc: "/images/syrnyky.png" },
-      { text: "галушки", correct: false, audioSrc: "/audio/galushky.mp3", imageSrc: "/images/galushky.png" },
-    ]);
-
-    addChallenge(9, "LISTEN", "Обери слово хліб", [
-      { text: "хліб", correct: true, audioSrc: "/audio/hlib.mp3" },
-      { text: "булочка", correct: false, audioSrc: "/audio/bulochka.mp3" },
-      { text: "паляниця", correct: false, audioSrc: "/audio/palyanytsya.mp3" },
-    ]);
-
-    addChallenge(9, "WRITE", "Напиши переклад слова «кулеша»", [
-      { text: "каша з кукурудзи", correct: true },
-    ]);
-    addChallenge(10, "SELECT", "Що означає «співати» на півночі?", [
-      { text: "гуторити", correct: false, audioSrc: "/audio/gutority.mp3", imageSrc: "/images/gutority.png" },
-      { text: "співати", correct: true, audioSrc: "/audio/spivaty.mp3", imageSrc: "/images/spivaty.png" },
-      { text: "говорити", correct: false, audioSrc: "/audio/hovoryty.mp3", imageSrc: "/images/hovoryty.png" },
-    ]);
-
-    addChallenge(10, "ASSIST", "Переклади: гуторка", [
-      { text: "розмова", correct: true, audioSrc: "/audio/rozmova.mp3" },
-      { text: "спів", correct: false, audioSrc: "/audio/spiv.mp3" },
-      { text: "сварка", correct: false, audioSrc: "/audio/svarka.mp3" },
-    ]);
-
-    addChallenge(10, "SELECT", "Що означає слово «молоти»?", [
-      { text: "говорити", correct: false, audioSrc: "/audio/hovoryty.mp3", imageSrc: "/images/hovoryty.png" },
-      { text: "товкти", correct: true, audioSrc: "/audio/tovkty.mp3", imageSrc: "/images/tovkty.png" },
-      { text: "жартувати", correct: false, audioSrc: "/audio/zhartuvaty.mp3", imageSrc: "/images/zhartuvaty.png" },
-    ]);
-
-    addChallenge(10, "LISTEN", "Прослухай і вибери слово «ходити»", [
-      { text: "іти", correct: true, audioSrc: "/audio/ity.mp3" },
-      { text: "йти", correct: false, audioSrc: "/audio/yty.mp3" },
-      { text: "ходь", correct: false, audioSrc: "/audio/khod.mp3" },
-    ]);
-
-    addChallenge(10, "WRITE", "Напиши слово, яке означає «розмовляти»", [
-      { text: "гуторити", correct: true },
+    addChallenge(5, "WRITE", "Діти сиділи на теплому ….", [
+      { text: "припічку", correct: true },
     ]);
       await db.insert(schema.units).values([
     {
-      id: 3,
+      id: 2,
       regionId: 8,
-      title: "Основи діалекту",
-      description: "Вивчай лексику південно-західного наріччя — від слів до вимови.",
+      title: "Додаток",
+      description: "Перед тим як практикуватись радимо, прочитати навчальні матеріали.",
       order: 1,
     },
   ]);
 
 await db.insert(schema.lessons).values([
-  { id: 11, unitId: 3, order: 1, title: "Слова про людей" },
-  { id: 12, unitId: 3, order: 2, title: "Природа і село" },
-  { id: 13, unitId: 3, order: 3, title: "Хата і побут" },
-  { id: 14, unitId: 3, order: 4, title: "Їжа і напої" },
-  { id: 15, unitId: 3, order: 5, title: "Дії" },
+  { id: 6, unitId: 2, order: 1, title: "Слова про людей" },
+  { id: 7, unitId: 2, order: 2, title: "Природа і село" },
+  { id: 8, unitId: 2, order: 3, title: "Хата і побут" },
+  { id: 9, unitId: 2, order: 4, title: "Їжа і напої" },
+  { id: 10, unitId: 2, order: 5, title: "Дії" },
 ]);
     const swChallenges: typeof schema.challenges.$inferInsert[] = [];
     const swOptions: typeof schema.challengesOptions.$inferInsert[] = [];
@@ -260,104 +262,247 @@ await db.insert(schema.lessons).values([
         });
       });
     };
-    addSWChallenge(11, "SELECT", "Що означає слово «файний»?", [
-      { text: "гарний", correct: true, audioSrc: "/audio/faynyy.mp3" },
-      { text: "злий", correct: false, audioSrc: "/audio/zlyy.mp3" },
-      { text: "маленький", correct: false, audioSrc: "/audio/malenkyy.mp3" },
-      { text: "брудний", correct: false, audioSrc: "/audio/brudnyy.mp3" },
+    addSWChallenge(6, "SELECT", "Що з цього означає «хазяїн»?", [
+      { text: "ґазда", correct: true, imageSrc: "/gazda.png" },
+      { text: "леґінь", correct: false, imageSrc: "/legin.png" },
+      { text: "пляц", correct: false, imageSrc: "/plats.png" },
     ]);
-     addSWChallenge(11, "SELECT", "Слово «ґазда» означає:", [
-      { text: "господар", correct: true, audioSrc: "/audio/hozhar.mp3" },
-      { text: "селянин", correct: false, audioSrc: "/audio/selyanyn.mp3" },
-      { text: "друг", correct: false, audioSrc: "/audio/drug.mp3" },
-      { text: "кухар", correct: false, audioSrc: "/audio/kukhar.mp3" },
+     addSWChallenge(6, "SELECT", "Що з цього означає «гарний»?", [
+      { text: "файний", correct: true, audioSrc: "/audio/hozhar.mp3" },
+      { text: "бляшняр", correct: false, audioSrc: "/audio/selyanyn.mp3" },
+      { text: "кептар", correct: false, audioSrc: "/audio/drug.mp3" },
     ]);
-    addSWChallenge(11, "ASSIST", "Напиши переклад слова «баняк»", [
-      { text: "каструля", correct: true, audioSrc: "/audio/kastrulya.mp3", imageSrc: "/images/kastrulya.png" },
-      { text: "відро", correct: false, audioSrc: "/audio/vidro.mp3", imageSrc: "/images/vidro.png" },
-    ]);  
-    addSWChallenge(11, "ASSIST", "Напиши переклад слова «баняк»", [
-  { text: "каструля", correct: true, audioSrc: "/audio/kastrulya.mp3" },
-  { text: "відро", correct: false, audioSrc: "/audio/vidro.mp3" },
+//     addSWChallenge(11, "ASSIST", "Напиши переклад слова «баняк»", [
+//       { text: "каструля", correct: true, audioSrc: "/audio/kastrulya.mp3", imageSrc: "/images/kastrulya.png" },
+//       { text: "відро", correct: false, audioSrc: "/audio/vidro.mp3", imageSrc: "/images/vidro.png" },
+//     ]);  
+//     addSWChallenge(11, "ASSIST", "Напиши переклад слова «баняк»", [
+//   { text: "каструля", correct: true, audioSrc: "/audio/kastrulya.mp3" },
+//   { text: "відро", correct: false, audioSrc: "/audio/vidro.mp3" },
+// ]);
+
+  // addSWChallenge(11, "LISTEN", "Прослухай і вибери правильну вимову слова «ґринджоли»", [
+  //   { text: "ґринджоли", correct: true, audioSrc: "/audio/gryndzholy.mp3" },
+  //   { text: "гринджоли", correct: false, audioSrc: "/audio/hrindzholy.mp3" },
+  // ]);
+  addSWChallenge(6, "WRITE", "Той … має велику хату.", [{ text: "ґазда", correct: true }]);
+
+addSWChallenge(7, "SELECT", "Що з цього означає «підлога»?", [
+  { text: "плєцак", correct: false, audioSrc: "/audio/pagorb.mp3", imageSrc: "/pletsek.png" },
+  { text: "леванда", correct: true, audioSrc: "/audio/boloto.mp3", imageSrc: "/levanda.png" },
+  { text: "пляц", correct: false, audioSrc: "/audio/rivnyna.mp3", imageSrc: "/plats.png" },
+]);
+addSWChallenge(7, "SELECT", "Що з цього означає «рюкзак»?", [
+  { text: "ліжник", correct: false, audioSrc: "/audio/pagorb.mp3", imageSrc: "/images/pagorb.png" },
+  { text: "кептар", correct: false, audioSrc: "/audio/boloto.mp3", imageSrc: "/images/boloto.png" },
+  { text: "плєцак", correct: true, audioSrc: "/audio/rivnyna.mp3", imageSrc: "/images/rivnyna.png" },
 ]);
 
-  addSWChallenge(11, "LISTEN", "Прослухай і вибери правильну вимову слова «ґринджоли»", [
-    { text: "ґринджоли", correct: true, audioSrc: "/audio/gryndzholy.mp3" },
-    { text: "гринджоли", correct: false, audioSrc: "/audio/hrindzholy.mp3" },
-  ]);
-  addSWChallenge(11, "WRITE", "Мій тато — добрий ______.", [{ text: "ґазда", correct: true }]);
 
-addSWChallenge(12, "SELECT", "Що означає «грунь»?", [
-  { text: "пагорб", correct: true, audioSrc: "/audio/pagorb.mp3", imageSrc: "/images/pagorb.png" },
-  { text: "болото", correct: false, audioSrc: "/audio/boloto.mp3", imageSrc: "/images/boloto.png" },
-  { text: "рівнина", correct: false, audioSrc: "/audio/rivnyna.mp3", imageSrc: "/images/rivnyna.png" },
+// addSWChallenge(7, "ASSIST", "Переклади слово «гутірка»", [
+//   { text: "розмова", correct: true, audioSrc: "/audio/rozmova.mp3" },
+//   { text: "пісня", correct: false, audioSrc: "/audio/pisnya.mp3" },
+//   { text: "прогулянка", correct: false, audioSrc: "/audio/progulyanka.mp3" },
+// ]);
+
+// addSWChallenge(7, "LISTEN", "Прослухай слово «муркотіти»", [
+//   { text: "вуркотати", correct: true, audioSrc: "/audio/vurkotaty.mp3" },
+//   { text: "мурчати", correct: false, audioSrc: "/audio/murchaty.mp3" },
+// ]);
+
+addSWChallenge(7, "WRITE", "Постав відро на ….", [{ text: "леванду", correct: true }]);
+
+addSWChallenge(8, "SELECT", "Що з цього означає «рушниця»?", [
+  { text: "гвер", correct: true, audioSrc: "/audio/shafa_posud.mp3", imageSrc: "/rushnyca.png" },
+  { text: "пляц", correct: false, imageSrc: "/plats.png" },
+  { text: "кептар", correct: false, audioSrc: "/audio/stilets.mp3", imageSrc: "/keptar.png" },
+]);
+addSWChallenge(8, "SELECT", "Що з цього означає «ділянка землі»?", [
+  { text: "файний", correct: false, audioSrc: "/audio/shafa_posud.mp3", imageSrc: "/images/shafa_posud.png" },
+  { text: "пляц", correct: true, audioSrc: "/audio/stil.mp3", imageSrc: "/images/stil.png" },
+  { text: "бляшняр", correct: false, audioSrc: "/audio/stilets.mp3", imageSrc: "/images/stilets.png" },
 ]);
 
-addSWChallenge(12, "ASSIST", "Переклади слово «гутірка»", [
-  { text: "розмова", correct: true, audioSrc: "/audio/rozmova.mp3" },
-  { text: "пісня", correct: false, audioSrc: "/audio/pisnya.mp3" },
-  { text: "прогулянка", correct: false, audioSrc: "/audio/progulyanka.mp3" },
+// addSWChallenge(8, "ASSIST", "Переклади слово «покуть»", [
+//   { text: "кут хати", correct: true, audioSrc: "/audio/kut_haty.mp3" },
+//   { text: "вікно", correct: false, audioSrc: "/audio/vikno.mp3" },
+// ]);
+
+// addSWChallenge(8, "LISTEN", "Прослухай слово «припічок»", [
+//   { text: "місце біля печі", correct: true, audioSrc: "/audio/prypichok.mp3" },
+// ]);
+
+addSWChallenge(8, "WRITE", "На … ростуть яблуні.", [{ text: "пляці", correct: true }]);
+
+addSWChallenge(9, "SELECT", "Що з цього означає «солодка страва»?", [
+  { text: "ліжник", correct: false, audioSrc: "/audio/kulesha.mp3", imageSrc: "/lizhnyk.png" },
+  { text: "ґринджоли", correct: false, audioSrc: "/audio/borshch.mp3", imageSrc: "/images/borshch.png" },
+  { text: "ліґуміна", correct: true, audioSrc: "/audio/syr.mp3", imageSrc: "/images/syr.png" },
+]);
+addSWChallenge(9, "SELECT", "Що з цього означає «санчата»?", [
+  { text: "ґринджоли", correct: true, audioSrc: "/audio/kulesha.mp3", imageSrc: "/gryndzholy.png" },
+  { text: "кептар", correct: false, audioSrc: "/audio/borshch.mp3", imageSrc: "/keptar.png" },
+  { text: "ґазда", correct: false, audioSrc: "/audio/syr.mp3", imageSrc: "/gazda.png" },
 ]);
 
-addSWChallenge(12, "LISTEN", "Прослухай слово «муркотіти»", [
-  { text: "вуркотати", correct: true, audioSrc: "/audio/vurkotaty.mp3" },
-  { text: "мурчати", correct: false, audioSrc: "/audio/murchaty.mp3" },
+// addSWChallenge(9, "ASSIST", "Переклади слово «бурак»", [
+//   { text: "буряк", correct: true, audioSrc: "/audio/buryak.mp3" },
+//   { text: "морква", correct: false, audioSrc: "/audio/morkva.mp3" },
+// ]);
+
+// addSWChallenge(9, "LISTEN", "Прослухай і вибери слово «вареники»", [
+//   { text: "лєпка", correct: true, audioSrc: "/audio/lepkа.mp3" },
+//   { text: "галушки", correct: false, audioSrc: "/audio/galushky.mp3" },
+// ]);
+
+addSWChallenge(9, "WRITE", "Діти каталися на ….", [{ text: "ґринджолах", correct: true }]);
+
+addSWChallenge(10, "SELECT", "Що з цього означає «прядиво, волокно»?", [
+  { text: "гвер", correct: false, audioSrc: "/audio/gutoryty.mp3", imageSrc: "/ryshnyca.png" },
+  { text: "кептар", correct: false, audioSrc: "/audio/spivaty.mp3", imageSrc: "/keptar.png" },
+  { text: "кужіль", correct: true, audioSrc: "/audio/zhartuvaty.mp3", imageSrc: "/kuzhil.png" },
 ]);
 
-addSWChallenge(12, "WRITE", "Напиши переклад слова «грунь»", [{ text: "пагорб", correct: true }]);
+addSWChallenge(10, "SELECT", "Що з цього означає «увага»?", [
+  { text: "файний", correct: false, audioSrc: "/audio/gutoryty.mp3", imageSrc: "/rozmova.png" },
+  { text: "позір", correct: true, audioSrc: "/audio/spivaty.mp3", imageSrc: "/images/spivaty.png" },
+  { text: "пляц", correct: false, audioSrc: "/audio/zhartuvaty.mp3", imageSrc: "/images/zhartuvaty.png" },
+]);
+// addSWChallenge(10, "ASSIST", "Переклади слово «молоти»", [
+//   { text: "товкти", correct: true, audioSrc: "/audio/tovkty.mp3" },
+//   { text: "говорити", correct: false, audioSrc: "/audio/hovoryty.mp3" },
+// ]);
 
-addSWChallenge(13, "SELECT", "Що означає слово «мисник»?", [
-  { text: "шафа для посуду", correct: true, audioSrc: "/audio/shafa_posud.mp3", imageSrc: "/images/shafa_posud.png" },
-  { text: "стіл", correct: false, audioSrc: "/audio/stil.mp3", imageSrc: "/images/stil.png" },
-  { text: "стілець", correct: false, audioSrc: "/audio/stilets.mp3", imageSrc: "/images/stilets.png" },
+// addSWChallenge(10, "LISTEN", "Прослухай і вибери слово «іти»", [
+//   { text: "ходити", correct: true, audioSrc: "/audio/ity.mp3" },
+//   { text: "стояти", correct: false, audioSrc: "/audio/stoyaty.mp3" },
+// ]);
+
+addSWChallenge(10, "WRITE", "Зверни …. під час розмови!", [{ text: "позір", correct: true }]);
+
+await db.insert(schema.units).values([
+  {
+    id: 3,
+    regionId: 9,
+    title: "Додаток",
+    description: "Перед тим як практикуватись радимо, прочитати навчальні матеріали.",
+    order: 1,
+  },
 ]);
 
-addSWChallenge(13, "ASSIST", "Переклади слово «покуть»", [
-  { text: "кут хати", correct: true, audioSrc: "/audio/kut_haty.mp3" },
-  { text: "вікно", correct: false, audioSrc: "/audio/vikno.mp3" },
+await db.insert(schema.lessons).values([
+  { id: 11, unitId: 3, order: 1, title: "Основні речення (частина 1)" },
+  { id: 12, unitId: 3, order: 2, title: "Основні речення (частина 2)" },
+   { id: 13, unitId: 3, order: 3, title: "Сімʼя та дім" },
+  { id: 14, unitId: 3, order: 4, title: "Їжа та речі" },
+  { id: 15, unitId: 3, order: 5, title: "Дії та рух" },
 ]);
 
-addSWChallenge(13, "LISTEN", "Прослухай слово «припічок»", [
-  { text: "місце біля печі", correct: true, audioSrc: "/audio/prypichok.mp3" },
+const easternChallenges: typeof schema.challenges.$inferInsert[] = [];
+const easternOptions: typeof schema.challengesOptions.$inferInsert[] = [];
+let easternId = 300;
+
+const addEastern = (
+  lessonId: number,
+  type: "SELECT" | "ASSIST" | "LISTEN" | "WRITE",
+  question: string,
+  answers: { text: string; correct: boolean; audioSrc?: string; imageSrc?: string }[]
+) => {
+  const chId = easternId++;
+  easternChallenges.push({ id: chId, lessonId, type, order: chId, question });
+
+  answers.forEach((a) => {
+    easternOptions.push({
+      id: easternId++,
+      challengeId: chId,
+      text: a.text,
+      correct: a.correct,
+      audioSrc: a.audioSrc || null,
+      imageSrc: a.imageSrc || null,
+    });
+  });
+};
+
+addEastern(11, "SELECT", "Що з цього означає «кукурудза»?", [
+  { text: "толока", correct: false, imageSrc: "/toloka.png" },
+  { text: "поребрик", correct: false, imageSrc: "/perebryk.png" },
+  { text: "пшонка", correct: true, imageSrc: "/pshonka.png"},
+]);
+addEastern(11, "SELECT", "Що з цього означає «віз для сіна»?", [
+  { text: "поребрик", correct: false },
+  { text: "мажара", correct: true, audioSrc: "/audio/dat_is_een_broodt.mp3" },
+  { text: "кібитка", correct: false },
 ]);
 
-addSWChallenge(13, "WRITE", "У мене стоїть глечик на ______.", [{ text: "миснику", correct: true }]);
 
-addSWChallenge(14, "SELECT", "Що означає «кулеша»?", [
-  { text: "каша з кукурудзяного борошна", correct: true, audioSrc: "/audio/kulesha.mp3", imageSrc: "/images/kulesha.png" },
-  { text: "борщ", correct: false, audioSrc: "/audio/borshch.mp3", imageSrc: "/images/borshch.png" },
-  { text: "сир", correct: false, audioSrc: "/audio/syr.mp3", imageSrc: "/images/syr.png" },
+
+addEastern(11, "WRITE", "Селяни везли сіно на ….", [
+  { text: "мажарі", correct: true },
+
 ]);
 
-addSWChallenge(14, "ASSIST", "Переклади слово «бурак»", [
-  { text: "буряк", correct: true, audioSrc: "/audio/buryak.mp3" },
-  { text: "морква", correct: false, audioSrc: "/audio/morkva.mp3" },
+addEastern(12, "SELECT", "Що з цього означає «бордюр»?", [
+  { text: "поребрик", correct: true, imageSrc: "/perebryk.png" },
+  { text: "кібитка", correct: false, imageSrc: "/кібитка.png" },
+  { text: "ненька", correct: false, imageSrc: "/nenika.png" },
+]);
+addEastern(12, "SELECT", "Що з цього означає «колиска»?", [
+  { text: "шаньга", correct: false },
+  { text: "ненька", correct: true, audioSrc: "/audio/dat_is_een_broodt.mp3" },
+  { text: "билиця", correct: false },
 ]);
 
-addSWChallenge(14, "LISTEN", "Прослухай і вибери слово «вареники»", [
-  { text: "лєпка", correct: true, audioSrc: "/audio/lepkа.mp3" },
-  { text: "галушки", correct: false, audioSrc: "/audio/galushky.mp3" },
+addEastern(12, "WRITE", "Мама поклала дитину в ….", [
+  { text: "неньку", correct: true },
+
 ]);
 
-addSWChallenge(14, "WRITE", "Мама приготувала смачну ______.", [{ text: "кулешу", correct: true }]);
-
-addSWChallenge(15, "SELECT", "Що означає «гуторити»?", [
-  { text: "розмовляти", correct: true, audioSrc: "/audio/gutoryty.mp3", imageSrc: "/images/rozmova.png" },
-  { text: "співати", correct: false, audioSrc: "/audio/spivaty.mp3", imageSrc: "/images/spivaty.png" },
-  { text: "жартувати", correct: false, audioSrc: "/audio/zhartuvaty.mp3", imageSrc: "/images/zhartuvaty.png" },
+addEastern(13, "SELECT", "Що з цього означає «блискавка»?", [
+  { text: "змійка", correct: true,  imageSrc: "/zmiyka.png"},
+  { text: "веселуха", correct: false, imageSrc: "/veseluha.png" },
+  { text: "билиця", correct: false, imageSrc: "/bilka.png" },
+]);
+addEastern(13, "SELECT", "Що з цього означає «райдуга»?", [
+  { text: "поребрик", correct: false },
+  { text: "ненька", correct: false, audioSrc: "/audio/dat_is_een_broodt.mp3" },
+  { text: "веселуха", correct: true, imageSrc: "/veseluha.png" },
 ]);
 
-addSWChallenge(15, "ASSIST", "Переклади слово «молоти»", [
-  { text: "товкти", correct: true, audioSrc: "/audio/tovkty.mp3" },
-  { text: "говорити", correct: false, audioSrc: "/audio/hovoryty.mp3" },
+addEastern(13, "WRITE", "Після дощу з’явилася ….", [
+  { text: "веселуха", correct: true },
 ]);
 
-addSWChallenge(15, "LISTEN", "Прослухай і вибери слово «іти»", [
-  { text: "ходити", correct: true, audioSrc: "/audio/ity.mp3" },
-  { text: "стояти", correct: false, audioSrc: "/audio/stoyaty.mp3" },
+addEastern(14, "SELECT", "Що з цього означає «будь-яке збіжжя»?", [
+  { text: "пшінка", correct: false },
+  { text: "жито", correct: true, audioSrc: "/audio/dat_is_een_broodt.mp3" },
+  { text: "байрак", correct: false },
+]);
+addEastern(14, "SELECT", "Що з цього означає «яр, балка»?", [
+  { text: "байрак", correct: true },
+  { text: "кібитка", correct: false, audioSrc: "/audio/dat_is_een_broodt.mp3" },
+  { text: "поребрик", correct: false },
 ]);
 
-addSWChallenge(15, "WRITE", "Напиши переклад слова «гуторити»", [{ text: "розмовляти", correct: true }]);
+addEastern(14, "WRITE", "Внизу під селом був глибокий ….", [
+  { text: "байрак", correct: true },
+
+]);
+
+addEastern(15, "SELECT", "Що з цього означає «світло, райдуга»?", [
+  { text: "билиця", correct: false },
+  { text: "веселуха", correct: true, audioSrc: "/audio/dat_is_een_broodt.mp3" },
+  { text: "поребрик", correct: false },
+]);
+addEastern(15, "SELECT", "Що з цього означає «баклажани»?", [
+  { text: "пшонка", correct: false },
+  { text: "синеньки", correct: true, audioSrc: "/audio/dat_is_een_broodt.mp3" },
+  { text: "шаньга", correct: false },
+]);
+
+addEastern(15, "WRITE", "На городі дозріли ….", [
+  { text: "синеньки", correct: true },
+
+]);
 
 await db.insert(schema.units).values([
   {
@@ -379,7 +524,7 @@ await db.insert(schema.lessons).values([
 
 const plattChallenges: typeof schema.challenges.$inferInsert[] = [];
 const plattOptions: typeof schema.challengesOptions.$inferInsert[] = [];
-let plattId = 300;
+let plattId = 400;
 
 const addPlatt = (
   lessonId: number,
@@ -497,7 +642,7 @@ await db.insert(schema.lessons).values([
 
 const middleChallenges: typeof schema.challenges.$inferInsert[] = [];
 const middleOptions: typeof schema.challengesOptions.$inferInsert[] = [];
-let middleId = 400;
+let middleId = 500;
 
 const addMiddlet = (
   lessonId: number,
@@ -620,7 +765,7 @@ await db.insert(schema.lessons).values([
 
 const oberChallenges: typeof schema.challenges.$inferInsert[] = [];
 const oberOptions: typeof schema.challengesOptions.$inferInsert[] = [];
-let oberId = 500;
+let oberId = 600;
 
 const addOber = (
   lessonId: number,
@@ -733,7 +878,7 @@ await db.insert(schema.lessons).values([
 
 const cockneyChallenges: typeof schema.challenges.$inferInsert[] = [];
 const cockneyOptions: typeof schema.challengesOptions.$inferInsert[] = [];
-let cockneyId = 600;
+let cockneyId = 700;
 
 const addCockney = (
   lessonId: number,
@@ -847,7 +992,7 @@ await db.insert(schema.lessons).values([
 
 const scouseChallenges: typeof schema.challenges.$inferInsert[] = [];
 const scouseOptions: typeof schema.challengesOptions.$inferInsert[] = [];
-let scouseId = 700;
+let scouseId = 800;
 
 const addScouse = (
   lessonId: number,
@@ -964,7 +1109,7 @@ await db.insert(schema.lessons).values([
 
 const geordieChallenges: typeof schema.challenges.$inferInsert[] = [];
 const geordieOptions: typeof schema.challengesOptions.$inferInsert[] = [];
-let geordieId = 800;
+let geordieId = 900;
 
 const addGeordie = (
   lessonId: number,
@@ -1077,7 +1222,7 @@ await db.insert(schema.lessons).values([
 
 const yorkChallenges: typeof schema.challenges.$inferInsert[] = [];
 const yorkOptions: typeof schema.challengesOptions.$inferInsert[] = [];
-let yorkId = 900;
+let yorkId = 1000;
 
 const addYork = (
   lessonId: number,
@@ -1170,6 +1315,8 @@ addYork(50, "WRITE", "The … were grazing peacefully in the field", [
 ]);
   
 // ✅ Вставка в базу
+   await db.insert(schema.challenges).values(easternChallenges);
+    await db.insert(schema.challengesOptions).values(easternOptions);
    await db.insert(schema.challenges).values(yorkChallenges);
     await db.insert(schema.challengesOptions).values(yorkOptions);
    await db.insert(schema.challenges).values(geordieChallenges);
