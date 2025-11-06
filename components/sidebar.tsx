@@ -31,7 +31,7 @@ export const Sidebar = ({ className }: Props) => {
                 <SidebarItem label="Челенджі" iconSrc="/quests.png" href="/quests" iconSize={38}/>
                 <SidebarItem label="Магазин" iconSrc="/shop.png" href="/shop" iconSize={38}/>
                 <SidebarItem label="Навчальні матеріали" iconSrc="/practice.png" href="/practice" iconSize={38}/>
-                <SidebarItem label="Словник" iconSrc="/dictionary.png" href="/dictionary" iconSize={38}/>
+                <SidebarItem label="Додаток" iconSrc="/dictionary.png" href="/dictionary" iconSize={38}/>
             </div>
 
             {/* Кнопка користувача */}
