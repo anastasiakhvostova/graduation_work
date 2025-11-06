@@ -1,0 +1,104 @@
+[
+  {
+    "id": 1,
+    "audio": "/audio/REGION_ID/1.mp3",
+    "word": "Бульба",
+    "translation": "картопля"
+  },
+  {
+    "id": 2,
+    "audio": "/audio/REGION_ID/2.mp3",
+    "word": "Лєс",
+    "translation": "ліс"
+  },
+  {
+    "id": 3,
+    "audio": "/audio/REGION_ID/3.mp3",
+    "word": "Гуторити",
+    "translation": "розмовляти"
+  },
+  {
+    "id": 4,
+    "audio": "/audio/REGION_ID/4.mp3",
+    "word": "Куфер",
+    "translation": "чемодан, скриня"
+  },
+  {
+    "id": 5,
+    "audio": "/audio/REGION_ID/5.mp3",
+    "word": "Припічок",
+    "translation": "місце біля печі"
+  },
+  {
+    "id": 6,
+    "audio": "/audio/REGION_ID/6.mp3",
+    "word": "Клюмба",
+    "translation": "квітник"
+  },
+  {
+    "id": 7,
+    "audio": "/audio/REGION_ID/7.mp3",
+    "word": "Порєдок",
+    "translation": "порядок"
+  },
+  {
+    "id": 8,
+    "audio": "/audio/REGION_ID/8.mp3",
+    "word": "Лєснік",
+    "translation": "лісник"
+  },
+  {
+    "id": 9,
+    "audio": "/audio/REGION_ID/9.mp3",
+    "word": "Прип’ятник",
+    "translation": "камінь-пам’ятник"
+  },
+  {
+    "id": 10,
+    "audio": "/audio/REGION_ID/10.mp3",
+    "word": "Клямка",
+    "translation": "дверна ручка"
+  },
+  {
+    "id": 11,
+    "audio": "/audio/REGION_ID/11.mp3",
+    "word": "Шчьо",
+    "translation": "що"
+  },
+  {
+    "id": 12,
+    "audio": "/audio/REGION_ID/12.mp3",
+    "word": "Хвіртка",
+    "translation": "брама, ворота"
+  },
+  {
+    "id": 13,
+    "audio": "/audio/REGION_ID/13.mp3",
+    "word": "Погрєб",
+    "translation": "льох"
+  },
+  {
+    "id": 14,
+    "audio": "/audio/REGION_ID/14.mp3",
+    "word": "Калачі",
+    "translation": "хлібці з білого тіста"
+  },
+  {
+    "id": 15,
+    "audio": "/audio/REGION_ID/15.mp3",
+    "word": "Шопка",
+    "translation": "невеликий сарай"
+  },
+  {
+    "id": 16,
+    "audio": "/audio/REGION_ID/16.mp3",
+    "word": "Посьолок",
+    "translation": "селище"
+  },
+  {
+    "id": 17,
+    "audio": "/audio/REGION_ID/17.mp3",
+    "word": "Дєдьо",
+    "translation": "дядько"
+  }
+]

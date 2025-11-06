@@ -293,9 +293,9 @@ addSWChallenge(7, "SELECT", "Що з цього означає «підлога�
   { text: "пляц", correct: false, audioSrc: "/audio/rivnyna.mp3", imageSrc: "/plats.png" },
 ]);
 addSWChallenge(7, "SELECT", "Що з цього означає «рюкзак»?", [
-  { text: "ліжник", correct: false, audioSrc: "/audio/pagorb.mp3", imageSrc: "/images/pagorb.png" },
-  { text: "кептар", correct: false, audioSrc: "/audio/boloto.mp3", imageSrc: "/images/boloto.png" },
-  { text: "плєцак", correct: true, audioSrc: "/audio/rivnyna.mp3", imageSrc: "/images/rivnyna.png" },
+  { text: "ліжник", correct: false, audioSrc: "/audio/pagorb.mp3"},
+  { text: "кептар", correct: false, audioSrc: "/audio/boloto.mp3"},
+  { text: "плєцак", correct: true, audioSrc: "/audio/rivnyna.mp3"},
 ]);
 
 
