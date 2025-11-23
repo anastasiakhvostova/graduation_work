@@ -7,6 +7,7 @@ import { redirect } from "next/navigation"
 import { Unit } from "./unit"
 import { lessons, units as unitsSchema} from "@/db/schema"
 import { Quests } from "@/components/quests";
+import { RegionImage } from "@/components/current_region_image";
 
 const LearnPage = async () =>{
 
@@ -38,6 +39,7 @@ const LearnPage = async () =>{
                 points={userProgress.points}
                 />
                 <Quests points={userProgress.points}/>
+                <RegionImage activeRegionId={userProgress.activeRegion?.id ?? null} />
             </StickyWrapper>
             <FeedWrapper>
                <Header title={userProgress.activeRegion.title} />

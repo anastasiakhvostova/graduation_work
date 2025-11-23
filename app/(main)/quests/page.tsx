@@ -6,6 +6,7 @@ import { redirect } from "next/navigation"
 import Image from "next/image"
 import { Progress } from "@/components/ui/progress"
 import { quests } from "@/constant"
+import { RegionImage } from "@/components/current_region_image"
 
 
 
@@ -35,6 +36,7 @@ const QuestsPage = async () => {
                     // hasActiveSubscription={isPro}
                 />
                 {/* {!isPro && (<Promo />)} */}
+                <RegionImage activeRegionId={userProgress.activeRegion?.id ?? null} />
             </StickyWrapper>
             <FeedWrapper>
                 <div className="w-full flex-col items-center ">

@@ -7,6 +7,7 @@ import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import fs from "fs";
 import path from "path";
+import {RegionImage} from "@/components/current_region_image"
 
 const PracticePage = async () => {
   const userProgress = await getUserProgress();
@@ -46,6 +47,7 @@ const PracticePage = async () => {
           points={userProgress.points}
         />
         <Quests points={userProgress.points} />
+        <RegionImage activeRegionId={userProgress.activeRegion?.id ?? null} />
       </StickyWrapper>
 
       <FeedWrapper>

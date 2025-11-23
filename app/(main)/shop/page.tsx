@@ -6,7 +6,8 @@ import { redirect } from "next/navigation"
 import Image from "next/image"
 import { Items } from "./items"
 // import { Promo } from "@/components/promo"
-// import { Quests } from "@/components/quests"
+import { Quests } from "@/components/quests"
+import { RegionImage } from "@/components/current_region_image"
 const ShopPage = async () => {
     const userProgressData = getUserProgress()
     // const userSubscriptionData = getUserSubscription()
@@ -30,7 +31,9 @@ const ShopPage = async () => {
                     // hasActiveSubscription={isPro}
                 />
                 {/* {!isPro && (<Promo />)} */}
-                {/* <Quests points={userProgress.points}/> */}
+                <Quests points={userProgress.points}/>
+                <RegionImage activeRegionId={userProgress.activeRegion?.id ?? null} />
+                
             </StickyWrapper>
             <FeedWrapper>
                 <div className="w-full flex-col items-center">
