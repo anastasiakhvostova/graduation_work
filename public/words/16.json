@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "audio": "/audio/REGION_ID/36.mp3",
+    "word": "Cuddy",
+    "translation": "кінь"
+  },
+  {
+    "id": 2,
+    "audio": "/audio/REGION_ID/37.mp3",
+    "word": "Pannier",
+    "translation": "кошик"
+  },
+  {
+    "id": 3,
+    "audio": "/audio/REGION_ID/38.mp3",
+    "word": "Garth",
+    "translation": "сад/двір"
+  },
+  {
+    "id": 4,
+    "audio": "/audio/REGION_ID/39.mp3",
+    "word": "Kist",
+    "translation": "коробка/скриня"
+  },
+  {
+    "id": 5,
+    "audio": "/audio/REGION_ID/40.mp3",
+    "word": "Beck",
+    "translation": "невеликий потік, струмок"
+  },
+  {
+    "id": 6,
+    "audio": "/audio/REGION_ID/41.mp3",
+    "word": "Croft",
+    "translation": "невелика ферма, земельна ділянка"
+  },
+  {
+    "id": 7,
+    "audio": "/audio/REGION_ID/42.mp3",
+    "word": "Staithe",
+    "translation": "гавань, причал"
+  },
+  {
+    "id": 8,
+    "audio": "/audio/REGION_ID/43.mp3",
+    "word": "Ginnel",
+    "translation": "вузький прохід, провулок"
+  },
+  {
+    "id": 9,
+    "audio": "/audio/REGION_ID/44.mp3",
+    "word": "Yow",
+    "translation": "вівця"
+  },
+  {
+    "id": 10,
+    "audio": "/audio/REGION_ID/45.mp3",
+    "word": "Neddy",
+    "translation": "кінь"
+  }
+]

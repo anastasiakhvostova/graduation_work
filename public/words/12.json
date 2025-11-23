@@ -1,0 +1,218 @@
+[
+  {
+    "id": 1,
+    "audio": "/audio/12/Griab di.mp3",
+    "word": "Griaß di!",
+    "translation": "привіт"
+  },
+  {
+    "id": 2,
+    "audio": "/audio/12/Servus.mp3",
+    "word": "Servus!",
+    "translation": "привіт / бувай"
+  },
+  {
+    "id": 3,
+    "audio": "/audio/12/Erdapfel.mp3",
+    "word": "Erdäpfel",
+    "translation": "картопля"
+  },
+  {
+    "id": 4,
+    "audio": "/audio/12/apfe.mp3",
+    "word": "Apfe",
+    "translation": "яблуко"
+  },
+  {
+    "id": 5,
+    "audio": "/audio/12/brod.mp3",
+    "word": "Brod",
+    "translation": "хліб"
+  },
+  {
+    "id": 6,
+    "audio": "/audio/12/Semmel.mp3",
+    "word": "Semmel",
+    "translation": "булочка"
+  },
+  {
+    "id": 7,
+    "audio": "/audio/12/Wossa.mp3",
+    "word": "Wossa",
+    "translation": "вода"
+  },
+  {
+    "id": 8,
+    "audio": "/audio/12/Kaffe.mp3",
+    "word": "Kaffe",
+    "translation": "кава"
+  },
+  {
+    "id": 9,
+    "audio": "/audio/12/guad.mp3",
+    "word": "guad",
+    "translation": "добре"
+  },
+  {
+    "id": 10,
+    "audio": "/audio/12/sche.mp3",
+    "word": "sche (schön)",
+    "translation": "гарний"
+  },
+  {
+    "id": 11,
+    "audio": "/audio/12/Gwand.mp3",
+    "word": "Gwand",
+    "translation": "одяг"
+  },
+  {
+    "id": 12,
+    "audio": "/audio/12/Schuah.mp3",
+    "word": "Schuah",
+    "translation": "взуття"
+  },
+  {
+    "id": 13,
+    "audio": "/audio/12/Hosn.mp3",
+    "word": "Hosn",
+    "translation": "штани"
+  },
+  {
+    "id": 14,
+    "audio": "/audio/12/Hemad.mp3",
+    "word": "Hemad",
+    "translation": "сорочка"
+  },
+  {
+    "id": 15,
+    "audio": "/audio/12/Jackl.mp3",
+    "word": "Jackl",
+    "translation": "куртка"
+  },
+  {
+    "id": 16,
+    "audio": "/audio/12/Dirndl.mp3",
+    "word": "Dirndl",
+    "translation": "сукня (традиційна)"
+  },
+  {
+    "id": 17,
+    "audio": "/audio/12/redn.mp3",
+    "word": "redn",
+    "translation": "розмовляти"
+  },
+  {
+    "id": 18,
+    "audio": "/audio/12/helfa.mp3",
+    "word": "helfa",
+    "translation": "допомагати"
+  },
+  {
+    "id": 19,
+    "audio": "/audio/12/koa.mp3",
+    "word": "koa",
+    "translation": "немає"
+  },
+  {
+    "id": 20,
+    "audio": "/audio/12/Madel  Madele.mp3",
+    "word": "Mädel / Mädele",
+    "translation": "дівчина"
+  },
+  {
+    "id": 21,
+    "audio": "/audio/12/Bua.mp3",
+    "word": "Bua",
+    "translation": "хлопець"
+  },
+  {
+    "id": 22,
+    "audio": "/audio/12/heit.mp3",
+    "word": "heit",
+    "translation": "сьогодні"
+  },
+  {
+    "id": 23,
+    "audio": "/audio/12/jetzt.mp3",
+    "word": "jetzt",
+    "translation": "зараз"
+  },
+  {
+    "id": 24,
+    "audio": "/audio/12/glei.mp3",
+    "word": "glei",
+    "translation": "скоро"
+  },
+  {
+    "id": 25,
+    "audio": "/audio/12/Voda.mp3",
+    "word": "Voda",
+    "translation": "батько"
+  },
+  {
+    "id": 26,
+    "audio": "/audio/12/Muada.mp3",
+    "word": "Muada",
+    "translation": "мати"
+  },
+  {
+    "id": 27,
+    "audio": "/audio/12/a bissl  a weng.mp3",
+    "word": "a bissl / a weng",
+    "translation": "трохи"
+  },
+  {
+    "id": 28,
+    "audio": "/audio/12/guat drauf.mp3",
+    "word": "guat drauf",
+    "translation": "у гарному настрої"
+  },
+  {
+    "id": 29,
+    "audio": "/audio/12/dahoam.mp3",
+    "word": "dahoam",
+    "translation": "вдома"
+  },
+  {
+    "id": 30,
+    "audio": "/audio/12/draubn.mp3",
+    "word": "draußn",
+    "translation": "надворі"
+  },
+  {
+    "id": 31,
+    "audio": "/audio/12/Haus.mp3",
+    "word": "Haus",
+    "translation": "дім / будиночок"
+  },
+  {
+    "id": 32,
+    "audio": "/audio/12/Geschaft.mp3",
+    "word": "Geschäft",
+    "translation": "магазин"
+  },
+  {
+    "id": 33,
+    "audio": "/audio/12/Kirch  Kircha.mp3",
+    "word": "Kirch / Kircha",
+    "translation": "церква"
+  },
+  {
+    "id": 34,
+    "audio": "/audio/12/Schui.mp3",
+    "word": "Schui",
+    "translation": "школа"
+  },
+  {
+    "id": 35,
+    "audio": "/audio/12/geh.mp3",
+    "word": "geh",
+    "translation": "йти"
+  },
+  {
+    "id": 36,
+    "audio": "/audio/12/do.mp3",
+    "word": "do",
+    "translation": "тут / там"
+  }
+]

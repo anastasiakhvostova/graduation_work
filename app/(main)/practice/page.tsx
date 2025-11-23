@@ -87,8 +87,8 @@ const PracticePage = async () => {
       <tr>
         <th className="p-3 border text-lg">ID</th>
         <th className="p-3 border text-lg">Аудіо</th>
-        <th className="p-3 border text-lg">Слово</th>
-        <th className="p-3 border text-lg">Переклад</th>
+        <th className="p-3 border text-lg">Слово в діалекті</th>
+        <th className="p-3 border text-lg">Переклад на літературну мову</th>
       </tr>
     </thead>
 

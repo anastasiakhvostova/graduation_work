@@ -27,7 +27,7 @@ export const upsertUserProgress = async (countryId: number) => {
       .update(userProgress)
       .set({
         activeCountryId: countryId,
-        activeRegionId: null, // скидаємо регіон при виборі нової країни
+        activeRegionId: null, 
         userName: user.firstName || "User",
         userImageSrc: user.imageUrl || "/mascot.png",
       });

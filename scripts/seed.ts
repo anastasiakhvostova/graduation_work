@@ -26,9 +26,9 @@ async function main() {
     ]);
 
     await db.insert(schema.regions).values([
-      { id: 7, title: "Північне наріччя", countryId: 1, imageSrc: "/ukraine.png" },
-      { id: 8, title: "Південно-західне наріччя", countryId: 1, imageSrc: "/ukraine.png" },
-      { id: 9, title: "Південно-східне наріччя", countryId: 1, imageSrc: "/ukraine.png" },
+      { id: 7, title: "ПІВНІЧНЕ НАРІЧЧЯ", countryId: 1, imageSrc: "/ukraine.png" },
+      { id: 8, title: "ПІВДЕННО-ЗАХІДНЕ НАРІЧЧЯ", countryId: 1, imageSrc: "/ukraine.png" },
+      { id: 9, title: "ПІВДЕННО-СХІДНЕ НАРІЧЧЯ", countryId: 1, imageSrc: "/ukraine.png" },
       { id: 10, title: "Нижньонімецькі діалекти", countryId: 2, imageSrc: "/germany.png" },
       { id: 11, title: "Середньонімецькі діалекти", countryId: 2, imageSrc: "/germany.png" },
       { id: 12, title: "Верхньонімецькі діалекти", countryId: 2, imageSrc: "/germany.png" },
@@ -110,7 +110,7 @@ async function main() {
     ]);
 
     addChallenge(2, "SELECT", "Що з цього означає «чемодан»?", [
-      { text: "кулачі", correct: false, audioSrc: "/audio/stavok.mp3", imageSrc: "/kalachi.png" },
+      { text: "калачі", correct: false, audioSrc: "/audio/stavok.mp3", imageSrc: "/kalachi.png" },
       { text: "клюмба", correct: false, audioSrc: "/audio/park.mp3", imageSrc: "/klumba.png" },
       { text: "куфер", correct: true, audioSrc: "/audio/gora.mp3", imageSrc: "/kufer.png" },
     ]);

@@ -1,0 +1,224 @@
+[
+  {
+    "id": 1,
+    "audio": "/audio/11/isch.mp3",
+    "word": "Isch",
+    "translation": "я"
+  },
+  {
+    "id": 2,
+    "audio": "/audio/11/du.mp3",
+    "word": "du",
+    "translation": "ти"
+  },
+  {
+    "id": 3,
+    "audio": "/audio/11/er.mp3",
+    "word": "er",
+    "translation": "він"
+  },
+  {
+    "id": 4,
+    "audio": "/audio/11/mir.mp3",
+    "word": "mir",
+    "translation": "ми"
+  },
+  {
+    "id": 5,
+    "audio": "/audio/11/eich.mp3",
+    "word": "Eich",
+    "translation": "вас"
+  },
+  {
+    "id": 6,
+    "audio": "/audio/11/zeit.mp3",
+    "word": "Zeit",
+    "translation": "час"
+  },
+  {
+    "id": 8,
+    "audio": "/audio/11/mach.mp3",
+    "word": "Mach",
+    "translation": "роблю"
+  },
+  {
+    "id": 9,
+    "audio": "/audio/11/komm.mp3",
+    "word": "Komm",
+    "translation": "приходжу"
+  },
+  {
+    "id": 10,
+    "audio": "/audio/11/geh.mp3",
+    "word": "geh", 
+    "translation": "йду"
+  },
+    {
+    "id": 11,
+    "audio": "/audio/11/madsche.mp3",
+    "word": "Mädsche",
+    "translation": "дівчина"
+  },
+  {
+    "id": 12,
+    "audio": "/audio/11/bub.mp3",
+    "word": "Bub",
+    "translation": "хлопець"
+  },
+  {
+    "id": 13,
+    "audio": "/audio/11/fraa.mp3",
+    "word": "Fraa",
+    "translation": "жінка"
+  },
+    {
+    "id": 14,
+    "audio": "/audio/11/mann.mp3",
+    "word": "mann",
+    "translation": "чоловік"
+  },
+  {
+    "id": 15,
+    "audio": "/audio/11/kinner.mp3",
+    "word": "Kinner",
+    "translation": "діти"
+  },
+  {
+    "id": 16,
+    "audio": "/audio/11/aussehn.mp3",
+    "word": "Aussehn ",
+    "translation": "виглядати"
+  },
+  {
+    "id": 17,
+    "audio": "/audio/11/ken.mp3",
+    "word": "Ken",
+    "translation": "жоден"
+  },
+  {
+    "id": 18,
+    "audio": "/audio/11/zeit.mp3",
+    "word": "Zeit",
+    "translation": "час"
+  },
+  {
+    "id": 19,
+    "audio": "/audio/11/schnell.mp3",
+    "word": "Schnell ",
+    "translation": "швижко"
+  },
+  {
+    "id": 20,
+    "audio": "/audio/11/langsam.mp3",
+    "word": "Langsam",
+    "translation": "повільно"
+  },
+  {
+    "id": 21,
+    "audio": "/audio/11/viel.mp3",
+    "word": "Viel",
+    "translation": "багато"
+  },
+  {
+    "id": 22,
+    "audio": "/audio/11/wenisch.mp3",
+    "word": "Wenisch", 
+    "translation": "мало"
+  },
+    {
+    "id": 23,
+    "audio": "/audio/11/jetzt.mp3",
+    "word": "Jetzt",
+    "translation": "зараз"
+  },
+  {
+    "id": 24,
+    "audio": "/audio/11/gleich.mp3",
+    "word": "Gleich",
+    "translation": "скоро"
+  },
+  {
+    "id": 25,
+    "audio": "/audio/11/schaffe.mp3",
+    "word": "Schaffe",
+    "translation": "працювати"
+  }, 
+    {
+    "id": 26,
+    "audio": "/audio/11/arbeit.mp3",
+    "word": "Arbeit",
+    "translation": "робота"
+  },
+  {
+    "id": 27,
+    "audio": "/audio/11/mud.mp3",
+    "word": "Müd",
+    "translation": "втомлений"
+  },
+  {
+    "id": 28,
+    "audio": "/audio/11/kaputt.mp3",
+    "word": "kaputt",
+    "translation": "виснажений"
+  },
+  {
+    "id": 29,
+    "audio": "/audio/11/hungrisch.mp3",
+    "word": "Hungrisch",
+    "translation": "голодний"
+  },
+  {
+    "id": 30,
+    "audio": "/audio/11/durstich.mp3",
+    "word": "Durstich",
+    "translation": "спраглий"
+  },
+  {
+    "id": 31,
+    "audio": "/audio/11/Feierowend.mp3",
+    "word": "Feierowend",
+    "translation": "кінець робочого дня"
+  },
+  {
+    "id": 32,
+    "audio": "/audio/11/Wie gehts.mp3",
+    "word": "Wie geht’s?", 
+    "translation": "мій"
+  },
+    {
+    "id": 33,
+    "audio": "/audio/11/net.mp3",
+    "word": "Net",
+    "translation": "не"
+  },
+  {
+    "id": 34,
+    "audio": "/audio/11/Isch koch net.mp3",
+    "word": "Isch koch net",
+    "translation": "я не готую"
+  },
+  {
+    "id": 35,
+    "audio": "/audio/11/esse.mp3",
+    "word": "Esse",
+    "translation": "їсти"
+  }, 
+  {
+    "id": 36,
+    "audio": "/audio/11/trinke.mp3",
+    "word": "Trinke",
+    "translation": "пити"
+  }, 
+    {
+    "id": 37,
+    "audio": "/audio/11/Daheem.mp3",
+    "word": "Daheem",
+    "translation": "вдома (гессенський)"
+  },
+  {
+    "id": 38,
+    "audio": "/audio/11/fort.mp3",
+    "word": "Fort",
+    "translation": "пішов / зник"
+  }
+]

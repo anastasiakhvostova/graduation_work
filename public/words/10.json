@@ -1,0 +1,290 @@
+[
+  {
+    "id": 1,
+    "audio": "/audio/10/ik.mp3",
+    "word": "ik",
+    "translation": "я"
+  },
+  {
+    "id": 2,
+    "audio": "/audio/10/du.mp3",
+    "word": "du",
+    "translation": "ти"
+  },
+  {
+    "id": 3,
+    "audio": "/audio/10/he.mp3",
+    "word": "he",
+    "translation": "він"
+  },
+  {
+    "id": 4,
+    "audio": "/audio/10/wi.mp3",
+    "word": "wu/wie",
+    "translation": "ми"
+  },
+  {
+    "id": 5,
+    "audio": "/audio/10/se.mp3",
+    "word": "se",
+    "translation": "вони"
+  },
+  {
+    "id": 6,
+    "audio": "/audio/10/maken.mp3",
+    "word": "maken",
+    "translation": "робити"
+  },
+  {
+    "id": 8,
+    "audio": "/audio/10/doon.mp3",
+    "word": "doon",
+    "translation": "робити (ще одне platt-слово)"
+  },
+  {
+    "id": 9,
+    "audio": "/audio/10/gahn.mp3",
+    "word": "gahn",
+    "translation": "йти"
+  },
+  {
+    "id": 10,
+    "audio": "/audio/10/komen.mp3",
+    "word": "kömen", 
+    "translation": "приходити"
+  },
+    {
+    "id": 11,
+    "audio": "/audio/10/spreken.mp3",
+    "word": "spreken",
+    "translation": "говорити"
+  },
+  {
+    "id": 12,
+    "audio": "/audio/10/verstahn.mp3",
+    "word": "verstahn",
+    "translation": "розуміти"
+  },
+  {
+    "id": 13,
+    "audio": "/audio/10/hewwen.mp3",
+    "word": "hewwen",
+    "translation": "мати"
+  },
+    {
+    "id": 14,
+    "audio": "/audio/10/Broodt  Brood.mp3",
+    "word": "Bröödt / Brood",
+    "translation": "хліб"
+  },
+  {
+    "id": 15,
+    "audio": "/audio/10/water.mp3",
+    "word": "Water",
+    "translation": "вода"
+  },
+  {
+    "id": 16,
+    "audio": "/audio/10/melk.mp3",
+    "word": "Melk",
+    "translation": "молоко"
+  },
+  {
+    "id": 17,
+    "audio": "/audio/10/koffie.mp3",
+    "word": "Koffie",
+    "translation": "кава"
+  },
+  {
+    "id": 18,
+    "audio": "/audio/10/tee.mp3",
+    "word": "Tee",
+    "translation": "чай"
+  },
+  {
+    "id": 19,
+    "audio": "/audio/10/eten.mp3",
+    "word": "Eten",
+    "translation": "їсти"
+  },
+  {
+    "id": 20,
+    "audio": "/audio/10/drinke.mp3",
+    "word": "Drinke",
+    "translation": "пити"
+  },
+  {
+    "id": 21,
+    "audio": "/audio/10/appel.mp3",
+    "word": "Appel",
+    "translation": "яблуко"
+  },
+  {
+    "id": 22,
+    "audio": "/audio/10/koken.mp3",
+    "word": "Koken", 
+    "translation": "готувати"
+  },
+    {
+    "id": 23,
+    "audio": "/audio/10/moin!.mp3",
+    "word": "Moin!",
+    "translation": "привіт"
+  },
+  {
+    "id": 24,
+    "audio": "/audio/10/aben!.mp3",
+    "word": "Aben!",
+    "translation": "добрий вечір"
+  },
+  {
+    "id": 25,
+    "audio": "/audio/10/vadder.mp3",
+    "word": "vadder",
+    "translation": "батько"
+  }, 
+    {
+    "id": 26,
+    "audio": "/audio/10/moder.mp3",
+    "word": "Moder",
+    "translation": "мати"
+  },
+  {
+    "id": 27,
+    "audio": "/audio/10/kinner.mp3",
+    "word": "Kinner",
+    "translation": "діти"
+  },
+  {
+    "id": 28,
+    "audio": "/audio/10/broder.mp3",
+    "word": "Broder",
+    "translation": "брат"
+  },
+  {
+    "id": 29,
+    "audio": "/audio/10/suster.mp3",
+    "word": "Süster",
+    "translation": "сестра"
+  },
+  {
+    "id": 30,
+    "audio": "/audio/10/oma.mp3",
+    "word": "Oma",
+    "translation": "бабуся"
+  },
+  {
+    "id": 31,
+    "audio": "/audio/10/opa.mp3",
+    "word": "Opa",
+    "translation": "дідусь"
+  },
+  {
+    "id": 32,
+    "audio": "/audio/10/mien.mp3",
+    "word": "Mien", 
+    "translation": "мій"
+  },
+    {
+    "id": 33,
+    "audio": "/audio/10/dien.mp3",
+    "word": "Dien",
+    "translation": "твій"
+  },
+  {
+    "id": 34,
+    "audio": "/audio/10/ehr.mp3",
+    "word": "ehr",
+    "translation": "її"
+  },
+  {
+    "id": 35,
+    "audio": "/audio/10/sien.mp3",
+    "word": "sien",
+    "translation": "його"
+  }, 
+  {
+    "id": 36,
+    "audio": "/audio/10/huus.mp3",
+    "word": "huus",
+    "translation": "дім"
+  }, 
+    {
+    "id": 37,
+    "audio": "/audio/10/fenster.mp3",
+    "word": "fenster",
+    "translation": "вікно"
+  },
+  {
+    "id": 38,
+    "audio": "/audio/10/kammer.mp3",
+    "word": "kammer",
+    "translation": "кімната"
+  },
+  {
+    "id": 39,
+    "audio": "/audio/10/stuw.mp3",
+    "word": "stuw",
+    "translation": "вітальня"
+  },
+  {
+    "id": 40,
+    "audio": "/audio/10/kok.mp3",
+    "word": "Kök",
+    "translation": "кухня"
+  },
+  {
+    "id": 41,
+    "audio": "/audio/10/tied.mp3",
+    "word": "Tied",
+    "translation": "час"
+  },
+  {
+    "id": 42,
+    "audio": "/audio/10/keen.mp3",
+    "word": "Keen",
+    "translation": "жоден/нема"
+  },
+  {
+    "id": 43,
+    "audio": "/audio/10/schoul.mp3",
+    "word": "Schoul", 
+    "translation": "школа"
+  },
+    {
+    "id": 44,
+    "audio": "/audio/10/leter.mp3",
+    "word": "Leter",
+    "translation": "вчитель"
+  },
+  {
+    "id": 45,
+    "audio": "/audio/10/scholer.mp3",
+    "word": "Schöler",
+    "translation": "учень"
+  },
+  {
+    "id": 46,
+    "audio": "/audio/10/leren.mp3",
+    "word": "Leren",
+    "translation": "вчитися"
+  },
+  {
+    "id": 47,
+    "audio": "/audio/10/Schrieven.mp3",
+    "word": "Schrieven", 
+    "translation": "писати"
+  },
+    {
+    "id": 48,
+    "audio": "/audio/10/lesen.mp3",
+    "word": "Lesen",
+    "translation": "читати"
+  },
+  {
+    "id": 49,
+    "audio": "/audio/10/Klass.mp3",
+    "word": "klass",
+    "translation": "клас"
+  }
+]

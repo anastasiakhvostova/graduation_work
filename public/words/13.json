@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "audio": "/audio/13/bees_and_honey.mp3",
+    "word": "Bees and honey ",
+    "translation": "гроші"
+  },
+  {
+    "id": 2,
+    "audio": "/audio/13/loaf_of_bread.mp3",
+    "word": "Loaf of bread",
+    "translation": "голова"
+  },
+  {
+    "id": 3,
+    "audio": "/audio/13/china_plate.mp3",
+    "word": "China plate",
+    "translation": "друг"
+  },
+  {
+    "id": 4,
+    "audio": "/audio/13/apples_and_pears.mp3",
+    "word": "Apples and pears",
+    "translation": "сходи"
+  },
+  {
+    "id": 5,
+    "audio": "/audio/13/barnet.mp3",
+    "word": "Barnet (fair)",
+    "translation": "волосся"
+  },
+  {
+    "id": 6,
+    "audio": "/audio/13/bottle_and_stopper.mp3",
+    "word": "Bottle and stopper",
+    "translation": "поліцейський"
+  },
+  {
+    "id": 7,
+    "audio": "/audio/13/half-ich.mp3",
+    "word": "Half-inch",
+    "translation": "украсти"
+  },
+  {
+    "id": 8,
+    "audio": "/audio/13/trouble_and_strife.mp3",
+    "word": "Trouble and strife",
+    "translation": "дружина"
+  },
+  {
+    "id": 9,
+    "audio": "/audio/13/butchers_hook.mp3",
+    "word": "Butcher’s hook",
+    "translation": "подив/погляд"
+  },
+  {
+    "id": 10,
+    "audio": "/audio/13/rossie_lee.mp3",
+    "word": "Rosie lee",
+    "translation": "чай"
+  }
+]
