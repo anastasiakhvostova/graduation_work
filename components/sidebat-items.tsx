@@ -9,14 +9,14 @@ type Props = {
   label: string
   iconSrc: string
   href: string
-  iconSize?: number // ✅ додано новий проп
+  iconSize?: number 
 }
 
 export const SidebarItem = ({
   label,
   iconSrc,
   href,
-  iconSize = 34, // 🔹 розмір за замовчуванням
+  iconSize = 34, 
 }: Props) => {
   const pathname = usePathname()
   const isActive = pathname === href

@@ -13,7 +13,6 @@ const LessonPage = async () => {
 
   if (!userProgress) redirect("/learn")
 
-  // Якщо уроків більше нема → просто виведемо Quiz (він сам покаже фініш)
   if (!lesson) {
     return (
       <Quiz
@@ -40,4 +39,3 @@ const LessonPage = async () => {
 }
 
 export default LessonPage
-

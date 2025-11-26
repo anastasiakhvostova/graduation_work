@@ -6,11 +6,10 @@ import { ArrowLeft } from "lucide-react";
 import { DialectMap } from "./regions-map";
 
 interface RegionsPageProps {
-  params: Promise<{ countryId: string }>; // ❗️ ТЕПЕР PROMISE
+  params: Promise<{ countryId: string }>; 
 }
 
 const RegionsPage = async (props: RegionsPageProps) => {
-  // ❗️ РОЗПАКОВУЄМО params через await
   const { countryId } = await props.params;
   const countryIdNum = Number(countryId);
 
@@ -40,7 +39,6 @@ const RegionsPage = async (props: RegionsPageProps) => {
         </h1>
       </div>
 
-      {/* КАРТА */}
       <DialectMap
         countryId={countryIdNum}
         activeRegionId={userProgress?.activeRegionId ?? null}

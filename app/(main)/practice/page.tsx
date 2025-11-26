@@ -24,7 +24,6 @@ const PracticePage = async () => {
   const fileSrc = `/materials/${activeRegion.id}.docx`;
   const fileSrcCountry = `/materials/countries/${countryId}.docx`;
 
-  // ✅ Шлях до JSON з словами
   const filePath = path.join(
     process.cwd(),
     "public",
@@ -99,7 +98,6 @@ const PracticePage = async () => {
         <tr key={item.id} className="text-center">
           <td className="p-3 border text-lg font-medium">{item.id}</td>
 
-          {/* ✅ Аудіо збільшене трохи */}
           <td className="p-3 border">
             <audio
               controls

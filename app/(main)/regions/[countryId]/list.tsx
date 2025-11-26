@@ -19,20 +19,10 @@ export const RegionsList = ({ regions, activeRegionId }: Props) => {
   const onClick = (id: number) => {
     if (pending) return;
 
-    // Якщо вже вибрано активний регіон, просто переходимо
     if (id === activeRegionId) {
       router.push("/learn");
       return;
     }
-
-    startTransition(async () => {
-      try {
-        await upsertUserProgressRegion(id); // чекаємо оновлення на сервері
-        router.push("/learn");              // після цього самі переходимо
-      } catch {
-        toast.error("Something went wrong");
-      }
-    });
   };
 
   return (

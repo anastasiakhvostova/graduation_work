@@ -26,11 +26,15 @@ export const Sidebar = ({ className }: Props) => {
 
             {/* Основні пункти сайдбару */}
             <div className="flex flex-col gap-y-2 flex-1 px-4">
-                <SidebarItem label="Домашня сторінка" iconSrc="/house.png" href="/learn" iconSize={38}/>
+                <SidebarItem label="Сторінка з практичними завданнями" iconSrc="/house.png" href="/learn" iconSize={38}/>
+                <SidebarItem label="Навчальні матеріали" iconSrc="/practice.png" href="/practice" iconSize={38}/>
+
+                {/* 🟦 РОЗДІЛЮВАЧ МІЖ ГРУПАМИ */}
+                <div className="my-2 h-[2px] w-full bg-[#91d5ff] rounded-full" />
+
                 <SidebarItem label="Дошка лідерів" iconSrc="/Leardboard.png" href="/leaderboard" iconSize={38}/>
                 <SidebarItem label="Челенджі" iconSrc="/quests.png" href="/quests" iconSize={38}/>
                 <SidebarItem label="Магазин" iconSrc="/shop.png" href="/shop" iconSize={38}/>
-                <SidebarItem label="Навчальні матеріали" iconSrc="/practice.png" href="/practice" iconSize={38}/>
                 <SidebarItem label="Додаток" iconSrc="/dictionary.png" href="/dictionary" iconSize={38}/>
             </div>
 

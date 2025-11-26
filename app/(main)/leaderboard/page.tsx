@@ -12,14 +12,11 @@ import { RegionImage } from "@/components/current_region_image"
 const LeaderboardPage = async () => {
     const userProgressData = getUserProgress()
     const leaderboardData = getTopTenUsers()
-    // const userSubscriptionData = getUserSubscription()
     const [
         userProgress,
-        // userSubscription,
         leaderboard
     ] = await Promise.all([
         userProgressData,
-        // userSubscriptionData,
         leaderboardData
     ])
 
@@ -27,7 +24,6 @@ const LeaderboardPage = async () => {
         redirect("/courses")
     }
 
-    // const isPro = !!userSubscription?.isActive
     return( 
         <div className="flex flex-row-reverse gap-[48px] px-6">
             <StickyWrapper>
@@ -35,11 +31,8 @@ const LeaderboardPage = async () => {
                     activeCourse={userProgress.activeRegion}
                     hearts={userProgress.hearts}
                     points={userProgress.points}
-                    // hasActiveSubscription={isPro}
                 />
-                {/* {!isPro && (<Promo />)} */}
                 <Quests points={userProgress.points}/>
-                <RegionImage activeRegionId={userProgress.activeRegion?.id ?? null} />
             </StickyWrapper>
             <FeedWrapper>
                 <div className="w-full flex-col items-center">

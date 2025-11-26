@@ -5,12 +5,11 @@ import { getUserProgress} from "@/db/queries"
 import { redirect } from "next/navigation"
 import Image from "next/image"
 import { Items } from "./items"
-// import { Promo } from "@/components/promo"
+
 import { Quests } from "@/components/quests"
 import { RegionImage } from "@/components/current_region_image"
 const ShopPage = async () => {
     const userProgressData = getUserProgress()
-    // const userSubscriptionData = getUserSubscription()
     const [
         userProgress,
     ] = await Promise.all([
@@ -28,12 +27,8 @@ const ShopPage = async () => {
                     activeCourse={userProgress.activeRegion}
                     hearts={userProgress.hearts}
                     points={userProgress.points}
-                    // hasActiveSubscription={isPro}
                 />
-                {/* {!isPro && (<Promo />)} */}
-                <Quests points={userProgress.points}/>
-                <RegionImage activeRegionId={userProgress.activeRegion?.id ?? null} />
-                
+                <Quests points={userProgress.points}/>   
             </StickyWrapper>
             <FeedWrapper>
                 <div className="w-full flex-col items-center">

@@ -20,21 +20,20 @@ export const DialectMap = ({ countryId, activeRegionId }: Props) => {
 
   const { viewBox, imageSrc, imageWidth, imageHeight } = config;
 
-  // ✅ різний розмір контейнера для країн
   const containerMaxWidth =
     countryId === 2
-      ? "max-w-[600px]" // Німеччина
+      ? "max-w-[600px]"
       : countryId === 3
-      ? "max-w-[700px]" // Британія (підбери 650–750 як тобі подобається)
-      : "max-w-[900px]"; // Україна
+      ? "max-w-[700px]" 
+      : "max-w-[900px]"; 
 
-  // ✅ різна товщина обводки при hover
+
   const hoverStrokeWidthClass =
     countryId === 2
-      ? "hover:stroke-[2]" // Німеччина
+      ? "hover:stroke-[2]" 
       : countryId === 3
-      ? "hover:stroke-[2]" // Британія
-      : "hover:stroke-[30]"; // Україна
+      ? "hover:stroke-[2]" 
+      : "hover:stroke-[30]"; 
 
   const handleClick = (id: number) => {
     if (pending) return;
@@ -62,7 +61,7 @@ export const DialectMap = ({ countryId, activeRegionId }: Props) => {
           className="w-full h-auto rounded-xl"
           preserveAspectRatio="xMidYMid meet"
         >
-          {/* фон-карта */}
+
           <image
             href={imageSrc}
             x="0"
@@ -71,8 +70,6 @@ export const DialectMap = ({ countryId, activeRegionId }: Props) => {
             height={imageHeight ?? 5890}
             preserveAspectRatio="xMidYMid meet"
           />
-
-          {/* клікабельні регіони */}
           {config.regions.map((region) => (
             <path
               key={region.id}
@@ -93,7 +90,6 @@ export const DialectMap = ({ countryId, activeRegionId }: Props) => {
           ))}
         </svg>
 
-        {/* легенда для України */}
         {countryId === 1 && (
           <div className="absolute left-6 bottom-6 rounded-xl bg-white/90 backdrop-blur px-4 py-3 shadow-sm border border-neutral-200 max-w-[330px]">
             <p className="text-xs font-semibold text-neutral-700 mb-2">
@@ -115,8 +111,6 @@ export const DialectMap = ({ countryId, activeRegionId }: Props) => {
             </div>
           </div>
         )}
-
-        {/* легенда для Німеччини */}
         {countryId === 2 && (
           <div className="absolute right-[119%] top-[22%] translate-x-[-20%] rounded-xl bg-white/90 backdrop-blur px-4 py-3 shadow-sm border border-neutral-200 max-w-[330px]">
             <p className="text-xs font-semibold text-neutral-700 mb-2">

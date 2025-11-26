@@ -16,7 +16,7 @@ export const getUserProgress = async () => {
         where: eq(userProgress.userId, userId),
         with: {
             activeCountry: true,
-            activeRegion: true,  // 🆕 додай це, якщо є FK на regions
+            activeRegion: true,  
         }
     })
 
@@ -109,7 +109,7 @@ export const getRegionsByCountryId = cache(async (countryId: number) => {
     }
   });
 
-  return data ?? []; // ← додай це
+  return data ?? []; 
 });
 
 
@@ -218,28 +218,6 @@ export const getLessonPercantage = cache(async () => {
 
     return percentage
 })
-
-// const DAY_IN_MS = 86_400_000
-// export const getUserSubscription = cache(async () => {
-//     const {userId} = await auth()
-
-//     if (!userId) return null
-
-//     const data = await db.query.userSubscroption.findFirst({
-//         where: eq(userSubscroption.userId, userId)
-//     })
-
-//     if (!data) return null
-
-//     const isActive = 
-//         data.stripePriceId && 
-//         data.stripeCurrentPeriodEnd?.getTime()! + DAY_IN_MS > Date.now()
-//     return {
-//         ...data,
-//         isActive: !!isActive,
-//     }
-
-// })
 
 export const getTopTenUsers = cache(async () => {
     const { userId } = await auth()

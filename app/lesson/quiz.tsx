@@ -14,6 +14,7 @@ import Image from "next/image"
 import { ResultCard } from "./result-card"
 import Confetti from "react-confetti"
 import { useRouter } from "next/navigation"
+import { useHeartsModal } from "@/store/use-hearts-modal" // 👈 перевір шлях
 
 type Props = {
   initialLessonId: number
@@ -29,14 +30,16 @@ export const Quiz = ({
   initialLessonId,
   initialHearts,
   initialPercentage,
-  initialLessonChallenges
+  initialLessonChallenges,
 }: Props) => {
   const router = useRouter()
   const { width, height } = useWindowSize()
+  const heartsModal = useHeartsModal()
 
   const [correctAudio, _c, correctControls] = useAudio({ src: "/correct.mp3" })
-  const [incorrectAudio, _i, incorrectControls] = useAudio({ src: "/incorrect.mp3" })
-  // 🎵 це аудіо буде грати ОДИН РАЗ, коли змонтується на фініш-екрані
+  const [incorrectAudio, _i, incorrectControls] = useAudio({
+    src: "/incorrect.mp3",
+  })
   const [finishAudio] = useAudio({ src: "/finish.mp3", autoPlay: true })
 
   const [pending, startTransition] = useTransition()
@@ -62,15 +65,12 @@ export const Quiz = ({
   const challenge = challenges[activeIndex]
   const options = challenge?.challengeOption ?? []
 
-  // 🔊 Прослухати будь-який src (для LISTEN)
   const playAudio = async (src?: string | null) => {
     if (!src) return
     try {
       const audio = new Audio(src)
       await audio.play()
-    } catch {
-      /* ignore */
-    }
+    } catch {}
   }
 
   const playChallengeAudio = () => {
@@ -84,7 +84,6 @@ export const Quiz = ({
 
   const onNext = () => {
     if (activeIndex + 1 >= challenges.length) {
-      // останнє завдання → фініш
       setIsFinished(true)
       setStatus("none")
       return
@@ -97,15 +96,22 @@ export const Quiz = ({
   }
 
   const onContinue = () => {
+    // якщо вже показаний результат — ведемо себе як раніше
     if (status !== "none") {
       if (status === "correct") onNext()
       else setStatus("none")
       return
     }
 
+    // якщо серця вже 0 — одразу показуємо модалку
+    if (hearts === 0) {
+      heartsModal.open()
+      return
+    }
+
     if (!challenge) return
 
-    // ✍ WRITE
+    // --- WRITE challenge ---
     if (challenge.type === "WRITE") {
       const answer = writeRef.current?.getValue() || ""
       const correctAnswer = options.find((o) => o.correct)?.text || ""
@@ -122,7 +128,20 @@ export const Quiz = ({
         })
       } else {
         startTransition(() => {
-          reduceHearts(challenge.id, initialLessonId).then(() => {
+          reduceHearts(challenge.id, initialLessonId).then((res) => {
+            // practice: урок уже був пройдений → серця не знімаємо
+            if (res && "error" in res) {
+              if (res.error === "серця") {
+                setHearts(0)
+                heartsModal.open()
+                return
+              }
+              if (res.error === "practice") {
+                incorrectControls.play()
+                return
+              }
+            }
+
             incorrectControls.play()
             setHearts((prev) => Math.max(prev - 1, 0))
           })
@@ -132,7 +151,7 @@ export const Quiz = ({
       return
     }
 
-    // 🔘 SELECT / ASSIST / LISTEN
+    // --- інші типи challenge (ASSIST / LISTEN / тощо) ---
     if (!selectedOption) return
     const correctOption = options.find((o) => o.correct)
     if (!correctOption) return
@@ -148,7 +167,19 @@ export const Quiz = ({
       })
     } else {
       startTransition(() => {
-        reduceHearts(challenge.id, initialLessonId).then(() => {
+        reduceHearts(challenge.id, initialLessonId).then((res) => {
+          if (res && "error" in res) {
+            if (res.error === "серця") {
+              setHearts(0)
+              heartsModal.open()
+              return
+            }
+            if (res.error === "practice") {
+              incorrectControls.play()
+              return
+            }
+          }
+
           incorrectControls.play()
           setHearts((prev) => Math.max(prev - 1, 0))
         })
@@ -156,8 +187,6 @@ export const Quiz = ({
     }
   }
 
-  // 🎉 ФІНІШ-ЕКРАН
-  // тут НІЯКОГО Footer, тільки центральна кнопка "Продовжити"
   if (isFinished) {
     return (
       <>
@@ -194,8 +223,6 @@ export const Quiz = ({
             <ResultCard variant="points" value={challenges.length * 10} />
             <ResultCard variant="hearts" value={hearts} />
           </div>
-
-          {/* ОДНА головна кнопка під картками */}
           <button
             onClick={() => router.push("/learn")}
             className="mt-6 px-8 py-3 rounded-full bg-yellow-400 hover:bg-yellow-500 text-black font-semibold text-lg shadow-md transition"
@@ -271,4 +298,5 @@ export const Quiz = ({
     </>
   )
 }
+
 

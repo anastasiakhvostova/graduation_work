@@ -16,7 +16,6 @@ export const ResultScreen = ({ hearts, points }: Props) => {
   const router = useRouter()
   const { width, height } = useWindowSize()
 
-  // Звук фіналу
   const [finishAudio] = useAudio({
     src: "/finish.mp3",
     autoPlay: true,
@@ -26,8 +25,6 @@ export const ResultScreen = ({ hearts, points }: Props) => {
     <div className="flex flex-col gap-y-6 lg:gap-y-10 items-center justify-center h-full text-center px-4">
 
       {finishAudio}
-
-      {/* Конфеті */}
       <Confetti
         width={width}
         height={height}
@@ -42,7 +39,6 @@ export const ResultScreen = ({ hearts, points }: Props) => {
         Чудова робота! <br /> Ви завершили урок!
       </h1>
 
-      {/* Результати */}
       <div className="flex items-center gap-6 w-full max-w-md justify-center">
         <ResultCard variant="points" value={points} />
         <ResultCard variant="hearts" value={hearts} />

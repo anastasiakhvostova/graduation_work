@@ -1,7 +1,6 @@
 import { pgTable, serial, text, integer, pgEnum, boolean, timestamp } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 
-// -------------------- COUNTRIES --------------------
 export const countries = pgTable("countries", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
@@ -12,7 +11,6 @@ export const countriesRelations = relations(countries, ({ many }) => ({
   userProgress: many(userProgress),
 }));
 
-// -------------------- USER PROGRESS --------------------
 export const userProgress = pgTable("user_progress", {
   userId: text("user_id").primaryKey(),
   userName: text("user_name").notNull().default("User"),
@@ -34,7 +32,7 @@ export const userProgressRelations = relations(userProgress, ({ one }) => ({
   }),
 }));
 
-// -------------------- REGIONS --------------------
+
 export const regions = pgTable("regions", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
@@ -42,7 +40,7 @@ export const regions = pgTable("regions", {
   imageSrc: text("image_src").notNull().default("/default-region.png"),
 });
 
-// -------------------- UNITS --------------------
+
 export const units = pgTable("units", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
@@ -59,7 +57,7 @@ export const unitsRelations = relations(units, ({ one, many }) => ({
   lessons: many(lessons),
 }));
 
-// -------------------- LESSONS --------------------
+
 export const lessons = pgTable("lessons", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
@@ -75,7 +73,7 @@ export const lessonsRelations = relations(lessons, ({ one, many }) => ({
   challenges: many(challenges),
 }));
 
-// -------------------- CHALLENGES --------------------
+
 export const challengesEnum = pgEnum("type", [  "SELECT",
   "ASSIST",
   "LISTEN",
@@ -100,7 +98,7 @@ export const challengesRelations = relations(challenges, ({ one, many }) => ({
   challengeProgress: many(challengesProgress),
 }));
 
-// -------------------- CHALLENGES OPTIONS --------------------
+
 export const challengesOptions = pgTable("challenges_options", {
   id: serial("id").primaryKey(),
   challengeId: integer("challenge_id").references(() => challenges.id, { onDelete: "cascade" }).notNull(),
@@ -117,7 +115,7 @@ export const challengesOptionRelations = relations(challengesOptions, ({ one }) 
   }),
 }));
 
-// -------------------- CHALLENGES PROGRESS --------------------
+
 export const challengesProgress = pgTable("challenges_progress", {
   id: serial("id").primaryKey(),
   userId: text("user_id").notNull(),
@@ -132,7 +130,7 @@ export const challengesProgressRelations = relations(challengesProgress, ({ one 
   }),
 }));
 
-// -------------------- REGIONS RELATIONS --------------------
+
 export const regionsRelations = relations(regions, ({ one, many }) => ({
   country: one(countries, {
     fields: [regions.countryId],

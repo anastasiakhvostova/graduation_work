@@ -9,14 +9,6 @@ import { HeartsModal } from "@/components/modals/hearts-modal";
 import { ExitModal } from "@/components/modals/exit-modal"
 import { ukUA } from "@clerk/localizations";
 
-
-// const font = Pangolin({ subsets: ["latin"], weight: "400" });
-// const font = Nunito({
-//   subsets: ["latin"],
-//   weight: ["400", "600", "700"],
-// });
-// import { Poppins } from "next/font/google";
-// const font = Poppins({ subsets: ["latin"], weight: ["400", "600", "700"] });
 import { Baloo_2 } from "next/font/google";
 const font = Baloo_2({
   subsets: ["latin"],
@@ -45,12 +37,5 @@ export default function RootLayout({
         </body>
       </html>
     </ClerkProvider>
-    // <html lang="en">
-    //   <body className={font.className}>
-    //     <ClerkProvider>
-    //       {children}
-    //     </ClerkProvider>
-    //   </body>
-    // </html>
   );
 }

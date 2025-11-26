@@ -30,7 +30,6 @@ export const Card = ({
   type,
 }: Props) => {
 
-  // ❗ Викликаємо useAudio тільки якщо аудіо є
   const [audio, _, controls] = audioSrc
     ? useAudio({ src: audioSrc })
     : [null, null, { play: () => {} }];
@@ -61,7 +60,6 @@ export const Card = ({
         type === "ASSIST" && "lg:p-3 w-full"
       )}
     >
-      {/* тільки якщо є аудіо */}
       {audioSrc && audio}
 
       {imageSrc && (

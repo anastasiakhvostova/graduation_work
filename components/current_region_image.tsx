@@ -17,8 +17,7 @@ const REGION_IMAGES: Record<number, string> = {
   13: "/maps/kokney.png",
   14: "/maps/scause.png",
   15: "/maps/georgie.png",
-  16: "/maps/yorkshire.png"
-  // додай інші за потреби
+  16: "/maps/yorkshire.png",
 };
 
 export const RegionImage = ({ activeRegionId, className }: Props) => {
@@ -29,9 +28,7 @@ export const RegionImage = ({ activeRegionId, className }: Props) => {
 
   return (
     <div className={`w-full flex justify-center ${className ?? ""}`}>
-      {/* group — щоб керувати ховером і текстом одночасно */}
       <div className="group inline-flex flex-col items-center">
-        {/* повідомлення над картинкою */}
         <div
           className="
             mb-2 px-3 py-1 rounded-full
@@ -44,11 +41,10 @@ export const RegionImage = ({ activeRegionId, className }: Props) => {
           Ви зараз знаходитесь в цьому регіоні
         </div>
 
-        {/* сама картинка з ефектом як у кнопки */}
         <div
           className="
             rounded-xl overflow-hidden
-            transition-transform transition-shadow duration-200
+            transition duration-200
             group-hover:scale-105 group-hover:shadow-lg
           "
         >
@@ -64,4 +60,5 @@ export const RegionImage = ({ activeRegionId, className }: Props) => {
     </div>
   );
 };
+
 

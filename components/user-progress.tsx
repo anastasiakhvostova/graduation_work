@@ -11,8 +11,9 @@ type Props = {
 
 export const UserProgress = ({ activeCourse, points, hearts }: Props) => {
   return (
-    <div className="flex items-center justify-between gap-x-2 w-full">
-      <Link href="/countries">
+    <div className="flex justify-end w-full">
+
+      {/* <Link href="/countries">
         <Button>
           {activeCourse && (
             <Image
@@ -24,7 +25,7 @@ export const UserProgress = ({ activeCourse, points, hearts }: Props) => {
             />
           )}
         </Button>
-      </Link>
+      </Link> */}
 
       <Link href="/shop">
         <Button variant="ghost" className="text-orange-500">

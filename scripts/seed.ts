@@ -19,14 +19,12 @@ async function main() {
     await db.delete(schema.userProgress);
     await db.delete(schema.countries);
 
-    // Країни
     await db.insert(schema.countries).values([
       { id: 1, title: "Україна", imageSrc: "/ukraine.png" },
       { id: 2, title: "Німеччина", imageSrc: "/germany.png" },
       { id: 3, title: "Велика Британія", imageSrc: "/britain.webp" },
     ]);
 
-    // Регіони
     await db.insert(schema.regions).values([
       { id: 7, title: "ПІВНІЧНЕ НАРІЧЧЯ", countryId: 1, imageSrc: "/ukraine.png" },
       { id: 8, title: "ПІВДЕННО-ЗАХІДНЕ НАРІЧЧЯ", countryId: 1, imageSrc: "/ukraine.png" },
@@ -40,7 +38,6 @@ async function main() {
       { id: 16, title: "Йоркшир", countryId: 3, imageSrc: "/britain.webp" },
     ]);
 
-    // Юніти
     await db.insert(schema.units).values([
       {
         id: 1,
@@ -51,7 +48,6 @@ async function main() {
       },
     ]);
 
-    // Уроки
     await db.insert(schema.lessons).values([
       { id: 1, unitId: 1, order: 1, title: "Слова про людей" },
       { id: 2, unitId: 1, order: 2, title: "Природа і село" },
@@ -60,7 +56,7 @@ async function main() {
       { id: 5, unitId: 1, order: 5, title: "Дієслова та дії" },
     ]);
 
-    // Завдання та опції
+
     const northChallenges: typeof schema.challenges.$inferInsert[] = [];
     const northOptions: typeof schema.challengesOptions.$inferInsert[] = [];
     let idCounter = 100;
@@ -70,7 +66,7 @@ async function main() {
       type: "SELECT" | "ASSIST" | "LISTEN" | "WRITE",
       question: string,
       answers: { text: string; correct: boolean; imageSrc?: string }[],
-      audioSrc?: string // тільки для LISTEN
+      audioSrc?: string 
     ) => {
       const chId = idCounter++;
       northChallenges.push({ id: chId, lessonId, type, order: chId, question, audioSrc: audioSrc || null });
@@ -86,14 +82,13 @@ async function main() {
       });
     };
 
-    // SELECT
+ 
     addChallenge(1, "SELECT", "Що з цього означає «картопля»?", [
       { text: "лєс", correct: false, imageSrc: "/les.png" },
       { text: "бульба", correct: true, imageSrc: "/bulba.png" },
       { text: "калач", correct: false, imageSrc: "/kalach.png" },
     ]);
 
-    // ASSIST
     addChallenge(1, "ASSIST", "Що з цього означає «розмовляти»?", [
       { text: "гуторити", correct: true },
       { text: "клюмба", correct: false },
@@ -110,7 +105,7 @@ async function main() {
       { text: "поле", correct: false },
       { text: "будинок", correct: false },
     ], "/audio/7/Лєс.mp3");
-    // WRITE
+
     addChallenge(1, "WRITE", "Ми з дєдом довго … біля печі", [
       { text: "гуторили", correct: true },
     ]);
@@ -248,7 +243,7 @@ await db.insert(schema.lessons).values([
       type: "SELECT" | "ASSIST" | "LISTEN" | "WRITE",
       question: string,
       answers: { text: string; correct: boolean; audioSrc?: string; imageSrc?: string }[],
-      audioSrc?: string // тільки для LISTEN
+      audioSrc?: string 
     ) => {
       const chId = swIdCounter++;
       swChallenges.push({ id: chId, lessonId, type, order: chId, question, audioSrc: audioSrc || null });
@@ -409,7 +404,7 @@ const addEastern = (
   type: "SELECT" | "ASSIST" | "LISTEN" | "WRITE",
   question: string,
   answers: { text: string; correct: boolean; audioSrc?: string; imageSrc?: string }[],
-   audioSrc?: string // тільки для LISTEN
+   audioSrc?: string 
 ) => {
   const chId = easternId++;
   easternChallenges.push({ id: chId, lessonId, type, order: chId, question, audioSrc: audioSrc || null  });
@@ -579,7 +574,7 @@ const addPlatt = (
   type: "SELECT" | "ASSIST" | "LISTEN" | "WRITE",
   question: string,
   answers: { text: string; correct: boolean; audioSrc?: string; imageSrc?: string }[],
-   audioSrc?: string // тільки для LISTEN
+   audioSrc?: string 
 ) => {
   const chId = plattId++;
   plattChallenges.push({ id: chId, lessonId, type, order: chId, question, audioSrc: audioSrc || null  });
@@ -743,7 +738,7 @@ const addMiddlet = (
   type: "SELECT" | "ASSIST" | "LISTEN" | "WRITE",
   question: string,
   answers: { text: string; correct: boolean; audioSrc?: string; imageSrc?: string }[],
-  audioSrc?: string // тільки для LISTEN
+  audioSrc?: string 
 ) => {
   const chId = middleId++;
   middleChallenges.push({ id: chId, lessonId, type, order: chId, question,audioSrc: audioSrc || null  });
@@ -915,7 +910,7 @@ const addOber = (
   type: "SELECT" | "ASSIST" | "LISTEN" | "WRITE",
   question: string,
   answers: { text: string; correct: boolean; audioSrc?: string; imageSrc?: string }[],
-  audioSrc?: string // тільки для LISTEN
+  audioSrc?: string 
 ) => {
   const chId = oberId++;
   oberChallenges.push({ id: chId, lessonId, type, order: chId, question, audioSrc: audioSrc || null  });
@@ -1079,7 +1074,7 @@ const addCockney = (
   type: "SELECT" | "ASSIST" | "LISTEN" | "WRITE",
   question: string,
   answers: { text: string; correct: boolean; audioSrc?: string; imageSrc?: string }[],
-  audioSrc?: string // тільки для LISTEN
+  audioSrc?: string 
 ) => {
   const chId = cockneyId++;
   cockneyChallenges.push({ id: chId, lessonId, type, order: chId, question, audioSrc: audioSrc || null });
@@ -1244,7 +1239,7 @@ const addScouse = (
   type: "SELECT" | "ASSIST" | "LISTEN" | "WRITE",
   question: string,
   answers: { text: string; correct: boolean; audioSrc?: string; imageSrc?: string }[],
-  audioSrc?: string // тільки для LISTEN
+  audioSrc?: string 
 ) => {
   const chId = scouseId++;
   scouseChallenges.push({ id: chId, lessonId, type, order: chId, question, audioSrc: audioSrc || null });
@@ -1412,7 +1407,7 @@ const addGeordie = (
   type: "SELECT" | "ASSIST" | "LISTEN" | "WRITE",
   question: string,
   answers: { text: string; correct: boolean; audioSrc?: string; imageSrc?: string }[],
-  audioSrc?: string // тільки для LISTEN
+  audioSrc?: string 
 ) => {
   const chId = geordieId++;
   geordieChallenges.push({ id: chId, lessonId, type, order: chId, question, audioSrc: audioSrc || null });
@@ -1576,7 +1571,7 @@ const addYork = (
   type: "SELECT" | "ASSIST" | "LISTEN" | "WRITE",
   question: string,
   answers: { text: string; correct: boolean; audioSrc?: string; imageSrc?: string }[],
-  audioSrc?: string // тільки для LISTEN
+  audioSrc?: string 
 ) => {
   const chId = yorkId++;
   yorkChallenges.push({ id: chId, lessonId, type, order: chId, question, audioSrc: audioSrc || null });
@@ -1712,7 +1707,6 @@ addYork(50, "WRITE", "The … were grazing peacefully in the field", [
   { text: "yow", correct: true },
 ]);
   
-// // ✅ Вставка в базу
    await db.insert(schema.challenges).values(easternChallenges);
     await db.insert(schema.challengesOptions).values(easternOptions);
    await db.insert(schema.challenges).values(yorkChallenges);

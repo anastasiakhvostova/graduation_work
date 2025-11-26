@@ -4,8 +4,6 @@ import { countries, userProgress } from "@/db/schema"
 import {Card} from "./card"
 import { useRouter } from "next/navigation"
 import { useTransition } from "react"
-// import { upsertUserProgress } from "@/actions/user-pogress"
-// import { toast } from "sonner"
 
 
 type Props = {
@@ -22,12 +20,6 @@ export const List = ({ countries, activeCountryId}: Props) =>{
 
   router.push(`/regions/${id}`);
     };
-
-    //     startTransition(() => {
-    //         upsertUserProgress(id)
-    //             .catch(() => toast.error("Something went wrong"))
-    //     })
-    // }
     
     return (
         <div className="pt-6 grid grid-cols-2 lg:grid-cols-[repeat(auto-fill,minmax(210px,1fr))] gap-4">

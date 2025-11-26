@@ -6,13 +6,11 @@ import { useExitModal } from "@/store/use-exit-modal"
 type Props = {
     hearts: number
     percentage: number
-    // hasActiveSubscription: boolean
 }
 
 export const Header = ({
     hearts,
     percentage,
-    // hasActiveSubscription
 }: Props) => {
     const { open } = useExitModal() 
     return (

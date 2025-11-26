@@ -9,7 +9,6 @@ type Props = {
 }
 
 export const Quests = ({ points }: Props) => {
-  // Знаходимо перший незавершений квест
   const currentQuest = quests.find((quest) => points < quest.value)
 
   return (
@@ -22,8 +21,6 @@ export const Quests = ({ points }: Props) => {
           </Button>
         </Link>
       </div>
-
-      {/* Якщо є квест для виконання */}
       {currentQuest ? (
         <div
           className="flex items-center w-full p-4 gap-x-4 border-t-2"
@@ -41,7 +38,6 @@ export const Quests = ({ points }: Props) => {
           </div>
         </div>
       ) : (
-        // Якщо всі квести завершені
         <p className="text-center text-neutral-500 font-medium">
           Усі квести завершено 🎉
         </p>

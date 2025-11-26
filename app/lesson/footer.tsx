@@ -18,7 +18,6 @@ export const Footer = ({
 }: Props) => {
   const isMobile = useMedia("(max-width: 1024px)");
 
-  // Enter працює тільки поки завдання не completed
   useKey(
     "Enter",
     () => {

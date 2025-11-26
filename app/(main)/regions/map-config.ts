@@ -1,5 +1,3 @@
-// app/(main)/regions/dialect-map-config.ts
-
 export type RegionPath = {
   id: number;
   name: string;
@@ -15,10 +13,9 @@ export type DialectMapConfig = {
 };
 
 export const DIALECT_MAPS: Record<number, DialectMapConfig> = {
-  // Україна — countryId = 1
   1: {
-    imageSrc: "/maps/1.png",      // 👈 твій PNG з картою
-    viewBox: "0 0 9105 5890",                    // 👈 З нового SVG!
+    imageSrc: "/maps/1.png",      
+    viewBox: "0 0 9105 5890",                   
     regions: [
       {
         id: 7,
@@ -38,10 +35,10 @@ export const DIALECT_MAPS: Record<number, DialectMapConfig> = {
     ],
   },
   2: {
-    imageSrc: "/maps/2.png",      // 👈 твій PNG з картою
+    imageSrc: "/maps/2.png",      
     viewBox: "0 0 675 724",  
-     imageWidth: 675,    // 👈 додай
-    imageHeight: 724,               // 👈 З нового SVG!
+     imageWidth: 675,   
+    imageHeight: 724,              
     regions: [
       {
         id: 10,
@@ -61,7 +58,7 @@ export const DIALECT_MAPS: Record<number, DialectMapConfig> = {
     ],
   },
    3: {
-    imageSrc: "/maps/3.png",      // 👈 твій PNG з картою
+    imageSrc: "/maps/3.png",   
     viewBox: "0 0 980 980",  
     imageWidth: 980,
     imageHeight: 980,
