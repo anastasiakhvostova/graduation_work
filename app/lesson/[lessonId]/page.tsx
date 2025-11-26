@@ -1,38 +1,43 @@
-import { redirect } from "next/navigation"
-import { getLesson, getUserProgress} from "@/db/queries"
+import { getLesson, getUserProgress } from "@/db/queries"
 import { Quiz } from "../quiz"
+import { redirect } from "next/navigation"
 
-type Props = {
-    params: {
-        lessonId: number
-    }
-}
+const LessonPage = async () => {
+  const lessonPromise = getLesson()
+  const progressPromise = getUserProgress()
 
-const LessonIdPage = async ({params}: Props) => {
-    const lessonData = getLesson(params.lessonId)
-    const userProgressData = getUserProgress()
+  const [lesson, userProgress] = await Promise.all([
+    lessonPromise,
+    progressPromise,
+  ])
 
-    const [lesson, userProgress] = await Promise.all([
-        lessonData,
-        userProgressData,
-    ])
+  if (!userProgress) redirect("/learn")
 
-    if (!lesson || !userProgress) {
-        redirect("/learn")
-    }
-
-    const initialPercentage =
-        lesson.challenges.filter(c => c.completed).length /
-        lesson.challenges.length * 100
-
+  // Якщо уроків більше нема → просто виведемо Quiz (він сам покаже фініш)
+  if (!lesson) {
     return (
-        <Quiz 
-            initialLessonId={lesson.id}
-            initialLessonChallenges={lesson.challenges}
-            initialHearts={userProgress.hearts}
-            initialPercentage={initialPercentage}
-        />
+      <Quiz
+        initialLessonId={0}
+        initialLessonChallenges={[]}
+        initialHearts={userProgress.hearts}
+        initialPercentage={100}
+      />
     )
+  }
+
+  const completed = lesson.challenges.filter(c => c.completed).length
+  const total = lesson.challenges.length || 1
+  const initialPercentage = (completed / total) * 100
+
+  return (
+    <Quiz
+      initialLessonId={lesson.id}
+      initialLessonChallenges={lesson.challenges}
+      initialHearts={userProgress.hearts}
+      initialPercentage={initialPercentage}
+    />
+  )
 }
 
-export default LessonIdPage
+export default LessonPage
+

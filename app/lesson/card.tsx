@@ -25,17 +25,25 @@ export const Card = ({
   shortcut,
   selected,
   onClick,
-  status,
   disabled,
+  status,
   type,
 }: Props) => {
-  const [audio, _, controls] = useAudio({ src: audioSrc || "" });
+
+  // ❗ Викликаємо useAudio тільки якщо аудіо є
+  const [audio, _, controls] = audioSrc
+    ? useAudio({ src: audioSrc })
+    : [null, null, { play: () => {} }];
 
   const handleClick = useCallback(() => {
     if (disabled) return;
-    controls.play();
+
+    if (audioSrc) {
+      controls.play();
+    }
+
     onClick();
-  }, [disabled, onClick, controls]);
+  }, [disabled, audioSrc, onClick, controls]);
 
   useKey(shortcut, handleClick, {}, [handleClick]);
 
@@ -53,12 +61,15 @@ export const Card = ({
         type === "ASSIST" && "lg:p-3 w-full"
       )}
     >
-      {audio}
+      {/* тільки якщо є аудіо */}
+      {audioSrc && audio}
+
       {imageSrc && (
         <div className="relative aspect-square mb-4 max-h-[80px] lg:max-h-[150px] w-full">
-          <Image src={imageSrc} fill alt={text} />
+          <Image src={imageSrc} fill alt={text} sizes="100%" />
         </div>
       )}
+
       <div
         className={cn(
           "flex items-center justify-between",
@@ -66,6 +77,7 @@ export const Card = ({
         )}
       >
         {type === "ASSIST" && <div />}
+
         <p
           className={cn(
             "text-neutral-600 text-lg lg:text-xl font-medium",
@@ -76,6 +88,7 @@ export const Card = ({
         >
           {text}
         </p>
+
         <div
           className={cn(
             "lg:w-[34px] lg:h-[34px] w-[26px] h-[26px] border-2 flex items-center justify-center rounded-lg text-neutral-400 lg:text-base text-sm font-semibold",
@@ -90,3 +103,4 @@ export const Card = ({
     </div>
   );
 };
+

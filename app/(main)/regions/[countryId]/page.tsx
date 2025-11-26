@@ -6,12 +6,13 @@ import { ArrowLeft } from "lucide-react";
 import { DialectMap } from "./regions-map";
 
 interface RegionsPageProps {
-  params: { countryId: string };
+  params: Promise<{ countryId: string }>; // ❗️ ТЕПЕР PROMISE
 }
 
 const RegionsPage = async (props: RegionsPageProps) => {
-  const { params } = props; // без await – props не є промісом
-  const countryIdNum = Number(params.countryId);
+  // ❗️ РОЗПАКОВУЄМО params через await
+  const { countryId } = await props.params;
+  const countryIdNum = Number(countryId);
 
   if (isNaN(countryIdNum)) {
     throw new Error("Invalid country ID");
@@ -49,3 +50,4 @@ const RegionsPage = async (props: RegionsPageProps) => {
 };
 
 export default RegionsPage;
+

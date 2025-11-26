@@ -78,12 +78,8 @@ export const lessonsRelations = relations(lessons, ({ one, many }) => ({
 // -------------------- CHALLENGES --------------------
 export const challengesEnum = pgEnum("type", [  "SELECT",
   "ASSIST",
-  "ORDER",
-  "TYPE",
-  "SPEAK",
   "LISTEN",
   "WRITE",
-  "MATCH",
   "COMPLETE"]);
 
 export const challenges = pgTable("challenges", {
@@ -91,6 +87,7 @@ export const challenges = pgTable("challenges", {
   lessonId: integer("lesson_id").references(() => lessons.id, { onDelete: "cascade" }).notNull(),
   type: challengesEnum("type").notNull(),
   question: text("question").notNull(),
+  audioSrc: text("audioSrc").$type<string | null>(), 
   order: integer("order").notNull(),
 });
 
