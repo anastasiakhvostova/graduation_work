@@ -9,7 +9,21 @@ import { userProgress, challengesProgress, challenges } from "@/db/schema";
 import { getCountryById, getUserProgress } from "@/db/queries";
 import { POINTS_TO_REFILL } from "@/constant";
 
-export const upsertUserProgress = async (countryId: number) => {
+// ----------------------
+// Типи для повернення
+// ----------------------
+
+export type ReduceHeartsResult =
+  | { error: "practice" | "серця" }
+  | undefined;
+
+// ----------------------
+// Вибір країни (перший екран)
+// ----------------------
+
+export const upsertUserProgress = async (
+  countryId: number
+): Promise<void> => {
   const { userId } = await auth();
   const user = await currentUser();
 
@@ -45,7 +59,13 @@ export const upsertUserProgress = async (countryId: number) => {
   redirect(`/regions/${countryId}`);
 };
 
-export const upsertUserProgressRegion = async (regionId: number) => {
+// ----------------------
+// Вибір регіону
+// ----------------------
+
+export const upsertUserProgressRegion = async (
+  regionId: number
+): Promise<void> => {
   const { userId } = await auth();
   const user = await currentUser();
 
@@ -74,7 +94,15 @@ export const upsertUserProgressRegion = async (regionId: number) => {
   revalidatePath("/learn");
 };
 
-export const reduceHearts = async (challengeId: number, lessonId: number) => {
+// ----------------------
+// Зменшення сердець при помилці
+// (використовується в Quiz)
+// ----------------------
+
+export const reduceHearts = async (
+  challengeId: number,
+  lessonId: number
+): Promise<ReduceHeartsResult> => {
   const { userId } = await auth();
   if (!userId) throw new Error("Не авторизований");
 
@@ -86,17 +114,25 @@ export const reduceHearts = async (challengeId: number, lessonId: number) => {
   });
   if (!challenge) throw new Error("Challenge not found");
 
-  const existingChallengeProgress = await db.query.challengesProgress.findFirst({
-    where: and(
-      eq(challengesProgress.userId, userId),
-      eq(challengesProgress.challengeId, challengeId)
-    ),
-  });
+  const existingChallengeProgress =
+    await db.query.challengesProgress.findFirst({
+      where: and(
+        eq(challengesProgress.userId, userId),
+        eq(challengesProgress.challengeId, challengeId)
+      ),
+    });
 
-  if (existingChallengeProgress) return { error: "practice" };
+  // якщо челендж уже був пройдений → це практика, серця не знімаємо
+  if (existingChallengeProgress) {
+    return { error: "practice" };
+  }
 
-  if (currentProgress.hearts === 0) return { error: "серця" };
+  // якщо сердець немає → повертаємо помилку для модалки
+  if (currentProgress.hearts === 0) {
+    return { error: "серця" };
+  }
 
+  // звичайне зняття серця
   await db
     .update(userProgress)
     .set({
@@ -109,9 +145,16 @@ export const reduceHearts = async (challengeId: number, lessonId: number) => {
   revalidatePath("/learn");
   revalidatePath("/leaderboard");
   revalidatePath(`/lesson/${lessonId}`);
+
+  // нічого не повертаємо → undefined
+  return;
 };
 
-export const refillHearts = async () => {
+// ----------------------
+// Відновлення сердець за поінти
+// ----------------------
+
+export const refillHearts = async (): Promise<void> => {
   const currentProgress = await getUserProgress();
   if (!currentProgress) throw new Error("User progress not found");
 
@@ -132,5 +175,3 @@ export const refillHearts = async () => {
   revalidatePath("/learn");
   revalidatePath("/leaderboard");
 };
-
-

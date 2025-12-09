@@ -1,81 +1,83 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
-import { getUserProgress} from "@/db/queries"
+import { getUserProgress } from "@/db/queries"
 import { auth } from "@clerk/nextjs/server"
 import db from "@/db/drizzle"
-import { eq, and} from "drizzle-orm"
+import { eq, and } from "drizzle-orm"
 import { challenges, challengesProgress, userProgress } from "@/db/schema"
 
 export const upsertChallengeProgress = async (challengeId: number) => {
-    const {userId} = await auth()
+  const { userId } = await auth()
 
-    if(!userId) {
-        throw new Error("Unauthorized")
-    }
+  if (!userId) {
+    throw new Error("Unauthorized")
+  }
 
-    const currentUserProgress = await getUserProgress()
+  const currentUserProgress = await getUserProgress()
+  if (!currentUserProgress) {
+    throw new Error("Прогрес користувача не знайдено")
+  }
 
-    if (!currentUserProgress) {
-        throw new Error("Прогрес користувача не знайдено")
-    }
+  const challenge = await db.query.challenges.findFirst({
+    where: eq(challenges.id, challengeId),
+  })
+  if (!challenge) {
+    throw new Error("Челендж не знайдено")
+  }
 
-    const challenge = await db.query.challenges.findFirst({
-        where: eq(challenges.id, challengeId)
-    })
+  const lessonId = challenge.lessonId
 
-    if(!challenge) {
-        throw new Error("Челендж не знайдено")
-    }
+  const existingChallengeProgress = await db.query.challengesProgress.findFirst({
+    where: and(
+      eq(challengesProgress.userId, userId),
+      eq(challengesProgress.challengeId, challengeId)
+    ),
+  })
 
-    const lessonId = challenge.lessonId
+  const isPractice = !!existingChallengeProgress
 
-    const existingChallengeProgress = await db.query.challengesProgress.findFirst({
-        where: and(
-            eq(challengesProgress.userId, userId),
-            eq(challengesProgress.challengeId, challengeId)
-        )
-    })
+  // ⛔ Якщо це перше проходження і немає сердець — блокуємо
+  if (!isPractice && currentUserProgress.hearts === 0) {
+    return { error: "серця" }
+  }
 
-    const isPractice = !!existingChallengeProgress
+  // 🔁 ПРАКТИКА (челендж уже є в challengesProgress)
+  if (isPractice) {
+    // просто гарантуємо, що він completed = true
+    await db
+      .update(challengesProgress)
+      .set({ completed: true })
+      .where(eq(challengesProgress.id, existingChallengeProgress.id))
 
-    if (currentUserProgress.hearts === 0 && !isPractice) {
-        return { error: "серця"}
-    }
-
-    if (isPractice) {
-        await db.update(challengesProgress).set({
-            completed: true
-        })
-        .where
-        (eq(challengesProgress.id, existingChallengeProgress.id))
-
-        await db.update(userProgress).set({
-            hearts: Math.min(currentUserProgress.hearts + 1, 5),
-            points: currentUserProgress.points + 10,
-
-        }).where(eq(userProgress.userId, userId))
-
-        revalidatePath("/learn")
-        revalidatePath("/lesson")
-        revalidatePath("/quests")
-        revalidatePath("/leaderboard")
-        revalidatePath(`/lesson/${lessonId}`)
-        return
-    }
-
-    await db.insert(challengesProgress).values({
-        challengeId,
-        userId,
-        completed: true
-    })
-
-    await db.update(userProgress).set({
-        points: currentUserProgress.points + 10,
-    }).where(eq(userProgress.userId, userId))
+    // ❗ ЖОДНИХ змін до points / hearts на практиці
     revalidatePath("/learn")
-    revalidatePath("/lesson")
+    revalidatePath(`/lesson/${lessonId}`)
     revalidatePath("/quests")
     revalidatePath("/leaderboard")
-    revalidatePath(`/lesson/${lessonId}`)
+
+    return { practice: true }
+  }
+
+  // 🟢 ПЕРШЕ ПРОХОДЖЕННЯ
+  await db.insert(challengesProgress).values({
+    challengeId,
+    userId,
+    completed: true,
+  })
+
+  await db
+    .update(userProgress)
+    .set({
+      // +10 балів тільки ПЕРШИЙ раз
+      points: currentUserProgress.points + 10,
+    })
+    .where(eq(userProgress.userId, userId))
+
+  revalidatePath("/learn")
+  revalidatePath(`/lesson/${lessonId}`)
+  revalidatePath("/quests")
+  revalidatePath("/leaderboard")
+
+  return { success: true }
 }

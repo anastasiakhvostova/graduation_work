@@ -1,4 +1,5 @@
 "use client"
+
 import { forwardRef, useImperativeHandle, useState } from "react"
 
 export type WriteChallengeRef = {
@@ -21,16 +22,35 @@ export const WriteChallenge = forwardRef<WriteChallengeRef, Props>(
     }))
 
     return (
-      <input
-        type="text"
-        className="border-2 rounded p-2 w-full"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        disabled={disabled}
-        placeholder={placeholder}
-      />
+      <div className="w-full flex justify-center">
+        <div className="w-full max-w-xl">
+          <input
+            type="text"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            disabled={disabled}
+            placeholder={placeholder}
+
+            className="
+              w-full px-5 py-3
+              text-lg lg:text-xl
+              rounded-2xl
+              border border-neutral-300
+              bg-white
+              shadow-sm
+              transition-all
+              focus:outline-none 
+              focus:ring-4 focus:ring-sky-200 
+              focus:border-sky-500 
+              hover:border-neutral-400
+              disabled:opacity-60 disabled:cursor-not-allowed
+            "
+          />
+        </div>
+      </div>
     )
   }
 )
 
 WriteChallenge.displayName = "WriteChallenge"
+

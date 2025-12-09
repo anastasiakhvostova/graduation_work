@@ -9,7 +9,7 @@ export const QuestionBubble = ({ question }: Props) => {
         <div className="flex items-start gap-x-4 mb-8 animate-fadeIn">
             {/* Аватар */}
             <Image
-                src="/mascot.png"
+                src="/mascot1.png"
                 alt="Mascot"
                 height={70}
                 width={70}

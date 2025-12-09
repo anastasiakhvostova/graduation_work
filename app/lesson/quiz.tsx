@@ -8,13 +8,13 @@ import { QuestionBubble } from "./question-bubble"
 import { Challenge } from "./challenge"
 import { WriteChallenge, WriteChallengeRef } from "./write-challenge"
 import { upsertChallengeProgress } from "@/actions/challenge-progress"
-import { reduceHearts } from "@/actions/user-progress"
+import { reduceHearts, type ReduceHeartsResult } from "@/actions/user-progress"
 import { useAudio, useWindowSize } from "react-use"
 import Image from "next/image"
 import { ResultCard } from "./result-card"
 import Confetti from "react-confetti"
 import { useRouter } from "next/navigation"
-import { useHeartsModal } from "@/store/use-hearts-modal" // 👈 перевір шлях
+import { useHeartsModal } from "@/store/use-hearts-modal"
 
 type Props = {
   initialLessonId: number
@@ -40,29 +40,37 @@ export const Quiz = ({
   const [incorrectAudio, _i, incorrectControls] = useAudio({
     src: "/incorrect.mp3",
   })
-  const [finishAudio] = useAudio({ src: "/finish.mp3", autoPlay: true })
+  const [finishAudio] = useAudio({ src: "/finish.mp3", autoPlay: false })
 
   const [pending, startTransition] = useTransition()
 
   const [hearts, setHearts] = useState(initialHearts)
   const [percentage, setPercentage] = useState(initialPercentage)
-  const [challenges] = useState(initialLessonChallenges)
+  const [challengesState] = useState(initialLessonChallenges)
 
+  // шукаємо перший незавершений челендж
   const [activeIndex, setActiveIndex] = useState(() => {
-    const uncompleted = challenges.findIndex((ch) => !ch.completed)
+    const uncompleted = initialLessonChallenges.findIndex((ch) => !ch.completed)
     return uncompleted === -1 ? 0 : uncompleted
   })
 
+  // урок завершений тільки коли дійшли до кінця масиву
   const [isFinished, setIsFinished] = useState(
-    initialPercentage >= 100 || activeIndex >= challenges.length
+    activeIndex >= initialLessonChallenges.length
   )
+
+  // якщо урок був на 100% — це практика
+  const isPracticeMode = initialPercentage >= 100
+
+  // модалка при вході в уже пройдений урок
+  const [showPracticeModal, setShowPracticeModal] = useState(isPracticeMode)
 
   const [selectedOption, setSelectedOption] = useState<number | undefined>()
   const [status, setStatus] = useState<"correct" | "wrong" | "none">("none")
 
   const writeRef = useRef<WriteChallengeRef>(null)
 
-  const challenge = challenges[activeIndex]
+  const challenge = challengesState[activeIndex]
   const options = challenge?.challengeOption ?? []
 
   const playAudio = async (src?: string | null) => {
@@ -70,7 +78,9 @@ export const Quiz = ({
     try {
       const audio = new Audio(src)
       await audio.play()
-    } catch {}
+    } catch {
+      // ігноруємо помилки
+    }
   }
 
   const playChallengeAudio = () => {
@@ -83,9 +93,11 @@ export const Quiz = ({
   }
 
   const onNext = () => {
-    if (activeIndex + 1 >= challenges.length) {
+    if (activeIndex + 1 >= challengesState.length) {
       setIsFinished(true)
       setStatus("none")
+      // аудіо вже підключене як компонент вище
+      finishAudio?.props?.autoPlay
       return
     }
 
@@ -96,14 +108,14 @@ export const Quiz = ({
   }
 
   const onContinue = () => {
-    // якщо вже показаний результат — ведемо себе як раніше
+    // якщо вже показано результат за це питання — або далі, або скидаємо статус
     if (status !== "none") {
       if (status === "correct") onNext()
       else setStatus("none")
       return
     }
 
-    // якщо серця вже 0 — одразу показуємо модалку
+    // якщо серця закінчились – показуємо модалку
     if (hearts === 0) {
       heartsModal.open()
       return
@@ -111,7 +123,7 @@ export const Quiz = ({
 
     if (!challenge) return
 
-    // --- WRITE challenge ---
+    // ---------------- WRITE challenge ----------------
     if (challenge.type === "WRITE") {
       const answer = writeRef.current?.getValue() || ""
       const correctAnswer = options.find((o) => o.correct)?.text || ""
@@ -124,12 +136,60 @@ export const Quiz = ({
         startTransition(() => {
           upsertChallengeProgress(challenge.id)
           correctControls.play()
-          setPercentage((prev) => prev + 100 / challenges.length)
+
+          // не збільшуємо відсоток, якщо цей челендж уже був completed
+          setPercentage((prev) =>
+            challenge.completed ? prev : prev + 100 / challengesState.length
+          )
         })
       } else {
         startTransition(() => {
-          reduceHearts(challenge.id, initialLessonId).then((res) => {
-            // practice: урок уже був пройдений → серця не знімаємо
+          reduceHearts(challenge.id, initialLessonId).then(
+            (res: ReduceHeartsResult) => {
+              if (res && "error" in res) {
+                if (res.error === "серця") {
+                  setHearts(0)
+                  heartsModal.open()
+                  return
+                }
+                if (res.error === "practice") {
+                  // практика: серця не знімаємо
+                  incorrectControls.play()
+                  return
+                }
+              }
+
+              incorrectControls.play()
+              setHearts((prev) => Math.max(prev - 1, 0))
+            }
+          )
+        })
+      }
+
+      return
+    }
+
+    // --------------- інші типи (ASSIST / LISTEN / ...) ---------------
+    if (!selectedOption) return
+    const correctOption = options.find((o) => o.correct)
+    if (!correctOption) return
+
+    const isCorrect = correctOption.id === selectedOption
+    setStatus(isCorrect ? "correct" : "wrong")
+
+    if (isCorrect) {
+      startTransition(() => {
+        upsertChallengeProgress(challenge.id)
+        correctControls.play()
+
+        setPercentage((prev) =>
+          challenge.completed ? prev : prev + 100 / challengesState.length
+        )
+      })
+    } else {
+      startTransition(() => {
+        reduceHearts(challenge.id, initialLessonId).then(
+          (res: ReduceHeartsResult) => {
             if (res && "error" in res) {
               if (res.error === "серця") {
                 setHearts(0)
@@ -144,49 +204,13 @@ export const Quiz = ({
 
             incorrectControls.play()
             setHearts((prev) => Math.max(prev - 1, 0))
-          })
-        })
-      }
-
-      return
-    }
-
-    // --- інші типи challenge (ASSIST / LISTEN / тощо) ---
-    if (!selectedOption) return
-    const correctOption = options.find((o) => o.correct)
-    if (!correctOption) return
-
-    const isCorrect = correctOption.id === selectedOption
-    setStatus(isCorrect ? "correct" : "wrong")
-
-    if (isCorrect) {
-      startTransition(() => {
-        upsertChallengeProgress(challenge.id)
-        correctControls.play()
-        setPercentage((prev) => prev + 100 / challenges.length)
-      })
-    } else {
-      startTransition(() => {
-        reduceHearts(challenge.id, initialLessonId).then((res) => {
-          if (res && "error" in res) {
-            if (res.error === "серця") {
-              setHearts(0)
-              heartsModal.open()
-              return
-            }
-            if (res.error === "practice") {
-              incorrectControls.play()
-              return
-            }
           }
-
-          incorrectControls.play()
-          setHearts((prev) => Math.max(prev - 1, 0))
-        })
+        )
       })
     }
   }
 
+  // ---------------- ЕКРАН ЗАВЕРШЕННЯ УРОКУ ----------------
   if (isFinished) {
     return (
       <>
@@ -220,9 +244,14 @@ export const Quiz = ({
           </h1>
 
           <div className="flex items-center gap-x-4 w-full justify-center">
-            <ResultCard variant="points" value={challenges.length * 10} />
+            {/* при практиці показуємо 0 балів */}
+            <ResultCard
+              variant="points"
+              value={isPracticeMode ? 0 : challengesState.length * 10}
+            />
             <ResultCard variant="hearts" value={hearts} />
           </div>
+
           <button
             onClick={() => router.push("/learn")}
             className="mt-6 px-8 py-3 rounded-full bg-yellow-400 hover:bg-yellow-500 text-black font-semibold text-lg shadow-md transition"
@@ -241,6 +270,7 @@ export const Quiz = ({
       ? "Обери правильну відповідь"
       : challenge.question
 
+  // ---------------- ОСНОВНИЙ ЕКРАН УРОКУ ----------------
   return (
     <>
       {correctAudio}
@@ -251,52 +281,134 @@ export const Quiz = ({
 
       <div className="flex-1">
         <div className="h-full flex items-center justify-center">
-          <div className="lg:minh-[350px] lg:w-[600px] w-full px-6 lg:px-0 flex flex-col gap-y-12">
-            <h1 className="text-lg lg:text-3xl text-center lg:text-start font-bold text-neutral-700">
-              {title}
-            </h1>
+          {challenge.type === "LISTEN" ? (
+            // 🔊 КРАСИВИЙ ЕКРАН ДЛЯ LISTEN
+            <div className="w-full flex justify-center px-4">
+              <div className="w-full max-w-4xl rounded-3xl border border-slate-200 bg-white/90 shadow-xl px-6 py-10 lg:px-10 lg:py-12 flex flex-col gap-y-8">
+                {/* Заголовок */}
+                <h1 className="text-center text-2xl lg:text-3xl font-semibold text-slate-900">
+                  Послухайте й оберіть. Що означає слово?
+                </h1>
 
-            <div>
-              {challenge.type === "ASSIST" && (
-                <QuestionBubble question={challenge.question} />
-              )}
-
-              {challenge.type === "LISTEN" && (
-                <div className="flex items-center justify-center mb-6">
+                {/* Кнопка "Прослухати" */}
+                <div className="flex justify-center">
                   <button
                     onClick={playChallengeAudio}
-                    className="flex items-center gap-x-3 px-6 py-3 rounded-full border border-neutral-300 hover:bg-neutral-100 shadow-sm text-lg font-semibold"
+                    className="inline-flex items-center gap-x-2 rounded-full bg-orange-600 px-7 py-3 
+                               text-white text-base lg:text-lg font-medium shadow-lg
+                               hover:bg-orange-700 active:scale-[0.98] transition"
+                    type="button"
                   >
-                    <svg width="28" height="28" viewBox="0 0 24 24">
-                      <path d="M3 10v4h4l5 4V6L7 10H3z" fill="currentColor" />
+                    {/* Іконка звуку */}
+                    <svg
+                      width="22"
+                      height="22"
+                      viewBox="0 0 24 24"
+                      className="shrink-0"
+                    >
+                      <path
+                        d="M3 10v4h4l5 4V6L7 10H3z"
+                        fill="currentColor"
+                      />
+                      <path
+                        d="M16.5 8.11a4 4 0 0 1 0 7.78M19 6a7 7 0 0 1 0 12"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.7"
+                        strokeLinecap="round"
+                      />
                     </svg>
-                    Прослухати
+                    <span>Прослухати</span>
                   </button>
                 </div>
-              )}
 
-              {challenge.type === "WRITE" ? (
-                <WriteChallenge ref={writeRef} placeholder="Введіть відповідь" />
-              ) : (
-                <Challenge
-                  options={options}
-                  onSelect={(id) => {
-                    if (status === "none") setSelectedOption(id)
-                  }}
-                  status={status}
-                  selectedOption={selectedOption}
-                  disabled={false}
-                  type={challenge.type}
-                />
-              )}
+                {/* Варіанти відповіді */}
+                <div className="mt-4">
+                  <Challenge
+                    options={options}
+                    onSelect={(id) => {
+                      if (status === "none") setSelectedOption(id)
+                    }}
+                    status={status}
+                    selectedOption={selectedOption}
+                    disabled={false}
+                    type={challenge.type}
+                  />
+                </div>
+              </div>
             </div>
-          </div>
+          ) : (
+            // 🧩 ЕКРАН ДЛЯ ІНШИХ ТИПІВ
+            <div className="lg:min-h-[350px] lg:w-[600px] w-full px-6 lg:px-0 flex flex-col gap-y-12">
+              <h1 className="text-lg lg:text-3xl text-center lg:text-start font-bold text-neutral-700">
+                {title}
+              </h1>
+
+              <div>
+                {challenge.type === "ASSIST" && (
+                  <QuestionBubble question={challenge.question} />
+                )}
+
+                {challenge.type === "WRITE" ? (
+                  <WriteChallenge
+                    ref={writeRef}
+                    placeholder="Введіть відповідь"
+                  />
+                ) : (
+                  <Challenge
+                    options={options}
+                    onSelect={(id) => {
+                      if (status === "none") setSelectedOption(id)
+                    }}
+                    status={status}
+                    selectedOption={selectedOption}
+                    disabled={false}
+                    type={challenge.type}
+                  />
+                )}
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
       <Footer disabled={pending} status={status} onCheck={onContinue} />
+
+      {/* 🔔 Попап для вже пройденого уроку */}
+      {showPracticeModal && (
+        <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
+          <div className="bg-white rounded-xl shadow-lg max-w-md w-full p-6">
+            <h2 className="text-xl font-bold mb-3">
+              Повторне проходження уроку
+            </h2>
+            <p className="text-sm text-neutral-700 mb-6">
+              Ви вже пройшли цей урок на 100%.
+              <br />
+              Повторне проходження{" "}
+              <span className="font-semibold">
+                не дає додаткових балів і сердечок.
+              </span>
+            </p>
+            <div className="flex justify-end gap-3">
+              <button
+                onClick={() => router.push("/learn")}
+                className="px-4 py-2 rounded-full border border-neutral-300 text-neutral-700 hover:bg-neutral-100 text-sm font-medium"
+              >
+                Вийти
+              </button>
+              <button
+                onClick={() => setShowPracticeModal(false)}
+                className="px-4 py-2 rounded-full bg-yellow-400 hover:bg-yellow-500 text-black text-sm font-semibold"
+              >
+                Продовжити
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   )
 }
+
 
 
