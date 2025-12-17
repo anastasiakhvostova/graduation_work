@@ -45,7 +45,7 @@ export const Footer = () => {
             className="flex items-center w-auto text-black text-lg font-semibold hover:text-blue-600 transition-colors"
           >
             <Image
-              src="/britain.webp"
+              src="/britain.png"
               alt="English"
               height={32}
               width={40}

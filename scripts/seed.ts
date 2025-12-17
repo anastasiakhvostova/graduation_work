@@ -22,7 +22,7 @@ async function main() {
     await db.insert(schema.countries).values([
       { id: 1, title: "Україна", imageSrc: "/ukraine.png" },
       { id: 2, title: "Німеччина", imageSrc: "/germany.png" },
-      { id: 3, title: "Велика Британія", imageSrc: "/britain.webp" },
+      { id: 3, title: "Велика Британія", imageSrc: "/britain.png" },
     ]);
 
     await db.insert(schema.regions).values([
@@ -32,10 +32,10 @@ async function main() {
       { id: 10, title: "Нижньонімецькі діалекти", countryId: 2, imageSrc: "/germany.png" },
       { id: 11, title: "Середньонімецькі діалекти", countryId: 2, imageSrc: "/germany.png" },
       { id: 12, title: "Верхньонімецькі діалекти", countryId: 2, imageSrc: "/germany.png" },
-      { id: 13, title: "Кокні", countryId: 3, imageSrc: "/britain.webp" },
-      { id: 14, title: "Скауз", countryId: 3, imageSrc: "/britain.webp" },
-      { id: 15, title: "Джорди", countryId: 3, imageSrc: "/britain.webp" },
-      { id: 16, title: "Йоркшир", countryId: 3, imageSrc: "/britain.webp" },
+      { id: 13, title: "Кокні", countryId: 3, imageSrc: "/britain.png" },
+      { id: 14, title: "Скауз", countryId: 3, imageSrc: "/britain.png" },
+      { id: 15, title: "Джорди", countryId: 3, imageSrc: "/britain.png" },
+      { id: 16, title: "Йоркшир", countryId: 3, imageSrc: "/britain.png" },
     ]);
 
     await db.insert(schema.units).values([
