@@ -8,6 +8,7 @@ import { Separator } from "@/components/ui/separator"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { Quests } from "@/components/quests"
 import { RegionImage } from "@/components/current_region_image"
+import { Feedback } from "@/components/Feedback"
 
 const LeaderboardPage = async () => {
     const userProgressData = getUserProgress()
@@ -33,6 +34,7 @@ const LeaderboardPage = async () => {
                     points={userProgress.points}
                 />
                 <Quests points={userProgress.points}/>
+                <Feedback/>
             </StickyWrapper>
             <FeedWrapper>
                 <div className="w-full flex-col items-center">

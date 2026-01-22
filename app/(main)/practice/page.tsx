@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import fs from "fs";
 import path from "path";
 import {RegionImage} from "@/components/current_region_image"
+import { Feedback } from "@/components/Feedback";
 
 const PracticePage = async () => {
   const userProgress = await getUserProgress();
@@ -47,6 +48,7 @@ const PracticePage = async () => {
         />
         <Quests points={userProgress.points} />
         <RegionImage activeRegionId={userProgress.activeRegion?.id ?? null} />
+        <Feedback />
       </StickyWrapper>
 
       <FeedWrapper>

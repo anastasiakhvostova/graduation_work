@@ -7,7 +7,7 @@ import Image from "next/image"
 import { Progress } from "@/components/ui/progress"
 import { quests } from "@/constant"
 import { RegionImage } from "@/components/current_region_image"
-
+import { Feedback } from "@/components/Feedback";
 
 
 const QuestsPage = async () => {
@@ -30,6 +30,7 @@ const QuestsPage = async () => {
                     hearts={userProgress.hearts}
                     points={userProgress.points}
                 />
+                <Feedback />
             </StickyWrapper>
             <FeedWrapper>
                 <div className="w-full flex-col items-center ">

@@ -8,6 +8,7 @@ import { Unit } from "./unit"
 import { lessons, units as unitsSchema} from "@/db/schema"
 import { Quests } from "@/components/quests";
 import { RegionImage } from "@/components/current_region_image";
+import { Feedback } from "@/components/Feedback";
 
 const LearnPage = async () =>{
 
@@ -40,6 +41,7 @@ const LearnPage = async () =>{
                 />
                 <Quests points={userProgress.points}/>
                 <RegionImage activeRegionId={userProgress.activeRegion?.id ?? null} />
+                <Feedback />
             </StickyWrapper>
             <FeedWrapper>
                <Header title={userProgress.activeRegion.title} />

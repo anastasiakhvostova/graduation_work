@@ -6,7 +6,7 @@ export const Footer = () => {
     <footer className="hidden lg:block w-full border-t-2 border-slate-200 p-4">
       <div className="max-w-screen-lg mx-auto flex flex-col items-center justify-center gap-4">
         <p className="text-center text-black text-xl font-semibold">
-          На цьому сайті ви зможете вивчити діалекти таких країн:
+          Оберіть мову
         </p>
         <div className="flex items-center justify-evenly w-full">
           <Button
@@ -21,7 +21,7 @@ export const Footer = () => {
               width={40}
               className="mr-4 rounded-md"
             />
-            Україна
+            Українська
           </Button>
 
           <Button
@@ -36,7 +36,7 @@ export const Footer = () => {
               width={40}
               className="mr-4 rounded-md"
             />
-            Німеччина
+            Deutsch
           </Button>
 
           <Button
@@ -51,7 +51,7 @@ export const Footer = () => {
               width={40}
               className="mr-4 rounded-md"
             />
-            Велика Британія
+            English
           </Button>
         </div>
       </div>

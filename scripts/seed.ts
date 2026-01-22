@@ -22,13 +22,13 @@ async function main() {
     await db.insert(schema.countries).values([
       { id: 1, title: "Україна", imageSrc: "/ukraine.png" },
       { id: 2, title: "Німеччина", imageSrc: "/germany.png" },
-      { id: 3, title: "Велика Британія", imageSrc: "/britain.png" },
+      { id: 3, title: "Англія", imageSrc: "/britain.png" },
     ]);
 
     await db.insert(schema.regions).values([
-      { id: 7, title: "ПІВНІЧНЕ НАРІЧЧЯ", countryId: 1, imageSrc: "/ukraine.png" },
-      { id: 8, title: "ПІВДЕННО-ЗАХІДНЕ НАРІЧЧЯ", countryId: 1, imageSrc: "/ukraine.png" },
-      { id: 9, title: "ПІВДЕННО-СХІДНЕ НАРІЧЧЯ", countryId: 1, imageSrc: "/ukraine.png" },
+      { id: 7, title: "Північне наріччя", countryId: 1, imageSrc: "/ukraine.png" },
+      { id: 8, title: "Південно-західне наріччя", countryId: 1, imageSrc: "/ukraine.png" },
+      { id: 9, title: "Південно-східне наріччя", countryId: 1, imageSrc: "/ukraine.png" },
       { id: 10, title: "Нижньонімецькі діалекти", countryId: 2, imageSrc: "/germany.png" },
       { id: 11, title: "Середньонімецькі діалекти", countryId: 2, imageSrc: "/germany.png" },
       { id: 12, title: "Верхньонімецькі діалекти", countryId: 2, imageSrc: "/germany.png" },
