@@ -1,4 +1,4 @@
-"use client"; // ← ОБОВ'ЯЗКОВО, щоб можна було використовувати useLanguage()
+"use client";
 
 import { ClerkLoading, ClerkLoaded, SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import Image from "next/image";
@@ -8,35 +8,39 @@ import { useLanguage } from "@/components/languageContext";
 import { translations } from "@/components/translations";
 
 export const Header = () => {
-  const { lang } = useLanguage(); // беремо обрану мову
+  const { lang } = useLanguage();
 
   return (
     <header className="h-20 w-full border-b-2 border-slate-200 px-4">
       <div className="lg:max-w-screen-lg mx-auto flex items-center justify-between h-full">
+        {/* Логотип */}
         <div className="pt-8 pl-4 pb-7 flex items-center gap-x-3">
-          <Image src="/mascot.png" height={40} width={40} alt="Mascot"/>
-          <h1 className="text-2xl font-extrabold text-black-300 tracking-wide text-orange-500">
+          <Image src="/mascot.png" height={40} width={40} alt="Mascot" />
+          <h1 className="text-2xl font-extrabold text-orange-500 tracking-wide">
             Dialecto
           </h1>
         </div>
 
-        <ClerkLoading>
-          <Loader className="h-5 w-5 text-muted-foreground animate-spin"/>
-        </ClerkLoading>
+        <div className="flex items-center gap-3">
+          <ClerkLoading>
+            <Loader className="h-5 w-5 text-muted-foreground animate-spin" />
+          </ClerkLoading>
 
-        <ClerkLoaded>
-          <SignedIn>
-            <UserButton afterSignOutUrl="/"/>
-          </SignedIn>
+          <ClerkLoaded>
+            <SignedIn>
+              {/* Просто UserButton без onClick */}
+              <UserButton afterSignOutUrl="/" />
+            </SignedIn>
 
-          <SignedOut>
-            <SignInButton mode="modal" forceRedirectUrl="/learn">
-              <Button size="lg" variant="ghost">
-                {translations[lang].signInButton} {/* ← текст залежить від мови */}
-              </Button>
-            </SignInButton>
-          </SignedOut>
-        </ClerkLoaded>
+            <SignedOut>
+              <SignInButton mode="modal" forceRedirectUrl="/learn">
+                <Button size="lg" variant="ghost">
+                  {translations[lang].signInButton}
+                </Button>
+              </SignInButton>
+            </SignedOut>
+          </ClerkLoaded>
+        </div>
       </div>
     </header>
   );
