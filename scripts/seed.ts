@@ -47,8 +47,8 @@ async function main() {
       imageSrc: "/britain.png",
       translations: {
         ua: "Англія",
-        en: "United Kingdom",
-        de: "Großbritannien",
+        en: "England",
+        de: "England",
       },
     },
   ]);
@@ -1882,15 +1882,15 @@ const addCockney = (
 
 // ================= УРОК 31 =================
 addCockney(31, "SELECT", { ua: "Що з цього означає «гроші»?", en: "Which of these means 'money'?", de: "Welche dieser Bedeutungen heißt 'Geld'?" }, [
-  { text: "china plate", correct: false },
-  { text: "bees and honey", correct: true },
+  { text: "china plate", correct: false},
+  { text: "bees and honey", correct: true},
   { text: "apples and pears", correct: false },
 ]);
 
 addCockney(31, "ASSIST", { ua: "Що з цього означає «голова»?", en: "Which of these means 'head'?", de: "Welche dieser Bedeutungen heißt 'Kopf'?" }, [
-  { text: "loaf of bread", correct: true },
-  { text: "dog and bone", correct: false },
-  { text: "bottle and stopper", correct: false },
+  { text: "loaf of bread", correct: true, imageSrc: "/1.1.png" },
+  { text: "dog and bone", correct: false, imageSrc: "/1.2.png" },
+  { text: "bottle and stopper", correct: false, imageSrc: "/3.2.png" },
 ]);
 
 addCockney(31, "LISTEN", { ua: "Послухайте й оберіть. Що означає слово", en: "Listen and choose. What does the word mean?", de: "Hören und wählen. Was bedeutet das Wort?" }, [
@@ -1917,9 +1917,9 @@ addCockney(32, "SELECT", { ua: "Що з цього означає «друг»?"
 ]);
 
 addCockney(32, "ASSIST", { ua: "Що з цього означає «сходи»?", en: "Which of these means 'stairs'?", de: "Welche dieser Bedeutungen heißt 'Treppen'?" }, [
-  { text: "loaf of bread", correct: false },
-  { text: "bees and honey", correct: false },
-  { text: "china plate", correct: true },
+  { text: "loaf of bread", correct: false, imageSrc: "/1.1.png" },
+  { text: "bees and honey", correct: false, imageSrc: "/1.2.png" },
+  { text: "china plate", correct: true, imageSrc: "/2.1.png" },
 ]);
 
 addCockney(32, "LISTEN", { ua: "Послухайте й оберіть. Що означає слово", en: "Listen and choose. What does the word mean?", de: "Hören und wählen. Was bedeutet das Wort?" }, [
@@ -1940,9 +1940,9 @@ addCockney(32, "WRITE", { ua: "Go up the … and you’ll see the bathroom", en:
 
 // ================= УРОК 33 =================
 addCockney(33, "SELECT", { ua: "Що з цього означає «волосся»?", en: "Which of these means 'hair'?", de: "Welche dieser Bedeutungen heißt 'Haar'?" }, [
-  { text: "barnet (fair)", correct: true },
-  { text: "trouble and strife", correct: false },
-  { text: "china plate", correct: false },
+  { text: "barnet (fair)", correct: true, imageSrc: "/3.1.png" },
+  { text: "trouble and strife", correct: false, imageSrc: "/4.2.png"},
+  { text: "china plate", correct: false, imageSrc: "/2.1.png" },
 ]);
 
 addCockney(33, "ASSIST", { ua: "Що з цього означає «поліцейський»?", en: "Which of these means 'policeman'?", de: "Welche dieser Bedeutungen heißt 'Polizist'?" }, [
@@ -1969,9 +1969,9 @@ addCockney(33, "WRITE", { ua: "Watch out, the … is about!", en: "Watch out, th
 
 // ================= УРОК 34 =================
 addCockney(34, "SELECT", { ua: "Що з цього означає «украсти»?", en: "Which of these means 'to steal'?", de: "Welche dieser Bedeutungen heißt 'stehlen'?" }, [
-  { text: "loaf of bread", correct: false },
-  { text: "half-inch", correct: true },
-  { text: "bees and honey", correct: false },
+  { text: "loaf of bread", correct: false, imageSrc: "/1.1.png" },
+  { text: "half-inch", correct: true, imageSrc: "/4.1.png"  },
+  { text: "bees and honey", correct: false, imageSrc: "/1.2.png"  },
 ]);
 
 addCockney(34, "ASSIST", { ua: "Що з цього означає «дружина»?", en: "Which of these means 'wife'?", de: "Welche dieser Bedeutungen heißt 'Ehefrau'?" }, [
@@ -1998,9 +1998,9 @@ addCockney(34, "WRITE", { ua: "My … is waiting for me at home", en: "My … is
 
 // ================= УРОК 35 =================
 addCockney(35, "SELECT", { ua: "Що з цього означає «подив/погляд»?", en: "Which of these means 'look'?", de: "Welche dieser Bedeutungen heißt 'Blick'?" }, [
-  { text: "butcher’s hook", correct: true },
-  { text: "china plate", correct: false },
-  { text: "apples and pears", correct: false },
+  { text: "butcher’s hook", correct: true, imageSrc: "/5.1.png"  },
+  { text: "china plate", correct: false, imageSrc: "/2.1.png" },
+  { text: "apples and pears", correct: false, imageSrc: "/2.2.png" },
 ]);
 
 addCockney(35, "ASSIST", { ua: "Що з цього означає «чай»?", en: "Which of these means 'tea'?", de: "Welche dieser Bedeutungen heißt 'Tee'?" }, [
@@ -2078,9 +2078,9 @@ const addScouse = (
 
 // ================= УРОК 36 =================
 addScouse(36, "SELECT", { ua: "Що з цього означає «їжа»?", en: "Which of these means 'food'?", de: "Welche dieser Bedeutungen heißt 'Essen'?" }, [
-  { text: "scran", correct: true },
-  { text: "kecks", correct: false },
-  { text: "boss", correct: false },
+  { text: "scran", correct: true, imageSrc: "/scouse/1.1.png" },
+  { text: "kecks", correct: false, imageSrc: "/scouse/1.2.png" },
+  { text: "boss", correct: false, imageSrc: "/scouse/1.1.png" },
 ]);
 
 addScouse(36, "ASSIST", { ua: "Що з цього означає «штани»?", en: "Which of these means 'trousers'?", de: "Welche dieser Bedeutungen heißt 'Hose'?" }, [
@@ -2107,9 +2107,9 @@ addScouse(36, "WRITE", { ua: "I’m starving, let’s grab some … before we go
 
 // ================= УРОК 37 =================
 addScouse(37, "SELECT", { ua: "Що з цього означає «не місцевий/чужак»?", en: "Which of these means 'outsider'?", de: "Welche dieser Bedeutungen heißt 'Außenseiter'?" }, [
-  { text: "wool", correct: true },
-  { text: "jarg", correct: false },
-  { text: "la/lad", correct: false },
+  { text: "wool", correct: true, imageSrc: "/scouse/2.1.png"},
+  { text: "jarg", correct: false, imageSrc: "/scouse/2.2.png" },
+  { text: "la/lad", correct: false, imageSrc: "/scouse/3.2.png" },
 ]);
 
 addScouse(37, "ASSIST", { ua: "Що з цього означає «фальшивий/підробка»?", en: "Which of these means 'fake'?", de: "Welche dieser Bedeutungen heißt 'falsch / gefälscht'?" }, [
@@ -2136,9 +2136,9 @@ addScouse(37, "WRITE", { ua: "That … just moved here last week, he doesn’t k
 
 // ================= УРОК 38 =================
 addScouse(38, "SELECT", { ua: "Що з цього означає «голова»?", en: "Which of these means 'head'?", de: "Welche dieser Bedeutungen heißt 'Kopf'?" }, [
-  { text: "lid", correct: true },
-  { text: "bevvy", correct: false },
-  { text: "div", correct: false },
+  { text: "lid", correct: true, imageSrc: "/scouse/3.1.png" },
+  { text: "bevvy", correct: false, imageSrc: "/scouse/5.1.png" },
+  { text: "div", correct: false, imageSrc: "/scouse/4.1.png" },
 ]);
 
 addScouse(38, "ASSIST", { ua: "Що з цього означає «друг/товариш»?", en: "Which of these means 'friend'?", de: "Welche dieser Bedeutungen heißt 'Freund'?" }, [
@@ -2167,9 +2167,9 @@ addScouse(38, "WRITE", { ua: "Me and my … are going to watch the football", en
 
 // ================= УРОК 39 =================
 addScouse(39, "SELECT", { ua: "Що з цього означає «дурень»?", en: "Which of these means 'fool'?", de: "Welche dieser Bedeutungen heißt 'Dummkopf'?" }, [
-  { text: "kecks", correct: false },
-  { text: "div", correct: true },
-  { text: "boss", correct: false },
+  { text: "kecks", correct: false, imageSrc: "/scouse/1.2.png" },
+  { text: "div", correct: true, imageSrc: "/scouse/4.1.png" },
+  { text: "boss", correct: false, imageSrc: "/scouse/5.2.png" },
 ]);
 
 addScouse(39, "ASSIST", { ua: "Що з цього означає «дитина»?", en: "Which of these means 'child'?", de: "Welche dieser Bedeutungen heißt 'Kind'?" }, [
@@ -2198,9 +2198,9 @@ addScouse(39, "WRITE", { ua: "Come on, …, time for bed", en: "Come on, …, ti
 
 // ================= УРОК 40 =================
 addScouse(40, "SELECT", { ua: "Що з цього означає «алкогольний напій»?", en: "Which of these means 'alcoholic drink'?", de: "Welche dieser Bedeutungen heißt 'alkoholisches Getränk'?" }, [
-  { text: "scran", correct: false },
-  { text: "bevvy", correct: true },
-  { text: "wool", correct: false },
+  { text: "scran", correct: false, imageSrc: "/scouse/1.1.png" },
+  { text: "bevvy", correct: true, imageSrc: "/scouse/5.1.png" },
+  { text: "wool", correct: false, imageSrc: "/scouse/2.1.png" },
 ]);
 
 addScouse(40, "ASSIST", { ua: "Що з цього означає «гарний/чудовий»?", en: "Which of these means 'great'?", de: "Welche dieser Bedeutungen heißt 'toll / großartig'?" }, [
@@ -2273,9 +2273,9 @@ const addGeordie = (
 
 // ================= УРОК 41 =================
 addGeordie(41, "SELECT", { ua: "Що з цього означає «хліб»?", en: "Which of these means 'bread'?", de: "Welche dieser Bedeutungen heißt 'Brot'?" }, [
-  { text: "toon", correct: false },
-  { text: "breed", correct: true },
-  { text: "spuggy", correct: false },
+  { text: "toon", correct: false, imageSrc: "/geordie/3.1.png" },
+  { text: "breed", correct: true, imageSrc: "/geordie/1.1.png" },
+  { text: "spuggy", correct: false, imageSrc: "/geordie/5.2.png"},
 ]);
 
 addGeordie(41, "ASSIST", { ua: "Що з цього означає «друг»?", en: "Which of these means 'friend'?", de: "Welche dieser Bedeutungen heißt 'Freund'?" }, [
@@ -2302,9 +2302,9 @@ addGeordie(41, "WRITE", { ua: "He’s my … from school", en: "He’s my … fr
 
 // ================= УРОК 42 =================
 addGeordie(42, "SELECT", { ua: "Що з цього означає «голова»?", en: "Which of these means 'head'?", de: "Welche dieser Bedeutungen heißt 'Kopf'?" }, [
-  { text: "nappa", correct: true },
-  { text: "toon", correct: false },
-  { text: "clart", correct: false },
+  { text: "nappa", correct: true, imageSrc: "/geordie/2.2.png" },
+  { text: "toon", correct: false, imageSrc: "/geordie/3.1.png" },
+  { text: "clart", correct: false, imageSrc: "/geordie/3.2.png" },
 ]);
 
 addGeordie(42, "ASSIST", { ua: "Що з цього означає «дитина»?", en: "Which of these means 'child'?", de: "Welche dieser Bedeutungen heißt 'Kind'?" }, [
@@ -2331,9 +2331,9 @@ addGeordie(42, "WRITE", { ua: "Use your … and think before you speak!", en: "U
 
 // ================= УРОК 43 =================
 addGeordie(43, "SELECT", { ua: "Що з цього означає «бруд»?", en: "Which of these means 'mud'?", de: "Welche dieser Bedeutungen heißt 'Schmutz'?" }, [
-  { text: "gadgie", correct: false },
-  { text: "clart", correct: true },
-  { text: "radgie", correct: false },
+  { text: "gadgie", correct: false, imageSrc: "/geordie/4.1.png" },
+  { text: "clart", correct: true, imageSrc: "/geordie/3.2.png" },
+  { text: "radgie", correct: false, imageSrc: "/geordie/5.1.png" },
 ]);
 
 addGeordie(43, "ASSIST", { ua: "Що з цього означає «місто (особливо Ньюкасл)»?", en: "Which of these means 'city (esp. Newcastle)'?", de: "Welche dieser Bedeutungen heißt 'Stadt (bes. Newcastle)'?" }, [
@@ -2360,9 +2360,9 @@ addGeordie(43, "WRITE", { ua: "You’ve got … all over your boots", en: "You�
 
 // ================= УРОК 44 =================
 addGeordie(44, "SELECT", { ua: "Що з цього означає «чоловік»?", en: "Which of these means 'man'?", de: "Welche dieser Bedeutungen heißt 'Mann'?" }, [
-  { text: "gadgie", correct: true },
-  { text: "nappa", correct: false },
-  { text: "spuggy", correct: false },
+  { text: "gadgie", correct: true, imageSrc: "/geordie/4.1.png" },
+  { text: "nappa", correct: false, imageSrc: "/geordie/2.2.png" },
+  { text: "spuggy", correct: false, imageSrc: "/geordie/5.2.png" },
 ]);
 
 addGeordie(44, "ASSIST", { ua: "Що з цього означає «светр»?", en: "Which of these means 'sweater'?", de: "Welche dieser Bedeutungen heißt 'Pullover'?" }, [
@@ -2389,9 +2389,9 @@ addGeordie(44, "WRITE", { ua: "He’s wearing his new … today", en: "He’s we
 
 // ================= УРОК 45 =================
 addGeordie(45, "SELECT", { ua: "Що з цього означає «сердитий»?", en: "Which of these means 'angry'?", de: "Welche dieser Bedeutungen heißt 'wütend'?" }, [
-  { text: "radgie", correct: true },
-  { text: "spuggy", correct: false },
-  { text: "toon", correct: false },
+  { text: "radgie", correct: true, imageSrc: "/geordie/3.2.png" },
+  { text: "spuggy", correct: false, imageSrc: "/geordie/5.2.png" },
+  { text: "toon", correct: false, imageSrc: "/geordie/3.1.png" },
 ]);
 
 addGeordie(45, "ASSIST", { ua: "Що з цього означає «горобець»?", en: "Which of these means 'sparrow'?", de: "Welche dieser Bedeutungen heißt 'Spatz'?" }, [
@@ -2468,10 +2468,10 @@ const addYork = (
 };
 
 // ================= УРОК 46 =================
-addYork(46, "SELECT", { ua: "Що з цього означає «кінь»?", en: "Which of these means 'horse'?", de: "Welche dieser Bedeutungen heißt 'Pferd'?" }, [
-  { text: "cuddy", correct: true },
-  { text: "croft", correct: false },
-  { text: "pannier", correct: false },
+addYork(46, "SELECT", { ua: "Що з цього означає «осел»?", en: "Which of these means 'donkey'?", de: "Welche dieser Bedeutungen heißt 'der Esel'?" }, [
+  { text: "cuddy", correct: true, imageSrc: "/york/1.1.png" },
+  { text: "croft", correct: false, imageSrc: "/york/3.2.png" },
+  { text: "pannier", correct: false, imageSrc: "/york/1.2.png" },
 ]);
 
 addYork(46, "ASSIST", { ua: "Що з цього означає «кошик»?", en: "Which of these means 'basket'?", de: "Welche dieser Bedeutungen heißt 'Korb'?" }, [
@@ -2498,9 +2498,9 @@ addYork(46, "WRITE", { ua: "Put the apples in the … before you carry them.", e
 
 // ================= УРОК 47 =================
 addYork(47, "SELECT", { ua: "Що з цього означає «сад/двір»?", en: "Which of these means 'garden/yard'?", de: "Welche dieser Bedeutungen heißt 'Garten/Hof'?" }, [
-  { text: "garth", correct: true },
-  { text: "ginnel", correct: false },
-  { text: "beck", correct: false },
+  { text: "garth", correct: true, imageSrc: "/york/2.1.png" },
+  { text: "ginnel", correct: false, imageSrc: "/york/4.2.png" },
+  { text: "beck", correct: false, imageSrc: "/york/3.1.png"},
 ]);
 
 addYork(47, "ASSIST", { ua: "Що з цього означає «коробка/скриня»?", en: "Which of these means 'chest/box'?", de: "Welche dieser Bedeutungen heißt 'Kiste/Truhe'?" }, [
@@ -2527,9 +2527,9 @@ addYork(47, "WRITE", { ua: "Fetch that … from the loft", en: "Fetch that … f
 
 // ================= УРОК 48 =================
 addYork(48, "SELECT", { ua: "Що з цього означає «невеликий потік/струмок»?", en: "Which of these means 'small stream'?", de: "Welche dieser Bedeutungen heißt 'kleiner Bach'?" }, [
-  { text: "staithe", correct: false },
-  { text: "neddy", correct: false },
-  { text: "beck", correct: true },
+  { text: "staithe", correct: false, imageSrc: "/york/4.1.png" },
+  { text: "neddy", correct: false, imageSrc: "/york/5.2.png" },
+  { text: "beck", correct: true, imageSrc: "/york/3.1.png" },
 ]);
 
 addYork(48, "ASSIST", { ua: "Що з цього означає «невелика ферма/земельна ділянка»?", en: "Which of these means 'small farm/plot'?", de: "Welche dieser Bedeutungen heißt 'kleiner Bauernhof/Grundstück'?" }, [
@@ -2550,9 +2550,9 @@ addYork(48, "WRITE", { ua: "The … runs behind the cottages", en: "The … runs
 
 // ================= УРОК 49 =================
 addYork(49, "SELECT", { ua: "Що з цього означає «гавань/причал»?", en: "Which of these means 'harbor/quay'?", de: "Welche dieser Bedeutungen heißt 'Hafen/Anleger'?" }, [
-  { text: "staithe", correct: true },
-  { text: "ginnel", correct: false },
-  { text: "cuddy", correct: false },
+  { text: "staithe", correct: true, imageSrc: "/york/4.1.png" },
+  { text: "ginnel", correct: false, imageSrc: "/york/4.2.png" },
+  { text: "cuddy", correct: false, imageSrc: "/york/1.1.png" },
 ]);
 
 addYork(49, "ASSIST", { ua: "Що з цього означає «вузький прохід/провулок»?", en: "Which of these means 'narrow alley/passage'?", de: "Welche dieser Bedeutungen heißt 'enge Gasse/Durchgang'?" }, [
@@ -2575,9 +2575,9 @@ addYork(49, "WRITE", { ua: "She went down the … behind the shop", en: "She wen
 
 // ================= УРОК 50 =================
 addYork(50, "SELECT", { ua: "Що з цього означає «вівця»?", en: "Which of these means 'sheep'?", de: "Welche dieser Bedeutungen heißt 'Schaf'?" }, [
-  { text: "yow", correct: true },
-  { text: "cuddy", correct: false },
-  { text: "beck", correct: false },
+  { text: "yow", correct: true, imageSrc: "/york/5.1.png" },
+  { text: "cuddy", correct: false, imageSrc: "/york/1.1.png" },
+  { text: "beck", correct: false, imageSrc: "/york/3.1.png" },
 ]);
 
 addYork(50, "ASSIST", { ua: "Що з цього означає «кінь»?", en: "Which of these means 'horse'?", de: "Welche dieser Bedeutungen heißt 'Pferd'?" }, [

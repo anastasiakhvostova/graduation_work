@@ -29,7 +29,7 @@ const LearnPage = async () => {
       lessonPercentageData,
     ]);
 
-  // 🔐 захист
+  // 🔐 базовий захист
   if (!userProgress || !userProgress.activeRegion) {
     redirect("/countries");
   }
@@ -38,10 +38,14 @@ const LearnPage = async () => {
     redirect("/countries");
   }
 
+  // 🔐 КЛЮЧОВИЙ guard — звужує тип countryId до number
+  if (!userProgress.activeRegion.countryId) {
+    redirect("/countries");
+  }
+
   // 🌍 мова користувача
   const lang = userProgress.lang as "ua" | "en" | "de";
 
-  // 🗺️ переклад назви регіону (ТОЛЬКИ тут)
   const regionTitle =
     userProgress.activeRegion.translations?.[lang] ??
     userProgress.activeRegion.title;
@@ -61,7 +65,10 @@ const LearnPage = async () => {
       </StickyWrapper>
 
       <FeedWrapper>
-        <Header title={regionTitle} />
+        <Header
+          title={regionTitle}
+          countryId={userProgress.activeRegion.countryId}
+        />
 
         {units.map((unit) => (
           <div key={unit.id} className="mb-10">

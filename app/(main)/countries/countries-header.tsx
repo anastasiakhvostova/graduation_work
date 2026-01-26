@@ -14,11 +14,13 @@ const CountriesHeader = () => {
       <Link href="/">
         <Button
           variant="ghost"
+          title="Повернутись на головний екран"
           className="flex items-center gap-2 text-black p-0 h-auto"
         >
           <ArrowLeft className="h-5 w-5 stroke-2 text-neutral-400" />
         </Button>
       </Link>
+
 
       <h1 className="text-2xl font-bold text-neutral-700">
         {translations[lang].chooseCountry}

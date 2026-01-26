@@ -11,9 +11,10 @@ const RegionHeader = () => {
 
   return (
     <div className="mt-4 mb-6 flex items-center gap-3">
-      <Link href="/">
+      <Link href="/countries">
         <Button
           variant="ghost"
+          title="Повернутись до вибору країни"
           className="flex items-center gap-2 text-black p-0 h-auto"
         >
           <ArrowLeft className="h-5 w-5 stroke-2 text-neutral-400" />

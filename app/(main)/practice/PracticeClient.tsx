@@ -19,6 +19,7 @@ type Props = {
   fileSrcCountry: string;
 };
 
+
 const PracticeClient = ({
   userProgress,
   activeRegion,
@@ -27,7 +28,11 @@ const PracticeClient = ({
   fileSrc,
   fileSrcCountry,
 }: Props) => {
-  const { lang } = useLanguage();
+  // const { lang } = useLanguage();
+  const lang = userProgress.lang as "ua" | "en" | "de";
+  const regionTitle =
+    userProgress.activeRegion.translations?.[lang] ??
+    userProgress.activeRegion.title;
 
   return (
     <div className="flex flex-row-reverse gap-[48px] px-6">
@@ -44,7 +49,7 @@ const PracticeClient = ({
 
       <FeedWrapper>
         <h1 className="text-3xl font-bold mb-6">
-          {translations[lang].practice.title}: {activeRegion.title}
+          {translations[lang].practice.title}: {regionTitle}
         </h1>
 
         <p className="text-lg font-semibold text-center">

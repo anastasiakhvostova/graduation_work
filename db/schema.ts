@@ -6,7 +6,9 @@ export const countries = pgTable("countries", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
   imageSrc: text("image_src").notNull(),
-  translations: jsonb("translations"), // ❗ без .notNull()
+  translations: jsonb("translations").$type<
+    Partial<Record<"ua" | "en" | "de", string>> | null
+  >(),
 });
 
 export const countriesRelations = relations(countries, ({ many }) => ({
@@ -44,7 +46,9 @@ export const regions = pgTable("regions", {
   countryId: integer("country_id").references(() => countries.id, { onDelete: "cascade" }),
   imageSrc: text("image_src").notNull(),
   translations: jsonb("translations").$type<
-    Partial<Record<"ua" | "en" | "de", string>>>(),
+    Partial<Record<"ua" | "en" | "de", string>> | null
+  >(),
+
 });
 
 export const regionsRelations = relations(regions, ({ one, many }) => ({

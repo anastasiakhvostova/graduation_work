@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { and, eq } from "drizzle-orm";
 import db from "@/db/drizzle";
-import { userProgress, challengesProgress, challenges } from "@/db/schema";
+import { userProgress, challengesProgress, challenges, regions } from "@/db/schema";
 import { getCountryById, getUserProgress } from "@/db/queries";
 import { POINTS_TO_REFILL } from "@/constant";
 
@@ -21,9 +21,7 @@ export type ReduceHeartsResult =
 // Вибір країни (перший екран)
 // ----------------------
 
-export const upsertUserProgress = async (
-  countryId: number
-): Promise<void> => {
+export const upsertUserProgress = async (countryId: number): Promise<void> => {
   const { userId } = await auth();
   const user = await currentUser();
 
@@ -35,11 +33,12 @@ export const upsertUserProgress = async (
   const existingProgress = await getUserProgress();
 
   if (existingProgress) {
+    // ✅ оновлюємо країну, зберігаючи регіон
     await db
       .update(userProgress)
       .set({
         activeCountryId: countryId,
-        activeRegionId: null,
+        activeRegionId: existingProgress.activeRegionId, // зберігаємо регіон
         userName: user.firstName || "User",
         userImageSrc: user.imageUrl || "/mascot.png",
       })
@@ -62,7 +61,6 @@ export const upsertUserProgress = async (
 // ----------------------
 // Вибір регіону
 // ----------------------
-
 export const upsertUserProgressRegion = async (
   regionId: number
 ): Promise<void> => {
@@ -71,6 +69,13 @@ export const upsertUserProgressRegion = async (
 
   if (!userId || !user) throw new Error("Не авторизований");
 
+  // 👉 дістаємо регіон разом з країною
+  const region = await db.query.regions.findFirst({
+    where: eq(regions.id, regionId),
+  });
+
+  if (!region) throw new Error("Регіон не знайдено");
+
   const existingProgress = await getUserProgress();
 
   if (existingProgress) {
@@ -78,6 +83,7 @@ export const upsertUserProgressRegion = async (
       .update(userProgress)
       .set({
         activeRegionId: regionId,
+        activeCountryId: region.countryId, // 🔥 ОТУТ ФІКС
         userName: user.firstName || "User",
         userImageSrc: user.imageUrl || "/mascot.png",
       })
@@ -86,6 +92,7 @@ export const upsertUserProgressRegion = async (
     await db.insert(userProgress).values({
       userId,
       activeRegionId: regionId,
+      activeCountryId: region.countryId, // 🔥 І ТУТ
       userName: user.firstName || "User",
       userImageSrc: user.imageUrl || "/mascot.png",
     });
@@ -93,6 +100,7 @@ export const upsertUserProgressRegion = async (
 
   revalidatePath("/learn");
 };
+
 
 // ----------------------
 // Зменшення сердець при помилці
