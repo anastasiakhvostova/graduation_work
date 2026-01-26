@@ -21,10 +21,38 @@ async function main() {
     await db.delete(schema.countries);
 
     await db.insert(schema.countries).values([
-      { id: 1, title: "Україна", imageSrc: "/ukraine.png" },
-      { id: 2, title: "Німеччина", imageSrc: "/germany.png" },
-      { id: 3, title: "Англія", imageSrc: "/britain.png" },
-    ]);
+    {
+      id: 1,
+      title: "Україна",
+      imageSrc: "/ukraine.png",
+      translations: {
+        ua: "Україна",
+        en: "Ukraine",
+        de: "Ukraine",
+      },
+    },
+    {
+      id: 2,
+      title: "Німеччина",
+      imageSrc: "/germany.png",
+      translations: {
+        ua: "Німеччина",
+        en: "Germany",
+        de: "Deutschland",
+      },
+    },
+    {
+      id: 3,
+      title: "Англія",
+      imageSrc: "/britain.png",
+      translations: {
+        ua: "Англія",
+        en: "United Kingdom",
+        de: "Großbritannien",
+      },
+    },
+  ]);
+
 
     await db.insert(schema.regions).values([
   {

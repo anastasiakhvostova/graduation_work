@@ -3,6 +3,11 @@ import { QuestKey } from "@/constant";
 export type QuestTranslations = Record<QuestKey, string>;
 export const translations = {
   ua: {
+    country: {
+      Ukraine: "Україна",
+      Germany: "Німеччина",
+      England: "Англія",
+    },
     footer: {
         checkButton: "Перевірити",
         nextButton: "Наступний",
@@ -14,7 +19,26 @@ export const translations = {
     lesson: {
       start: "Почати",
     },
+    quiz: {
+      resultCard: {
+        heartsLabel: "Залишилось сердець",
+        pointsLabel: "Загальна кількість балів",
+      },
+      greatJob: "Чудова робота!",
+      lessonFinished: "Ви завершили урок!",
+      continue: "Продовжити",
 
+      chooseCorrect: "Обери правильну відповідь",
+      listenAndChoose: "Послухайте й оберіть. Що означає слово?",
+      listen: "Прослухати",
+
+      writePlaceholder: "Введіть відповідь",
+
+      practiceTitle: "Повторне проходження уроку",
+      practiceText: "Ви вже пройшли цей урок на 100%.",
+      practiceNote: "Повторне проходження не дає додаткових балів і сердечок.",
+      exit: "Вийти",
+    },
     unitBanner: {
       title: "Додаток",
       description:
@@ -95,6 +119,32 @@ export const translations = {
       
 },
   en: {
+       country: {
+      Ukraine: "Ukraine",
+      Germany: "Germany",
+      England: "England",
+    },
+  quiz: {
+    resultCard: {
+      heartsLabel: "Hearts left",
+      pointsLabel: "Total points",
+    },
+    greatJob: "Great job!",
+    lessonFinished: "You’ve completed the lesson!",
+    continue: "Continue",
+
+    chooseCorrect: "Choose the correct answer",
+    listenAndChoose: "Listen and choose. What does the word mean?",
+    listen: "Listen",
+
+    writePlaceholder: "Enter your answer",
+
+    practiceTitle: "Practice mode",
+    practiceText: "You have already completed this lesson 100%.",
+    practiceNote: "Practice mode does not give extra points or hearts.",
+    exit: "Exit",
+  },
+
     lesson: {
       start: "Start",
     },
@@ -185,6 +235,32 @@ export const translations = {
       finish: "Finish lesson"
   },
   de: {
+  country: {
+  Ukraine: "Ukraine",        // Україна
+  Germany: "Deutschland",    // Німеччина
+  England: "England",        // Англія / Vereinigtes Königreich (якщо точніше)
+  },
+  quiz: {
+    resultCard: {
+      heartsLabel: "Verbleibende Herzen",
+      pointsLabel: "Gesamtpunktzahl",
+    },
+    greatJob: "Großartige Arbeit!",
+    lessonFinished: "Du hast die Lektion abgeschlossen!",
+    continue: "Weiter",
+
+    chooseCorrect: "Wähle die richtige Antwort",
+    listenAndChoose: "Höre zu und wähle. Was bedeutet das Wort?",
+    listen: "Anhören",
+
+    writePlaceholder: "Antwort eingeben",
+
+    practiceTitle: "Übungsmodus",
+    practiceText: "Du hast diese Lektion bereits zu 100 % abgeschlossen.",
+    practiceNote: "Der Übungsmodus bringt keine zusätzlichen Punkte oder Herzen.",
+    exit: "Beenden",
+  },
+
     lesson: {
       start: "Starten",
     },

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 
 type Props = {
-  title: string; // тут завжди рядок
+  title: string; // перекладений рядок
 };
 
 export const Header = ({ title }: Props) => {
@@ -17,8 +17,10 @@ export const Header = ({ title }: Props) => {
 
       <h1 className="font-bold text-lg text-neutral-700">{title}</h1>
 
-      <div /> 
+      <div />
     </div>
   );
 };
+
+
 

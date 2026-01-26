@@ -21,6 +21,7 @@ const CountriesPage = async () => {
       <List
         countries={countries}
         activeCountryId={userProgress?.activeCountryId ?? null}
+        lang={userProgress?.lang ?? "ua"}
       />
     </div>
   );
