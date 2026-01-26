@@ -1,4 +1,3 @@
-// лера
 "use client";
 
 import { Footer } from "./footer";
@@ -74,6 +73,13 @@ export const Quiz = ({
   const challenge = challengesState[activeIndex];
   const options = challenge?.challengeOption ?? [];
 
+  if (!challenge) return null;
+
+  // 🌍 ПЕРЕКЛАД ПИТАННЯ
+  const question =
+    challenge.questionTranslations?.[lang] ??
+    challenge.question;
+
   const playAudio = async (src?: string | null) => {
     if (!src) return;
     try {
@@ -83,7 +89,7 @@ export const Quiz = ({
   };
 
   const playChallengeAudio = () => {
-    if (challenge?.audioSrc) return playAudio(challenge.audioSrc);
+    if (challenge.audioSrc) return playAudio(challenge.audioSrc);
     const opt = options.find((o) => o.audioSrc);
     if (opt?.audioSrc) playAudio(opt.audioSrc);
   };
@@ -113,13 +119,12 @@ export const Quiz = ({
       return;
     }
 
-    if (!challenge) return;
-
     // WRITE
     if (challenge.type === "WRITE") {
       const answer = writeRef.current?.getValue() || "";
       const correctAnswer =
         options.find((o) => o.correct)?.text || "";
+
       const isCorrect =
         answer.trim().toLowerCase() ===
         correctAnswer.trim().toLowerCase();
@@ -159,7 +164,7 @@ export const Quiz = ({
       return;
     }
 
-    // OTHER TYPES
+    // SELECT / ASSIST / LISTEN
     if (!selectedOption) return;
     const correctOption = options.find((o) => o.correct);
     if (!correctOption) return;
@@ -199,18 +204,12 @@ export const Quiz = ({
     }
   };
 
-  // FINISH SCREEN
+  // 🎉 FINISH
   if (isFinished) {
     return (
       <>
         {finishAudio}
-        <Confetti
-          width={width}
-          height={height}
-          recycle={false}
-          numberOfPieces={500}
-          tweenDuration={1000}
-        />
+        <Confetti width={width} height={height} recycle={false} />
 
         <div className="flex flex-col gap-y-6 max-w-lg mx-auto text-center items-center justify-center h-full">
           <Image src="/finish.png" alt="Finish" height={100} width={100} />
@@ -227,7 +226,11 @@ export const Quiz = ({
               value={isPracticeMode ? 0 : challengesState.length * 10}
               label={t.resultCard.pointsLabel}
             />
-            <ResultCard variant="hearts" value={hearts} label={t.resultCard.heartsLabel} />
+            <ResultCard
+              variant="hearts"
+              value={hearts}
+              label={t.resultCard.heartsLabel}
+            />
           </div>
 
           <button
@@ -241,14 +244,12 @@ export const Quiz = ({
     );
   }
 
-  if (!challenge) return null;
-
+  // 🧠 TITLE
   const title =
     challenge.type === "ASSIST"
       ? t.chooseCorrect
-      : challenge.question;
+      : question;
 
-  // MAIN SCREEN
   return (
     <>
       {correctAudio}
@@ -287,7 +288,7 @@ export const Quiz = ({
             <h1 className="text-2xl font-bold mb-6">{title}</h1>
 
             {challenge.type === "ASSIST" && (
-              <QuestionBubble question={challenge.question} />
+              <QuestionBubble question={question} />
             )}
 
             {challenge.type === "WRITE" ? (
@@ -312,34 +313,10 @@ export const Quiz = ({
       </div>
 
       <Footer disabled={pending} status={status} onCheck={onContinue} />
-
-      {showPracticeModal && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center">
-          <div className="bg-white rounded-xl p-6 max-w-md">
-            <h2 className="text-xl font-bold">{t.practiceTitle}</h2>
-            <p className="mt-3 text-sm">
-              {t.practiceText}
-              <br />
-              <strong>{t.practiceNote}</strong>
-            </p>
-
-            <div className="flex justify-end gap-3 mt-6">
-              <button onClick={() => router.push("/learn")}>
-                {t.exit}
-              </button>
-              <button
-                onClick={() => setShowPracticeModal(false)}
-                className="bg-yellow-400 px-4 py-2 rounded-full"
-              >
-                {t.continue}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 };
+
 
 
 

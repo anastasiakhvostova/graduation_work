@@ -86,12 +86,18 @@ export const challengesEnum = pgEnum("type", ["SELECT", "ASSIST", "LISTEN", "WRI
 
 export const challenges = pgTable("challenges", {
   id: serial("id").primaryKey(),
-  lessonId: integer("lesson_id").references(() => lessons.id, { onDelete: "cascade" }).notNull(),
+  lessonId: integer("lesson_id")
+    .references(() => lessons.id, { onDelete: "cascade" })
+    .notNull(),
   type: challengesEnum("type").notNull(),
   question: text("question").notNull(),
+  questionTranslations: jsonb("question_translations").$type<
+    Partial<Record<"ua" | "en" | "de", string>>
+  >(),
   audioSrc: text("audioSrc").$type<string | null>(),
   order: integer("order").notNull(),
 });
+
 
 export const challengesRelations = relations(challenges, ({ one, many }) => ({
   lesson: one(lessons, { fields: [challenges.lessonId], references: [lessons.id] }),

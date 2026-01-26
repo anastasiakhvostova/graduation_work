@@ -1,56 +1,67 @@
-import Link from "next/link";
-import { Button } from "./ui/button";
-import Image from "next/image";
-import { countries } from "@/db/schema";
+"use client";
 
-type Props = {
-  activeCourse: typeof countries.$inferSelect | null;
-  hearts: number;
-  points: number;
+import Link from "next/link";
+import Image from "next/image";
+import { useLanguage, Lang } from "./languageContext";
+import { ArrowLeftRight } from "lucide-react";
+
+type Translations = { ua: string; en: string; de: string };
+type Country = { id: number; title: string; imageSrc: string; translations: Translations };
+type Props = { activeCourse: Country | null; hearts: number; points: number };
+
+const languageFlags: Record<Lang, string> = {
+  ua: "/flags/ua.png",
+  en: "/flags/en.png",
+  de: "/flags/de.png",
 };
 
 export const UserProgress = ({ activeCourse, points, hearts }: Props) => {
+  const { lang, setLang } = useLanguage();
+
+  const cycleLanguage = () => {
+    const nextLang: Lang =
+      lang === "ua" ? "de" : lang === "de" ? "en" : "ua";
+    setLang(nextLang);
+  };
+
   return (
-    <div className="flex justify-end w-full">
+    <div className="flex justify-end items-center gap-3 w-full">
+      {/* КНОПКА МОВИ */}
+      <div
+        onClick={cycleLanguage}
+        title="Змінити мову"
+        className="
+    mr-auto
+    flex items-center gap-2
+    bg-yellow-100
+    px-3 py-1.5
+    rounded-xl
+    cursor-pointer
+    hover:bg-yellow-200
+    transition
+    shadow-sm
+  "
+      >
+        <Image
+          src={languageFlags[lang]}
+          alt="Мова"
+          width={28}
+          height={28}
+          className="rounded-md"
+        />
+        <ArrowLeftRight size={16} className="text-yellow-700" />
+      </div>
 
-      {/* <Link href="/countries">
-        <Button>
-          {activeCourse && (
-            <Image
-              src={activeCourse.imageSrc}
-              alt={activeCourse.title}
-              className="rounded-md border"
-              width={32}
-              height={32}
-            />
-          )}
-        </Button>
-      </Link> */}
-
-      <Link href="/shop">
-        <Button variant="ghost" className="text-orange-500">
-          <Image
-            src="/points.png"
-            height={28}
-            width={28}
-            alt="Бали"
-            className="mr-2"
-          />
-          {points}
-        </Button>
+      {/* БАЛИ */}
+      <Link href="/shop" className="flex items-center gap-1 text-orange-500">
+        <Image src="/points.png" height={28} width={28} alt="Бали" />
+        <span className="font-medium">{points}</span>
       </Link>
 
-      <Link href="/shop">
-        <Button variant="ghost" className="text-rose-500">
-          <Image
-            src="/heart.png"
-            height={22}
-            width={22}
-            alt="Серця"
-            className="mr-2"
-          />
-          {hearts}
-        </Button>
+      {/* СЕРЦЯ */}
+      <Link href="/shop" className="flex items-center gap-1 text-rose-500">
+        <Image src="/heart.png" height={22} width={22} alt="Серця" />
+        <span className="font-medium">{hearts}</span>
       </Link>
     </div>
   );
