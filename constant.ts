@@ -1,24 +1,12 @@
-export const POINTS_TO_REFILL = 10
+export const POINTS_TO_REFILL = 10;
 
-export const quests = [
-    {
-        title: "Зароби 20 балів",
-        value: 20,
-    },
-     {
-        title: "Зароби 50 балів",
-        value: 50,
-    },
-     {
-        title: "Зароби 100 балів",
-        value: 100,
-    },
-     {
-        title: "Зароби 500 балів",
-        value: 500,
-    },
-     {
-        title: "Зароби 1000 балів",
-        value: 1000,
-    }
-]
+export type QuestKey = "earn20" | "earn50" | "earn100" | "earn500" | "earn1000";
+
+export const quests: { key: QuestKey; value: number }[] = [
+  { key: "earn20", value: 20 },
+  { key: "earn50", value: 50 },
+  { key: "earn100", value: 100 },
+  { key: "earn500", value: 500 },
+  { key: "earn1000", value: 1000 },
+];
+

@@ -3,60 +3,100 @@
     "id": 1,
     "audio": "/audio/15/breed.mp3",
     "word": "Breed",
-    "translation": "хліб"
+    "translations": {
+      "ua": "хліб",
+      "en": "bread",
+      "de": "Brot"
+    }
   },
   {
     "id": 2,
     "audio": "/audio/15/marra.mp3",
     "word": "Marra",
-    "translation": "друг/товариш"
+    "translations": {
+      "ua": "друг/товариш",
+      "en": "friend / mate",
+      "de": "Freund / Kumpel"
+    }
   },
   {
     "id": 3,
     "audio": "/audio/15/bairn.mp3",
     "word": "Bairn",
-    "translation": "дитина"
+    "translations": {
+      "ua": "дитина",
+      "en": "child",
+      "de": "Kind"
+    }
   },
   {
     "id": 4,
     "audio": "/audio/15/nappa.mp3",
     "word": "Nappa",
-    "translation": "голова"
+    "translations": {
+      "ua": "голова",
+      "en": "head",
+      "de": "Kopf"
+    }
   },
   {
     "id": 5,
     "audio": "/audio/15/toon.mp3",
     "word": "Toon",
-    "translation": "місто (особливо Ньюкасл)"
+    "translations": {
+      "ua": "місто (особливо Ньюкасл)",
+      "en": "city (especially Newcastle)",
+      "de": "Stadt (besonders Newcastle)"
+    }
   },
   {
     "id": 6,
     "audio": "/audio/15/clart.mp3",
     "word": "Clart",
-    "translation": "бруд"
+    "translations": {
+      "ua": "бруд",
+      "en": "mud / dirt",
+      "de": "Schlamm / Dreck"
+    }
   },
   {
     "id": 8,
     "audio": "/audio/15/gadgie.mp3",
     "word": "Gadgie",
-    "translation": "чоловік"
+    "translations": {
+      "ua": "чоловік",
+      "en": "man",
+      "de": "Mann"
+    }
   },
   {
     "id": 9,
     "audio": "/audio/15/gansey.mp3",
     "word": "Gansey",
-    "translation": "светр"
+    "translations": {
+      "ua": "светр",
+      "en": "sweater",
+      "de": "Pullover"
+    }
   },
   {
     "id": 10,
     "audio": "/audio/15/radgie.mp3",
     "word": "Radgie",
-    "translation": "сердитий"
+    "translations": {
+      "ua": "сердитий",
+      "en": "angry",
+      "de": "wütend"
+    }
   },
-    {
+  {
     "id": 11,
     "audio": "/audio/15/spuggy.mp3",
     "word": "Spuggy",
-    "translation": "горобець"
+    "translations": {
+      "ua": "горобець",
+      "en": "sparrow",
+      "de": "Sperling"
+    }
   }
 ]

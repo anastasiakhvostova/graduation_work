@@ -3,6 +3,8 @@
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
+import { useLanguage } from "@/components/languageContext";
+import { translations } from "@/components/translations";
 
 import {
     Dialog,
@@ -19,6 +21,7 @@ export const ExitModal = () => {
     const router = useRouter()
     const [isClient, setIsClient] = useState(false)
     const { isOpen, close } = useExitModal()
+    const { lang } = useLanguage();
 
     useEffect(() => setIsClient(true), [])
 
@@ -38,21 +41,21 @@ export const ExitModal = () => {
                             width={80}/>
                         </div>
                         <DialogTitle>
-                            Почекай, не виходь!
+                            {translations[lang].title}
                         </DialogTitle>
                         <DialogDescription>
-                            Ви збираєтесь вийти з уроку. Ви впевнені?
+                            {translations[lang].description}
                         </DialogDescription>
                         <DialogFooter className="mb-4">
                             <div className="flex flex-col gap-y-4 w-full">
                                 <Button variant="primary" className="w-full" size="lg" onClick={close}>
-                                    Продовжити навчання
+                                    {translations[lang].continue}
                                 </Button>
                                  <Button variant="dangerOutline" className="w-full" size="lg" onClick={() => {
                                     close()
                                     router.push("/learn")
                                  }}>
-                                    Завершити урок
+                                    {translations[lang].finish}
                                 </Button>
                             </div>
                         </DialogFooter>

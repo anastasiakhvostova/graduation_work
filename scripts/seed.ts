@@ -2,6 +2,7 @@ import "dotenv/config";
 import { drizzle } from "drizzle-orm/neon-http";
 import { neon } from "@neondatabase/serverless";
 import * as schema from "../db/schema";
+// import { sql } from "drizzle-orm";
 
 const sql = neon(process.env.DATABASE_URL!);
 const db = drizzle(sql, { schema });
@@ -26,16 +27,116 @@ async function main() {
     ]);
 
     await db.insert(schema.regions).values([
-      { id: 7, title: "Північне наріччя", countryId: 1, imageSrc: "/ukraine.png" },
-      { id: 8, title: "Південно-західне наріччя", countryId: 1, imageSrc: "/ukraine.png" },
-      { id: 9, title: "Південно-східне наріччя", countryId: 1, imageSrc: "/ukraine.png" },
-      { id: 10, title: "Нижньонімецькі діалекти", countryId: 2, imageSrc: "/germany.png" },
-      { id: 11, title: "Середньонімецькі діалекти", countryId: 2, imageSrc: "/germany.png" },
-      { id: 12, title: "Верхньонімецькі діалекти", countryId: 2, imageSrc: "/germany.png" },
-      { id: 13, title: "Кокні", countryId: 3, imageSrc: "/britain.png" },
-      { id: 14, title: "Скауз", countryId: 3, imageSrc: "/britain.png" },
-      { id: 15, title: "Джорди", countryId: 3, imageSrc: "/britain.png" },
-      { id: 16, title: "Йоркшир", countryId: 3, imageSrc: "/britain.png" },
+  {
+    id: 7,
+    title: "Північне наріччя",
+    countryId: 1,
+    imageSrc: "/ukraine.png",
+    translations: {
+      ua: "Північне наріччя",
+      en: "Northern Dialect",
+      de: "Nördlicher Dialekt",
+    },
+  },
+  {
+    id: 8,
+    title: "Південно-західне наріччя",
+    countryId: 1,
+    imageSrc: "/ukraine.png",
+    translations: {
+      ua: "Південно-західне наріччя",
+      en: "Southwestern Dialect",
+      de: "Südwestlicher Dialekt",
+    },
+  },
+  {
+    id: 9,
+    title: "Південно-східне наріччя",
+    countryId: 1,
+    imageSrc: "/ukraine.png",
+    translations: {
+      ua: "Південно-східне наріччя",
+      en: "Southeastern Dialect",
+      de: "Südöstlicher Dialekt",
+    },
+  },
+  {
+    id: 10,
+    title: "Нижньонімецькі діалекти",
+    countryId: 2,
+    imageSrc: "/germany.png",
+    translations: {
+      ua: "Нижньонімецькі діалекти",
+      en: "Low German Dialects",
+      de: "Niederdeutsche Dialekte",
+    },
+  },
+  {
+    id: 11,
+    title: "Середньонімецькі діалекти",
+    countryId: 2,
+    imageSrc: "/germany.png",
+    translations: {
+      ua: "Середньонімецькі діалекти",
+      en: "Central German Dialects",
+      de: "Mitteldeutsche Dialekte",
+    },
+  },
+  {
+    id: 12,
+    title: "Верхньонімецькі діалекти",
+    countryId: 2,
+    imageSrc: "/germany.png",
+    translations: {
+      ua: "Верхньонімецькі діалекти",
+      en: "Upper German Dialects",
+      de: "Oberdeutsche Dialekte",
+    },
+  },
+  {
+    id: 13,
+    title: "Кокні",
+    countryId: 3,
+    imageSrc: "/britain.png",
+    translations: {
+      ua: "Кокні",
+      en: "Cockney",
+      de: "Cockney",
+    },
+  },
+  {
+    id: 14,
+    title: "Скауз",
+    countryId: 3,
+    imageSrc: "/britain.png",
+    translations: {
+      ua: "Скауз",
+      en: "Scouse",
+      de: "Scouse",
+    },
+  },
+  {
+    id: 15,
+    title: "Джорди",
+    countryId: 3,
+    imageSrc: "/britain.png",
+    translations: {
+      ua: "Джорди",
+      en: "Geordie",
+      de: "Geordie",
+    },
+  },
+  {
+    id: 16,
+    title: "Йоркшир",
+    countryId: 3,
+    imageSrc: "/britain.png",
+    translations: {
+      ua: "Йоркшир",
+      en: "Yorkshire",
+      de: "Yorkshire",
+    },
+  },
     ]);
 
     await db.insert(schema.units).values([
@@ -1738,5 +1839,7 @@ addYork(50, "WRITE", "The … were grazing peacefully in the field", [
 }
 
 main();
+
+
 
 

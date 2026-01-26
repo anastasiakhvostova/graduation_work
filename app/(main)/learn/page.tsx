@@ -47,18 +47,15 @@ const LearnPage = async () =>{
                <Header title={userProgress.activeRegion.title} />
                {units.map((unit) => (
                 <div key={unit.id} className="mb-10">
-                    <Unit 
-                        id={unit.id}
-                        order={unit.order}
-                        description={unit.description}
-                        title={unit.title}
-                        lessons={unit.lessons}
-                        activeLesson={regionProgress.activeLesson as typeof lessons.$inferSelect & {
-                            unit: typeof unitsSchema.$inferSelect
-                        } | undefined}
-
-                        activeLessonPercentage={lessonPercentage}
-                    />
+                   <Unit 
+                      id={unit.id}
+                      order={unit.order}
+                      description={unit.description}
+                      title={unit.title}
+                      lessons={unit.lessons}
+                      activeLesson={regionProgress.activeLesson} // більше не треба 'as'
+                      activeLessonPercentage={lessonPercentage}
+                  />
                 </div>
                ))}
             </FeedWrapper>

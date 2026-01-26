@@ -6,6 +6,7 @@ import { redirect } from "next/navigation"
 import Image from "next/image"
 import { Items } from "./items"
 import { Feedback } from "@/components/Feedback"
+import { ShopList } from "./ShopList";
 
 import { Quests } from "@/components/quests"
 import { RegionImage } from "@/components/current_region_image"
@@ -30,10 +31,15 @@ const ShopPage = async () => {
                     points={userProgress.points}
                 />
                 <Quests points={userProgress.points}/>   
-                <Feedback />
+                <Feedback /> 
             </StickyWrapper>
             <FeedWrapper>
-                <div className="w-full flex-col items-center">
+                <ShopList
+  points={userProgress.points}
+  hearts={userProgress.hearts}
+/>
+
+                {/* <div className="w-full flex-col items-center">
                     <Image 
                     src="/shop.png"
                     alt="Shop"
@@ -49,7 +55,7 @@ const ShopPage = async () => {
                     hearts={userProgress.hearts}
                     points={userProgress.points}     
                     />
-                </div>
+                </div> */}
             </FeedWrapper>
         </div>
     )

@@ -1,5 +1,6 @@
 "use client";
-
+import { useLanguage } from "@/components/languageContext";
+import { translations } from "@/components/translations";
 import Image from "next/image";
 
 type Props = {
@@ -22,6 +23,7 @@ const REGION_IMAGES: Record<number, string> = {
 
 export const RegionImage = ({ activeRegionId, className }: Props) => {
   if (!activeRegionId) return null;
+  const { lang } = useLanguage();
 
   const src = REGION_IMAGES[activeRegionId];
   if (!src) return null;
@@ -38,7 +40,7 @@ export const RegionImage = ({ activeRegionId, className }: Props) => {
             group-hover:opacity-100 group-hover:translate-y-0
           "
         >
-          Ви зараз знаходитесь в цьому регіоні
+          {translations[lang].currentRegion}
         </div>
 
         <div

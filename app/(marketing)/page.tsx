@@ -1,3 +1,5 @@
+"use client"; // ← обов'язково для useLanguage()
+
 import {
   ClerkLoading,
   ClerkLoaded,
@@ -10,8 +12,12 @@ import Image from "next/image";
 import { Loader } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useLanguage } from "@/components/languageContext";
+import { translations } from "@/components/translations";
 
 export default function Home() {
+  const { lang } = useLanguage(); // отримуємо обрану мову
+
   return (
     <div className="max-w-[988px] mx-auto flex-1 w-full flex flex-col lg:flex-row items-center justify-center p-4 gap-8">
       {/* Ліва частина — картинка */}
@@ -22,7 +28,7 @@ export default function Home() {
       {/* Права частина — текст, кнопки і підпис */}
       <div className="flex flex-col items-center gap-y-6">
         <h1 className="text-xl lg:text-3xl font-bold text-neutral-600 max-w-[480px] text-center">
-          Веб-застосунок для вивчення українських, англійських та німецьких діалектів
+          {translations[lang].homeDescription}
         </h1>
 
         <div className="flex flex-col items-center gap-y-3 max-w-[330px] w-full">
@@ -38,7 +44,7 @@ export default function Home() {
                     variant="secondary"
                     className="w-full py-6 text-lg"
                   >
-                    Зареєструватись
+                    {translations[lang].signUpButton}
                   </Button>
                 </SignUpButton>
                 <SignInButton mode="modal" forceRedirectUrl="/countries">
@@ -47,7 +53,7 @@ export default function Home() {
                     variant="primaryOutline"
                     className="w-full py-6 text-lg"
                   >
-                    У мене вже є акаунт, увійти
+                    {translations[lang].signInButton}
                   </Button>
                 </SignInButton>
               </div>
@@ -60,7 +66,7 @@ export default function Home() {
                 className="w-full py-6 text-lg"
                 asChild
               >
-                <Link href="/countries">Продовжити навчання</Link>
+                <Link href="/countries">{translations[lang].continueLearning}</Link>
               </Button>
             </SignedIn>
           </ClerkLoaded>
@@ -68,7 +74,7 @@ export default function Home() {
 
         {/* Підпис одразу під кнопками */}
         <p className="mt-4 text-center text-black text-sm lg:text-base font-medium">
-          Роботу виконали: Хвостова Анастасія 11г, Нестеренко Марія 11г, Коробчиц Валерія 11г
+          {translations[lang].credits}
         </p>
       </div>
     </div>

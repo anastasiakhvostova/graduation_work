@@ -6,6 +6,8 @@ import { POINTS_TO_REFILL } from "@/constant"
 import Image from "next/image"
 import { useTransition } from "react"
 import { toast } from "sonner"
+import { useLanguage } from "@/components/languageContext";
+import { translations } from "@/components/translations";
 
 
 
@@ -15,6 +17,7 @@ type Props = {
 }
 
 export const Items = ({
+    
     hearts,
     points,
 }: Props) => {
@@ -28,6 +31,7 @@ export const Items = ({
                 .catch(() => toast.error("Something went wrong"))
         })
     }
+    const { lang } = useLanguage();
 
 
     return(
@@ -41,23 +45,23 @@ export const Items = ({
                 />
                 <div className="flex-1">
                     <p className="text-neutral-700 text-base lg:text-xl font-bold">
-                        Поповнити серця
+                        {translations[lang].boostHearts}
                     </p>
                 </div>
                 <Button 
                     onClick={onRefillHearts}
                     disabled={pending || hearts === 5 || points < POINTS_TO_REFILL}
                 >
-                    {hearts === 5 ? "Повні серця" : (
-                        <div className="flex items-center">
-                            <Image 
-                                src="/points.png"
-                                alt="Points"
-                                height={20}
-                                width={20}
-                            />
-                            <p>{POINTS_TO_REFILL}</p>
-                        </div>
+                    {hearts === 5 ? translations[lang].fullHearts : (
+                    <div className="flex items-center">
+                        <Image 
+                        src="/points.png"
+                        alt="Points"
+                        height={20}
+                        width={20}
+                        />
+                        <p>{POINTS_TO_REFILL}</p>
+                    </div>
                     )}
                 </Button>
             </div>

@@ -1,6 +1,7 @@
-import { pgTable, serial, text, integer, pgEnum, boolean, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, serial, text, integer, json, boolean, timestamp, pgEnum } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 
+// -------------------- COUNTRIES --------------------
 export const countries = pgTable("countries", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
@@ -11,6 +12,7 @@ export const countriesRelations = relations(countries, ({ many }) => ({
   userProgress: many(userProgress),
 }));
 
+// -------------------- USER PROGRESS --------------------
 export const userProgress = pgTable("user_progress", {
   userId: text("user_id").primaryKey(),
   userName: text("user_name").notNull().default("User"),
@@ -19,6 +21,7 @@ export const userProgress = pgTable("user_progress", {
   activeRegionId: integer("active_region_id").references(() => regions.id, { onDelete: "cascade" }),
   hearts: integer("hearts").notNull().default(5),
   points: integer("points").notNull().default(0),
+  lang: text("language").notNull().default("ua"),
 });
 
 export const userProgressRelations = relations(userProgress, ({ one }) => ({
@@ -32,72 +35,67 @@ export const userProgressRelations = relations(userProgress, ({ one }) => ({
   }),
 }));
 
+import { jsonb } from "drizzle-orm/pg-core";
 
 export const regions = pgTable("regions", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
   countryId: integer("country_id").references(() => countries.id, { onDelete: "cascade" }),
-  imageSrc: text("image_src").notNull().default("/default-region.png"),
+  imageSrc: text("image_src").notNull(),
+  translations: jsonb("translations"), // ❗ без .notNull()
 });
 
+export const regionsRelations = relations(regions, ({ one, many }) => ({
+  country: one(countries, { fields: [regions.countryId], references: [countries.id] }),
+  units: many(units),
+}));
 
+// -------------------- UNITS --------------------
 export const units = pgTable("units", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
   description: text("descroption").notNull(),
   regionId: integer("region_id").references(() => regions.id, { onDelete: "cascade" }).notNull(),
   order: integer("order").notNull(),
+  translations: json("translations").$type<Record<string, { title: string; description: string }>>(),
 });
 
 export const unitsRelations = relations(units, ({ one, many }) => ({
-  course: one(regions, {
-    fields: [units.regionId],
-    references: [regions.id],
-  }),
+  course: one(regions, { fields: [units.regionId], references: [regions.id] }),
   lessons: many(lessons),
 }));
 
-
+// -------------------- LESSONS --------------------
 export const lessons = pgTable("lessons", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
   unitId: integer("unit_id").references(() => units.id, { onDelete: "cascade" }).notNull(),
   order: integer("order").notNull(),
+  translations: json("translations").$type<Record<string, { title: string }>>(),
 });
 
 export const lessonsRelations = relations(lessons, ({ one, many }) => ({
-  unit: one(units, {
-    fields: [lessons.unitId],
-    references: [units.id],
-  }),
+  unit: one(units, { fields: [lessons.unitId], references: [units.id] }),
   challenges: many(challenges),
 }));
 
-
-export const challengesEnum = pgEnum("type", [  "SELECT",
-  "ASSIST",
-  "LISTEN",
-  "WRITE",
-  "COMPLETE"]);
+// -------------------- CHALLENGES --------------------
+export const challengesEnum = pgEnum("type", ["SELECT", "ASSIST", "LISTEN", "WRITE", "COMPLETE"]);
 
 export const challenges = pgTable("challenges", {
   id: serial("id").primaryKey(),
   lessonId: integer("lesson_id").references(() => lessons.id, { onDelete: "cascade" }).notNull(),
   type: challengesEnum("type").notNull(),
   question: text("question").notNull(),
-  audioSrc: text("audioSrc").$type<string | null>(), 
+  audioSrc: text("audioSrc").$type<string | null>(),
   order: integer("order").notNull(),
 });
 
 export const challengesRelations = relations(challenges, ({ one, many }) => ({
-  lesson: one(lessons, {
-    fields: [challenges.lessonId],
-    references: [lessons.id],
-  }),
+  lesson: one(lessons, { fields: [challenges.lessonId], references: [lessons.id] }),
   challengeOption: many(challengesOptions),
   challengeProgress: many(challengesProgress),
 }));
-
 
 export const challengesOptions = pgTable("challenges_options", {
   id: serial("id").primaryKey(),
@@ -109,32 +107,18 @@ export const challengesOptions = pgTable("challenges_options", {
 });
 
 export const challengesOptionRelations = relations(challengesOptions, ({ one }) => ({
-  challenges: one(challenges, {
-    fields: [challengesOptions.challengeId],
-    references: [challenges.id],
-  }),
+  challenges: one(challenges, { fields: [challengesOptions.challengeId], references: [challenges.id] }),
 }));
-
 
 export const challengesProgress = pgTable("challenges_progress", {
   id: serial("id").primaryKey(),
   userId: text("user_id").notNull(),
   challengeId: integer("challenge_id").references(() => challenges.id, { onDelete: "cascade" }).notNull(),
   completed: boolean("completed").notNull().default(false),
+  isPractice: boolean("is_practice").notNull().default(false), // ❗ нове поле
 });
 
+
 export const challengesProgressRelations = relations(challengesProgress, ({ one }) => ({
-  challenges: one(challenges, {
-    fields: [challengesProgress.challengeId],
-    references: [challenges.id],
-  }),
-}));
-
-
-export const regionsRelations = relations(regions, ({ one, many }) => ({
-  country: one(countries, {
-    fields: [regions.countryId],
-    references: [countries.id],
-  }),
-  units: many(units),
+  challenges: one(challenges, { fields: [challengesProgress.challengeId], references: [challenges.id] }),
 }));
