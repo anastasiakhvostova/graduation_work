@@ -3,6 +3,8 @@ import { drizzle } from "drizzle-orm/neon-http";
 import { neon } from "@neondatabase/serverless";
 import * as schema from "../db/schema";
 // import { sql } from "drizzle-orm";
+import { flashcards } from "../db/schema";
+
 
 const sql = neon(process.env.DATABASE_URL!);
 const db = drizzle(sql, { schema });
@@ -52,7 +54,116 @@ async function main() {
       },
     },
   ]);
+    const words = [
+    {
+      audio: "/audio/7/Бульба.mp3",
+      word: "Бульба",
+      translations: { ua: "картопля", en: "potato", de: "Kartoffel" },
+    },
+    {
+      audio: "/audio/7/Лєс.mp3",
+      word: "Лєс",
+      translations: { ua: "ліс", en: "forest", de: "Wald" },
+    },
+    {
+      audio: "/audio/7/Гуторити.mp3",
+      word: "Гуторити",
+      translations: { ua: "розмовляти", en: "to talk", de: "sprechen" },
+    },
+    {
+      audio: "/audio/7/Куфер.mp3",
+      word: "Куфер",
+      translations: { ua: "валіза, скриня", en: "trunk, chest", de: "Koffer, Truhe" },
+    },
+    {
+      audio: "/audio/7/Припічок.mp3",
+      word: "Припічок",
+      translations: { ua: "місце біля печі", en: "place near the stove", de: "Platz neben dem Herd" },
+    },
+    {
+      audio: "/audio/7/Клюмба.mp3",
+      word: "Клюмба",
+      translations: { ua: "квітник", en: "flowerbed", de: "Blumenbeet" },
+    },
+    {
+      audio: "/audio/7/Порєдок.mp3",
+      word: "Порєдок",
+      translations: { ua: "порядок", en: "order", de: "Ordnung" },
+    },
+    {
+      audio: "/audio/7/Лєснік.mp3",
+      word: "Лєснік",
+      translations: { ua: "лісник", en: "forester", de: "Förster" },
+    },
+    {
+      audio: "/audio/7/Прип’ятник.mp3",
+      word: "Прип’ятник",
+      translations: { ua: "камінь-пам’ятник", en: "memorial stone", de: "Gedenkstein" },
+    },
+    {
+      audio: "/audio/7/Клямка.mp3",
+      word: "Клямка",
+      translations: { ua: "дверна ручка", en: "door handle", de: "Türgriff" },
+    },
+    {
+      audio: "/audio/7/Шчьо.mp3",
+      word: "Шчьо",
+      translations: { ua: "що", en: "what", de: "was" },
+    },
+    {
+      audio: "/audio/7/Хвіртка.mp3",
+      word: "Хвіртка",
+      translations: { ua: "брама, ворота", en: "gate, doorway", de: "Tor, Pforte" },
+    },
+    {
+      audio: "/audio/7/Погрєб.mp3",
+      word: "Погрєб",
+      translations: { ua: "льох", en: "cellar", de: "Keller" },
+    },
+    {
+      audio: "/audio/7/Калачі.mp3",
+      word: "Калачі",
+      translations: { ua: "хлібці з білого тіста", en: "white bread rolls", de: "Weißbrotbrötchen" },
+    },
+    {
+      audio: "/audio/7/Шопка.mp3",
+      word: "Шопка",
+      translations: { ua: "невеликий сарай", en: "small shed", de: "kleiner Schuppen" },
+    },
+    {
+      audio: "/audio/7/Посьолок.mp3",
+      word: "Посьолок",
+      translations: { ua: "селище", en: "settlement", de: "Siedlung" },
+    },
+    {
+      audio: "/audio/7/Дєдьо.mp3",
+      word: "Дєдьо",
+      translations: { ua: "дядько", en: "uncle", de: "Onkel" },
+    },
+  ];
 
+  // Функція для рандомного перемішування
+  function shuffleArray<T>(array: T[]): T[] {
+    return array
+      .map((value) => ({ value, sort: Math.random() }))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({ value }) => value);
+  }
+
+  async function main() {
+    const shuffled = shuffleArray(words);
+
+    await db.insert(flashcards).values(
+      shuffled.map((w, index) => ({
+        word: w.word,
+        translations: w.translations,
+        audioSrc: w.audio,
+        order: index + 1,
+      }))
+    );
+
+    console.log("Flashcards seeded ✅");
+  }
 
     await db.insert(schema.regions).values([
   {

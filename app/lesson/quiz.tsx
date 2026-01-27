@@ -2,7 +2,7 @@
 
 import { Footer } from "./footer";
 import { challengesOptions, challenges } from "@/db/schema";
-import { useState, useTransition, useRef } from "react";
+import { useState, useTransition, useRef, useEffect } from "react";
 import { Header } from "./header";
 import { QuestionBubble } from "./question-bubble";
 import { Challenge } from "./challenge";
@@ -15,6 +15,8 @@ import { ResultCard } from "./result-card";
 import Confetti from "react-confetti";
 import { useRouter } from "next/navigation";
 import { useHeartsModal } from "@/store/use-hearts-modal";
+import { usePracticeModal } from "@/store/use-practice-modal";
+import { PracticeModal } from "@/components/modals/practice-modal";
 import { useLanguage } from "@/components/languageContext";
 import { translations } from "@/components/translations";
 
@@ -37,14 +39,13 @@ export const Quiz = ({
   const router = useRouter();
   const { width, height } = useWindowSize();
   const heartsModal = useHeartsModal();
+  const practiceModal = usePracticeModal();
 
   const { lang } = useLanguage();
   const t = translations[lang].quiz;
 
   const [correctAudio, _c, correctControls] = useAudio({ src: "/correct.mp3" });
-  const [incorrectAudio, _i, incorrectControls] = useAudio({
-    src: "/incorrect.mp3",
-  });
+  const [incorrectAudio, _i, incorrectControls] = useAudio({ src: "/incorrect.mp3" });
   const [finishAudio] = useAudio({ src: "/finish.mp3", autoPlay: false });
 
   const [pending, startTransition] = useTransition();
@@ -58,12 +59,19 @@ export const Quiz = ({
     return uncompleted === -1 ? 0 : uncompleted;
   });
 
-  const [isFinished, setIsFinished] = useState(
-    activeIndex >= initialLessonChallenges.length
-  );
+  const [isFinished, setIsFinished] = useState(activeIndex >= initialLessonChallenges.length);
 
   const isPracticeMode = initialPercentage >= 100;
-  const [showPracticeModal, setShowPracticeModal] = useState(isPracticeMode);
+
+  // 🔹 Локальний стан, щоб відкрити PracticeModal лише один раз
+  const [practiceModalOpened, setPracticeModalOpened] = useState(false);
+
+  useEffect(() => {
+    if (isPracticeMode && !practiceModalOpened) {
+      practiceModal.open();
+      setPracticeModalOpened(true);
+    }
+  }, [isPracticeMode, practiceModal, practiceModalOpened]);
 
   const [selectedOption, setSelectedOption] = useState<number | undefined>();
   const [status, setStatus] = useState<"correct" | "wrong" | "none">("none");
@@ -77,8 +85,7 @@ export const Quiz = ({
 
   // 🌍 ПЕРЕКЛАД ПИТАННЯ
   const question =
-    challenge.questionTranslations?.[lang] ??
-    challenge.question;
+    challenge.questionTranslations?.[lang] ?? challenge.question;
 
   const playAudio = async (src?: string | null) => {
     if (!src) return;
@@ -122,13 +129,8 @@ export const Quiz = ({
     // WRITE
     if (challenge.type === "WRITE") {
       const answer = writeRef.current?.getValue() || "";
-      const correctAnswer =
-        options.find((o) => o.correct)?.text || "";
-
-      const isCorrect =
-        answer.trim().toLowerCase() ===
-        correctAnswer.trim().toLowerCase();
-
+      const correctAnswer = options.find((o) => o.correct)?.text || "";
+      const isCorrect = answer.trim().toLowerCase() === correctAnswer.trim().toLowerCase();
       setStatus(isCorrect ? "correct" : "wrong");
 
       if (isCorrect) {
@@ -141,24 +143,21 @@ export const Quiz = ({
         });
       } else {
         startTransition(() => {
-          reduceHearts(challenge.id, initialLessonId).then(
-            (res: ReduceHeartsResult) => {
-              if (res && "error" in res) {
-                if (res.error === "серця") {
-                  setHearts(0);
-                  heartsModal.open();
-                  return;
-                }
-                if (res.error === "practice") {
-                  incorrectControls.play();
-                  return;
-                }
+          reduceHearts(challenge.id, initialLessonId).then((res: ReduceHeartsResult) => {
+            if (res && "error" in res) {
+              if (res.error === "серця") {
+                setHearts(0);
+                heartsModal.open();
+                return;
               }
-
-              incorrectControls.play();
-              setHearts((prev) => Math.max(prev - 1, 0));
+              if (res.error === "practice") {
+                incorrectControls.play();
+                return;
+              }
             }
-          );
+            incorrectControls.play();
+            setHearts((prev) => Math.max(prev - 1, 0));
+          });
         });
       }
       return;
@@ -182,24 +181,21 @@ export const Quiz = ({
       });
     } else {
       startTransition(() => {
-        reduceHearts(challenge.id, initialLessonId).then(
-          (res: ReduceHeartsResult) => {
-            if (res && "error" in res) {
-              if (res.error === "серця") {
-                setHearts(0);
-                heartsModal.open();
-                return;
-              }
-              if (res.error === "practice") {
-                incorrectControls.play();
-                return;
-              }
+        reduceHearts(challenge.id, initialLessonId).then((res: ReduceHeartsResult) => {
+          if (res && "error" in res) {
+            if (res.error === "серця") {
+              setHearts(0);
+              heartsModal.open();
+              return;
             }
-
-            incorrectControls.play();
-            setHearts((prev) => Math.max(prev - 1, 0));
+            if (res.error === "practice") {
+              incorrectControls.play();
+              return;
+            }
           }
-        );
+          incorrectControls.play();
+          setHearts((prev) => Math.max(prev - 1, 0));
+        });
       });
     }
   };
@@ -245,10 +241,7 @@ export const Quiz = ({
   }
 
   // 🧠 TITLE
-  const title =
-    challenge.type === "ASSIST"
-      ? t.chooseCorrect
-      : question;
+  const title = challenge.type === "ASSIST" ? t.chooseCorrect : question;
 
   return (
     <>
@@ -256,14 +249,14 @@ export const Quiz = ({
       {incorrectAudio}
       {finishAudio}
 
+      <PracticeModal /> {/* 🔹 додали тут, щоб показувалась у всіх уроках */}
+
       <Header hearts={hearts} percentage={percentage} />
 
       <div className="flex-1 flex items-center justify-center">
         {challenge.type === "LISTEN" ? (
           <div className="w-full max-w-4xl rounded-3xl bg-white p-8">
-            <h1 className="text-center text-2xl font-semibold">
-              {t.listenAndChoose}
-            </h1>
+            <h1 className="text-center text-2xl font-semibold">{t.listenAndChoose}</h1>
 
             <div className="flex justify-center mt-6">
               <button
@@ -287,21 +280,14 @@ export const Quiz = ({
           <div className="max-w-xl w-full px-6">
             <h1 className="text-2xl font-bold mb-6">{title}</h1>
 
-            {challenge.type === "ASSIST" && (
-              <QuestionBubble question={question} />
-            )}
+            {challenge.type === "ASSIST" && <QuestionBubble question={question} />}
 
             {challenge.type === "WRITE" ? (
-              <WriteChallenge
-                ref={writeRef}
-                placeholder={t.writePlaceholder}
-              />
+              <WriteChallenge ref={writeRef} placeholder={t.writePlaceholder} />
             ) : (
               <Challenge
                 options={options}
-                onSelect={(id) =>
-                  status === "none" && setSelectedOption(id)
-                }
+                onSelect={(id) => status === "none" && setSelectedOption(id)}
                 status={status}
                 selectedOption={selectedOption}
                 disabled={false}
@@ -316,7 +302,3 @@ export const Quiz = ({
     </>
   );
 };
-
-
-
-

@@ -11,7 +11,7 @@ const CountriesHeader = () => {
 
   return (
     <div className="mt-4 mb-6 flex items-center gap-3">
-      <Link href="/">
+      <Link href="/start">
         <Button
           variant="ghost"
           title="Повернутись на головний екран"

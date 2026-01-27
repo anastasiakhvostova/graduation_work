@@ -69,7 +69,6 @@ export const upsertChallengeProgress = async (challengeId: number) => {
   await db
     .update(userProgress)
     .set({
-      // +10 балів тільки ПЕРШИЙ раз
       points: currentUserProgress.points + 10,
     })
     .where(eq(userProgress.userId, userId))

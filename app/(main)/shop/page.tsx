@@ -1,63 +1,41 @@
-import { FeedWrapper } from "@/components/feed-wrapper"
-import { StickyWrapper } from "@/components/sticky-wrapper"
-import { UserProgress } from "@/components/user-progress"
-import { getUserProgress} from "@/db/queries"
-import { redirect } from "next/navigation"
-import Image from "next/image"
-import { Items } from "./items"
-import { Feedback } from "@/components/Feedback"
+import { FeedWrapper } from "@/components/feed-wrapper";
+import { StickyWrapper } from "@/components/sticky-wrapper";
+import { UserProgress } from "@/components/user-progress";
+import { getUserProgress } from "@/db/queries";
+import { Feedback } from "@/components/Feedback";
+import { Quests } from "@/components/quests";
 import { ShopList } from "./ShopList";
 
-import { Quests } from "@/components/quests"
-import { RegionImage } from "@/components/current_region_image"
 const ShopPage = async () => {
-    const userProgressData = getUserProgress()
-    const [
-        userProgress,
-    ] = await Promise.all([
-        userProgressData
-    ])
+  const userProgress = await getUserProgress();
 
-    if (!userProgress || !userProgress.activeRegion){
-        redirect("/learn")
-    }
+  const hasProgress = !!userProgress?.activeRegion;
 
-    return( 
-        <div className="flex flex-row-reverse gap-[48px] px-6">
-            <StickyWrapper>
-                <UserProgress 
-                    activeCourse={userProgress.activeRegion}
-                    hearts={userProgress.hearts}
-                    points={userProgress.points}
-                />
-                <Quests points={userProgress.points}/>   
-                <Feedback /> 
-            </StickyWrapper>
-            <FeedWrapper>
-                <ShopList
-  points={userProgress.points}
-  hearts={userProgress.hearts}
-/>
+  return (
+    <div className="flex flex-row-reverse gap-[48px] px-6">
+      <StickyWrapper>
+        {userProgress && (
+          <>
+            <UserProgress
+              activeCourse={userProgress.activeRegion}
+              hearts={userProgress.hearts}
+              points={userProgress.points}
+            />
+            <Quests points={userProgress.points} />
+          </>
+        )}
+        <Feedback />
+      </StickyWrapper>
 
-                {/* <div className="w-full flex-col items-center">
-                    <Image 
-                    src="/shop.png"
-                    alt="Shop"
-                    width={90}
-                    height={90}/>
-                    <h1 className="text-center font-bold text-neutral-800 text-2xl my-6">
-                        Магазин
-                    </h1>
-                    <p className="text-muted-foreground text-center text-lg mb-6">
-                        Витрачай свої бали на круті речі!
-                    </p>
-                    <Items 
-                    hearts={userProgress.hearts}
-                    points={userProgress.points}     
-                    />
-                </div> */}
-            </FeedWrapper>
-        </div>
-    )
-}
-export default ShopPage
+      <FeedWrapper>
+        <ShopList
+          points={userProgress?.points ?? 0}
+          hearts={userProgress?.hearts ?? 0}
+          hasProgress={hasProgress}
+        />
+      </FeedWrapper>
+    </div>
+  );
+};
+
+export default ShopPage;

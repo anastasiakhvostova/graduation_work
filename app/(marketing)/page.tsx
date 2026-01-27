@@ -1,83 +1,59 @@
-"use client"; // ← обов'язково для useLanguage()
+"use client";
 
-import {
-  ClerkLoading,
-  ClerkLoaded,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  SignUpButton,
-} from "@clerk/nextjs";
-import Image from "next/image";
-import { Loader } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useLanguage } from "@/components/languageContext";
-import { translations } from "@/components/translations";
+import { Button } from "@/components/ui/button";
 
-export default function Home() {
-  const { lang } = useLanguage(); // отримуємо обрану мову
-
+const MarketingPage = () => {
   return (
-    <div className="max-w-[988px] mx-auto flex-1 w-full flex flex-col lg:flex-row items-center justify-center p-4 gap-8">
-      {/* Ліва частина — картинка */}
-      <div className="relative w-[240px] h-[240px] lg:w-[424px] lg:h-[424px] mb-8 lg:mb-0">
-        <Image src="/hero.png" fill alt="Hero" className="object-contain" />
-      </div>
-
-      {/* Права частина — текст, кнопки і підпис */}
-      <div className="flex flex-col items-center gap-y-6">
-        <h1 className="text-xl lg:text-3xl font-bold text-neutral-600 max-w-[480px] text-center">
-          {translations[lang].homeDescription}
+    <div className="min-h-screen flex items-center justify-center bg-white px-6">
+      <div className="max-w-3xl w-full text-center text-neutral-900 leading-relaxed">
+        
+        <h1 className="text-xl font-semibold mb-10">
+          Дніпровський науковий ліцей інформаційних технологій  
+          <br />
+          Дніпровської міської ради
         </h1>
 
-        <div className="flex flex-col items-center gap-y-3 max-w-[330px] w-full">
-          <ClerkLoading>
-            <Loader className="h-5 w-5 text-muted-foreground animate-spin" />
-          </ClerkLoading>
-          <ClerkLoaded>
-            <SignedOut>
-              <div className="flex flex-col gap-4 w-full">
-                <SignUpButton mode="modal" forceRedirectUrl="/countries">
-                  <Button
-                    size="lg"
-                    variant="secondary"
-                    className="w-full py-6 text-lg"
-                  >
-                    {translations[lang].signUpButton}
-                  </Button>
-                </SignUpButton>
-                <SignInButton mode="modal" forceRedirectUrl="/countries">
-                  <Button
-                    size="lg"
-                    variant="primaryOutline"
-                    className="w-full py-6 text-lg"
-                  >
-                    {translations[lang].signInButton}
-                  </Button>
-                </SignInButton>
-              </div>
-            </SignedOut>
+        <div className="mb-14">
+          <p className="text-lg mb-2">Випускна робота</p>
+          <p className="text-lg mb-2">на тему:</p>
 
-            <SignedIn>
-              <Button
-                size="lg"
-                variant="secondary"
-                className="w-full py-6 text-lg"
-                asChild
-              >
-                <Link href="/countries">{translations[lang].continueLearning}</Link>
-              </Button>
-            </SignedIn>
-          </ClerkLoaded>
+          <h2 className="text-2xl font-bold uppercase mt-4">
+            Застосунок для вивчення українських, англійських та німецьких діалектів
+          </h2>
         </div>
 
-        {/* Підпис одразу під кнопками */}
-        <p className="mt-4 text-center text-black text-sm lg:text-base font-medium">
-          {translations[lang].credits}
-        </p>
+        <div className="text-left mb-14">
+          <p className="font-semibold mb-2">Виконавці:</p>
+          <p>ліцеїсти 11-Г-2 класу</p>
+          <p>Нестеренко Марія,</p>
+          <p>Хвостова Анастасія,</p>
+          <p>Коробчиц Валерія.</p>
+        </div>
+
+        <div className="text-left mb-20">
+          <p className="font-semibold mb-2">Наукові керівники:</p>
+          <p>Фомкін Сергій Володимирович</p>
+        </div>
+
+        {/* Кнопка переходу до програми */}
+        <div className="flex justify-center mb-16">
+          <Link href="/start">
+            <Button size="lg" variant="primary" className="px-10 text-lg">
+              ДО ПРОГРАМИ
+            </Button>
+          </Link>
+        </div>
+
+        <div className="flex justify-between text-lg">
+          <span>Дніпро</span>
+          <span>2026</span>
+        </div>
+
       </div>
     </div>
   );
-}
+};
+
+export default MarketingPage;
 

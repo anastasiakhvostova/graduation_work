@@ -15,6 +15,22 @@ export const countriesRelations = relations(countries, ({ many }) => ({
   userProgress: many(userProgress),
 }));
 
+export const flashcards = pgTable("flashcards", {
+  id: serial("id").primaryKey(),
+  word: text("word").notNull(),
+  translations: json("translations").$type<{
+    ua: string;
+    en: string;
+    de: string;
+  }>(),
+  audioSrc: text("audio_src").$type<string | null>(),
+  order: integer("order").notNull(),
+});
+
+export const flashcardsRelations = relations(flashcards, ({ }) => ({
+  // поки що без зв’язків, але можна прив’язати до уроків або тем
+}));
+
 // -------------------- USER PROGRESS --------------------
 export const userProgress = pgTable("user_progress", {
   userId: text("user_id").primaryKey(),

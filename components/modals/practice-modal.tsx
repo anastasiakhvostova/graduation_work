@@ -1,53 +1,62 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import { useEffect, useState } from "react"
-import { usePracticeModal } from "@/store/use-practice-modal"
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { usePracticeModal } from "@/store/use-practice-modal";
+import { useLanguage } from "@/components/languageContext";
+import { translations } from "@/components/translations";
 
 import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle
-} from "@/components/ui/dialog"
-import {Button} from "@/components/ui/button"
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 
 export const PracticeModal = () => {
-    const [isClient, setIsClient] = useState(false)
-    const { isOpen, close } = usePracticeModal()
+  const [isClient, setIsClient] = useState(false);
+  const { isOpen, close } = usePracticeModal();
+  const { lang } = useLanguage();
 
-    useEffect(() => setIsClient(true), [])
+  useEffect(() => setIsClient(true), []);
 
-    if (!isClient) {
-        return null
-    }
+  if (!isClient) return null;
 
-    return (
-        <Dialog open={isOpen} onOpenChange={close}>
-            <DialogContent className="max-w-md">
-                <DialogHeader>
-                    <div className="flex items-center w-full justify-center mb-5">
-                        <Image src="/heart.png" alt="Haert" height={100} width={100}/>
-                    </div>
-                    <DialogTitle className="text-center font-bold text-2xl">
-                        Повторюй урок
-                    </DialogTitle>
-                    <DialogDescription className="text-center text-base">
-                        Вмкористовуй повторення уроків для відновлення балів та сердець. Ви не можете втратити серця або бали на повторені уроку. 
-                    </DialogDescription>
+  return (
+    <Dialog open={isOpen} onOpenChange={close}>
+      <DialogContent className="max-w-md">
+        <DialogHeader>
+          <div className="flex items-center w-full justify-center mb-5">
+            <Image src="/heart.png" alt="Heart" height={90} width={90} />
+          </div>
 
-                </DialogHeader>
-                <DialogFooter className="mb-4">
-                    <div className="flex flex-col gap-y-4 w-full">
-                        <Button variant="primary" className="w-full" size="lg" onClick={close}>
-                            Зрозуміло!
-                        </Button>
-                    </div>
-                </DialogFooter>
-            </DialogContent>
-        </Dialog>
-    )
+          <DialogTitle className="text-center font-bold text-2xl">
+            {translations[lang].quiz.practiceTitle}
+          </DialogTitle>
 
-}
+          <DialogDescription className="text-center text-base mt-2">
+            {translations[lang].quiz.practiceText}
+          </DialogDescription>
+
+          <p className="text-center text-sm text-muted-foreground mt-2">
+            {translations[lang].quiz.practiceNote}
+          </p>
+        </DialogHeader>
+
+        <DialogFooter className="mt-6">
+          <Button
+            variant="primary"
+            className="w-full"
+            size="lg"
+            onClick={close}
+          >
+            {translations[lang].quiz.exit}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+};

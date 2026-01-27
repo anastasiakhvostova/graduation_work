@@ -48,6 +48,12 @@ export const Sidebar = ({ className }: Props) => {
           href="/practice"
           iconSize={38}
         />
+         <SidebarItem
+          label={translations[lang].sidebarDictionary}
+          iconSrc="/dictionary.png"
+          href="/flashcards"
+          iconSize={38}
+        />
 
         {/* 🟦 РОЗДІЛЮВАЧ МІЖ ГРУПАМИ */}
         <div className="my-2 h-[2px] w-full bg-[#91d5ff] rounded-full" />
@@ -68,12 +74,6 @@ export const Sidebar = ({ className }: Props) => {
           label={translations[lang].sidebarShop}
           iconSrc="/shop.png"
           href="/shop"
-          iconSize={38}
-        />
-        <SidebarItem
-          label={translations[lang].sidebarDictionary}
-          iconSrc="/dictionary.png"
-          href="/dictionary"
           iconSize={38}
         />
       </div>

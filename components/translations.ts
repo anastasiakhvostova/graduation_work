@@ -3,6 +3,16 @@ import { QuestKey } from "@/constant";
 export type QuestTranslations = Record<QuestKey, string>;
 export const translations = {
   ua: {
+    flashcards: "Флеш-картки",
+
+    showTranslation: "Показати переклад",
+    hideTranslation: "Сховати переклад",
+    playAudio: "Відтворити аудіо",
+    prev: "Назад",
+    next: "Далі",
+  leaderboardNoProgressTitle: "Ще рано",
+    leaderboardNoProgressText: "Спершу обери країну і регіон",
+    goToCountries: "Перейти до вибору країн",
     country: {
       Ukraine: "Україна",
       Germany: "Німеччина",
@@ -55,12 +65,12 @@ export const translations = {
     signInButton1: "У мене вже є акаунт, увійти",
     continueLearning: "Продовжити навчання",
     credits: "Роботу виконали: Хвостова Анастасія 11г, Нестеренко Марія 11г, Коробчиц Валерія 11г",
-    sidebarLearn: "Сторінка з практичними завданнями", 
+    sidebarLearn: "Практичні завдання", 
     sidebarPractice: "Навчальні матеріали",
     sidebarLeaderboard: "Дошка лідерів",
     sidebarChallenges: "Челенджі",
     sidebarShop: "Магазин",
-    sidebarDictionary: "Додаток",
+    sidebarDictionary: "Гейміфіковане навчання",
     questsSeeAll: "Побачити усі",
     questsCompleted: "Усі квести завершено 🎉",
     questsTitle:  "Челенджі",
@@ -119,6 +129,17 @@ export const translations = {
       
 },
   en: {
+    flashcards: "Flashcards",
+
+    showTranslation: "Show translation",
+    hideTranslation: "Hide translation",
+    playAudio: "Play audio",
+    prev: "Previous",
+    next: "Next",
+
+   leaderboardNoProgressTitle: "Ще рано",
+    leaderboardNoProgressText: "Спершу обери країну і регіон",
+    goToCountries: "Перейти до вибору країн",
        country: {
       Ukraine: "Ukraine",
       Germany: "Germany",
@@ -177,7 +198,7 @@ export const translations = {
     sidebarLeaderboard: "Leader board",
     sidebarChallenges: "Challenges",
     sidebarShop: "Shop",
-    sidebarDictionary: "Addition",
+    sidebarDictionary: "Gamified learning",
     questsSeeAll: "See all",
     questsCompleted: "All quests completed 🎉",
     questsTitle:  "Challenges",
@@ -235,6 +256,17 @@ export const translations = {
       finish: "Finish lesson"
   },
   de: {
+    flashcards: "Karteikarten",
+
+    showTranslation: "Übersetzung anzeigen",
+    hideTranslation: "Übersetzung ausblenden",
+    playAudio: "Audio abspielen",
+    prev: "Zurück",
+    next: "Weiter",
+
+    leaderboardNoProgressTitle: "Noch nicht 🙂",
+    leaderboardNoProgressText: "Bitte wähle zuerst ein Land und eine Region",
+    goToCountries: "Zur Länderauswahl",
   country: {
   Ukraine: "Ukraine",        // Україна
   Germany: "Deutschland",    // Німеччина
@@ -293,7 +325,7 @@ export const translations = {
     sidebarLeaderboard: "Bestenliste",
     sidebarChallenges: "Herausforderungen",
     sidebarShop: "Geschäft",
-    sidebarDictionary: "Zusatz",
+    sidebarDictionary: "Gamifiziertes Lernen",
     questsSeeAll: "Alle anzeigen",
     questsCompleted: "Alle Quests abgeschlossen 🎉",
     questsTitle:  "Herausforderungen",
